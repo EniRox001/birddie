@@ -1,11 +1,19 @@
+import 'package:birddie/features/onboarding_signin.dart/view_model.dart/onboarding_view_model.dart';
 import 'package:birddie/utils/images.dart';
 import 'package:flutter/material.dart';
 import 'package:birddie/utils/widgets.dart';
 
 PageController pageController = PageController();
 
-class OnboardingScreen extends StatelessWidget {
+class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
+
+  @override
+  State<OnboardingScreen> createState() => _OnboardingScreenState();
+}
+
+class _OnboardingScreenState extends State<OnboardingScreen> {
+  TextEditingController phoneNumberController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -28,9 +36,16 @@ class OnboardingScreen extends StatelessWidget {
             rightLogoPosition: 60.0,
             topLogoPosition: 200.0,
           ),
-          Container(
-            color: Colors.blue,
+          WOnboardingSignUp(
+            controller: phoneNumberController,
+            onPressed: () {
+              // print(phoneNumberController.text);
+              toNextPage(pageController);
+            },
           ),
+          Container(
+            color: Colors.red,
+          )
         ],
       ),
     );
