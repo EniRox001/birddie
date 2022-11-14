@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'images.dart';
-import '../features/onboarding_signin.dart/view_model.dart/onboarding_view_model.dart';
-import '../features/onboarding_signin.dart/screens/onboarding_screen.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 
 class WOnboardingScreen extends StatelessWidget {
   const WOnboardingScreen({
     Key? key,
+    required this.onPressed,
     required this.image,
     required this.title,
     required this.text,
@@ -17,6 +16,7 @@ class WOnboardingScreen extends StatelessWidget {
     this.bottomLogoPosition,
   }) : super(key: key);
 
+  final VoidCallback onPressed;
   final String image;
   final String title;
   final String text;
@@ -93,9 +93,7 @@ class WOnboardingScreen extends StatelessWidget {
                 height: 30.0,
               ),
               IconButton(
-                onPressed: () {
-                  toNextPage(pageController);
-                },
+                onPressed: onPressed,
                 icon: const Icon(
                   Icons.arrow_forward,
                   color: Colors.white,
