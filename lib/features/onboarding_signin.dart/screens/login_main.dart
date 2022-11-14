@@ -27,6 +27,7 @@ class _LoginMainState extends State<LoginMain> {
     return SafeArea(
         child: Scaffold(
       body: Stack(
+        alignment: Alignment.center,
         children: [
           Image.asset(
             OnboardingImages.imageThree,
@@ -46,31 +47,35 @@ class _LoginMainState extends State<LoginMain> {
               ),
             ),
           ),
-          Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Image.asset(
-                  OnboardingImages.birddieLogo,
-                  scale: 8,
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Image.asset(
+                OnboardingImages.birddieLogo,
+                scale: 8,
+              ),
+              const SizedBox(
+                height: 20.0,
+              ),
+              Text(
+                'Enter your Phone Number',
+                style: GoogleFonts.lato(
+                  color: Colors.white,
+                  fontStyle: FontStyle.italic,
+                  fontSize: 16.0,
                 ),
-                Text(
-                  'Enter your Phone Number',
-                  style: GoogleFonts.lato(
-                    color: Colors.white,
-                    fontStyle: FontStyle.italic,
-                    fontSize: 16.0,
-                  ),
-                ),
-                WPhoneInputField(controller: phoneNumberController),
-                WElevatedButton(
-                  onPressed: () {
-                    navigate(context, const OtpVerification());
-                  },
-                  text: 'NEXT',
-                )
-              ],
-            ),
+              ),
+              const SizedBox(
+                height: 10.0,
+              ),
+              WPhoneInputField(controller: phoneNumberController),
+              WElevatedButton(
+                onPressed: () {
+                  navigate(context, const OtpVerification());
+                },
+                text: 'NEXT',
+              )
+            ],
           )
         ],
       ),

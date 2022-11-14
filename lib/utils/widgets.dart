@@ -224,7 +224,7 @@ class WElevatedButton extends StatelessWidget {
           ),
           shape: const StadiumBorder()),
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 14.0, horizontal: 36.0),
+        padding: const EdgeInsets.symmetric(vertical: 14.0, horizontal: 50.0),
         child: Text(text),
       ),
     );
