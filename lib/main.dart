@@ -1,4 +1,4 @@
-import 'package:birddie/features/onboarding_signin.dart/screens/onboarding_screen.dart';
+import 'package:birddie/features/onboarding_and_signin/screens/onboarding_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {

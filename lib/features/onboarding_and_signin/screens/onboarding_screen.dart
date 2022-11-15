@@ -1,5 +1,5 @@
-import 'package:birddie/features/onboarding_signin.dart/screens/login_main.dart';
-import 'package:birddie/features/onboarding_signin.dart/view_model.dart/onboarding_view_model.dart';
+import 'package:birddie/features/onboarding_and_signin/screens/login_main.dart';
+import 'package:birddie/features/onboarding_and_signin/view_model.dart/onboarding_view_model.dart';
 import 'package:birddie/utils/images.dart';
 import 'package:flutter/material.dart';
 import 'package:birddie/utils/widgets.dart';

@@ -1,36 +1,27 @@
-import 'package:birddie/features/onboarding_signin.dart/screens/otp_verification.dart';
+import 'package:birddie/features/onboarding_and_signin/screens/user_info.dart';
 import 'package:birddie/utils/functions.dart';
-import 'package:flutter/material.dart';
 import 'package:birddie/utils/images.dart';
 import 'package:birddie/utils/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class LoginMain extends StatefulWidget {
-  const LoginMain({super.key});
+class OtpVerification extends StatefulWidget {
+  const OtpVerification({super.key});
 
   @override
-  State<LoginMain> createState() => _LoginMainState();
+  State<OtpVerification> createState() => _OtpVerificationState();
 }
 
-class _LoginMainState extends State<LoginMain> {
-  TextEditingController phoneNumberController = TextEditingController();
-
-  @override
-  void dispose() {
-    phoneNumberController;
-
-    super.dispose();
-  }
-
+class _OtpVerificationState extends State<OtpVerification> {
+  TextEditingController otpController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
+    return Scaffold(
       body: Stack(
         alignment: Alignment.center,
         children: [
           Image.asset(
-            OnboardingImages.imageThree,
+            OnboardingImages.imageFour,
             fit: BoxFit.cover,
             height: double.infinity,
             width: double.infinity,
@@ -49,36 +40,55 @@ class _LoginMainState extends State<LoginMain> {
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
+            children: [
               Image.asset(
                 OnboardingImages.birddieLogo,
                 scale: 8,
               ),
-              const SizedBox(
-                height: 20.0,
-              ),
               Text(
-                'Enter your Phone Number',
+                'Enter Code Sent To',
                 style: GoogleFonts.lato(
                   color: Colors.white,
                   fontStyle: FontStyle.italic,
                   fontSize: 16.0,
                 ),
               ),
+              Text(
+                '08108080358',
+                style: GoogleFonts.lato(
+                  color: Colors.white,
+                  fontStyle: FontStyle.italic,
+                  fontSize: 20.0,
+                ),
+              ),
               const SizedBox(
                 height: 10.0,
               ),
-              WPhoneInputField(controller: phoneNumberController),
+              WInputField(
+                controller: otpController,
+                hintText: 'OTP Code',
+              ),
+              TextButton(
+                onPressed: () {},
+                child: Text(
+                  'Resend OTP',
+                  style: GoogleFonts.lato(
+                    color: Colors.white,
+                    fontStyle: FontStyle.italic,
+                    fontSize: 20.0,
+                  ),
+                ),
+              ),
               WElevatedButton(
                 onPressed: () {
-                  navigate(context, const OtpVerification());
+                  navigate(context, const UserInfo());
                 },
-                text: 'NEXT',
-              )
+                text: 'VERIFY',
+              ),
             ],
           )
         ],
       ),
-    ));
+    );
   }
 }
