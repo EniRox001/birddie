@@ -1,4 +1,4 @@
-import 'package:birddie/features/profile_and_verification/screens/profile.dart';
+import 'package:birddie/screens/profile.dart';
 import 'package:birddie/utils/functions.dart';
 import 'package:birddie/utils/images.dart';
 import 'package:birddie/widgets/w_elevated_button.dart';
