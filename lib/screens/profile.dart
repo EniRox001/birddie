@@ -1,9 +1,9 @@
 import 'package:birddie/screens/dashboard.dart';
 import 'package:birddie/utils/functions.dart';
-
 import 'package:birddie/widgets/w_appbar.dart';
 import 'package:birddie/widgets/w_elevated_button.dart';
 import 'package:birddie/widgets/w_profile_media_widget.dart';
+import 'package:birddie/widgets/w_textfield.dart';
 import 'package:flutter/material.dart';
 
 class Profile extends StatefulWidget {
@@ -132,8 +132,65 @@ class _ProfileState extends State<Profile> {
                 ],
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  WTextField(
+                    controller: occupationController,
+                    hintText: 'Occupation',
+                  ),
+                  const SizedBox(
+                    height: 10.0,
+                  ),
+                  WTextField(
+                    controller: locationController,
+                    hintText: 'My Location',
+                  ),
+                  const SizedBox(
+                    height: 10.0,
+                  ),
+                  WTextField(
+                    controller: purposeController,
+                    hintText: 'I am looking for',
+                  ),
+                ],
+              ),
+            ),
             const SizedBox(
               height: 20.0,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  Text(
+                    'SOCIAL HABITS',
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  WTextField(
+                    controller: alcoholController,
+                    hintText: 'Drink Alcohol?',
+                  ),
+                  const SizedBox(
+                    height: 10.0,
+                  ),
+                  WTextField(
+                    controller: smokeController,
+                    hintText: 'Smoke?',
+                  ),
+                  const SizedBox(
+                    height: 10.0,
+                  ),
+                ],
+              ),
             ),
             WElevatedButton(
               onPressed: () {
