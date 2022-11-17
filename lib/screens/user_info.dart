@@ -1,7 +1,8 @@
-import 'package:birddie/features/onboarding_and_signin/screens/gender_dob.dart';
+import 'package:birddie/screens/gender_dob.dart';
 import 'package:birddie/utils/functions.dart';
 import 'package:birddie/utils/images.dart';
-import 'package:birddie/utils/widgets.dart';
+import 'package:birddie/widgets/w_elevated_button.dart';
+import 'package:birddie/widgets/w_inputfield.dart';
 import 'package:flutter/material.dart';
 
 class UserInfo extends StatefulWidget {

@@ -1,8 +1,9 @@
-import 'package:birddie/features/onboarding_and_signin/screens/otp_verification.dart';
+import 'package:birddie/screens/otp_verification.dart';
 import 'package:birddie/utils/functions.dart';
+import 'package:birddie/widgets/w_elevated_button.dart';
+import 'package:birddie/widgets/w_phone_inputfield.dart';
 import 'package:flutter/material.dart';
 import 'package:birddie/utils/images.dart';
-import 'package:birddie/utils/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class LoginMain extends StatefulWidget {
