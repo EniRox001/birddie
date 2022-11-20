@@ -5,6 +5,8 @@ import 'package:birddie/widgets/w_phone_inputfield.dart';
 import 'package:flutter/material.dart';
 import 'package:birddie/utils/images.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'package:birddie/providers/login_provider.dart';
 
 class LoginMain extends StatefulWidget {
   const LoginMain({super.key});
@@ -72,6 +74,10 @@ class _LoginMainState extends State<LoginMain> {
               WPhoneInputField(controller: phoneNumberController),
               WElevatedButton(
                 onPressed: () {
+                  //TODO: Send otp to phone number
+                  context
+                      .read<LoginSignUp>()
+                      .setPhoneNumber(phoneNumberController.text);
                   navigate(context, const OtpVerification());
                 },
                 text: 'NEXT',

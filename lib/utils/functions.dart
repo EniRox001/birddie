@@ -6,7 +6,7 @@ void navigate(BuildContext context, Widget page) {
 
 void toNextPage(PageController controller) {
   controller.nextPage(
-    duration: Duration(milliseconds: 500),
+    duration: const Duration(milliseconds: 500),
     curve: Curves.easeInOut,
   );
 }

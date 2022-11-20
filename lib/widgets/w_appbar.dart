@@ -4,12 +4,14 @@ class WAppBar extends StatelessWidget {
   const WAppBar({
     Key? key,
     required this.title,
+    this.icon = Icons.arrow_back_ios,
     required this.subData,
     required this.onBackPressed,
     this.subDataText = 'Premium: Monthly',
   }) : super(key: key);
 
   final String title;
+  final IconData icon;
   final String subDataText;
   final bool subData;
   final VoidCallback onBackPressed;
@@ -42,8 +44,8 @@ class WAppBar extends StatelessWidget {
           children: [
             IconButton(
               onPressed: onBackPressed,
-              icon: const Icon(
-                Icons.arrow_back_ios,
+              icon: Icon(
+                icon,
                 color: Colors.white,
               ),
             ),

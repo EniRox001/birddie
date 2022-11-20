@@ -5,6 +5,8 @@ import 'package:birddie/widgets/w_elevated_button.dart';
 import 'package:birddie/widgets/w_inputfield.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'package:birddie/providers/login_provider.dart';
 
 class OtpVerification extends StatefulWidget {
   const OtpVerification({super.key});
@@ -55,7 +57,7 @@ class _OtpVerificationState extends State<OtpVerification> {
                 ),
               ),
               Text(
-                '08108080358',
+                '+234${context.watch<LoginSignUp>().phoneNumber}',
                 style: GoogleFonts.lato(
                   color: Colors.white,
                   fontStyle: FontStyle.italic,
@@ -70,7 +72,9 @@ class _OtpVerificationState extends State<OtpVerification> {
                 hintText: 'OTP Code',
               ),
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  //TODO: Resend OTP to user
+                },
                 child: Text(
                   'Resend OTP',
                   style: GoogleFonts.lato(
@@ -82,6 +86,7 @@ class _OtpVerificationState extends State<OtpVerification> {
               ),
               WElevatedButton(
                 onPressed: () {
+                  //TODO: Verify OTP
                   navigate(context, const UserInfo());
                 },
                 text: 'VERIFY',
