@@ -33,20 +33,23 @@ class _ProfileState extends State<Profile> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: SafeArea(
-        child: Column(
+    return SafeArea(
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          flexibleSpace: WAppBar(
+            title: 'Profile',
+            subData: true,
+            onBackPressed: () {
+              navigateBack(context);
+            },
+          ),
+        ),
+        body: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            WAppBar(
-              title: 'Profile',
-              subData: true,
-              onBackPressed: () {
-                navigateBack(context);
-              },
-            ),
             const SizedBox(
               height: 10.0,
             ),

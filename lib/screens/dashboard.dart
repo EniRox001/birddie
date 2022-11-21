@@ -1,3 +1,5 @@
+import 'package:birddie/screens/event_details.dart';
+import 'package:birddie/utils/functions.dart';
 import 'package:birddie/widgets/w_appbar.dart';
 import 'package:birddie/widgets/w_elevated_button.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +20,7 @@ class _DashboardState extends State<Dashboard> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           flexibleSpace: WAppBar(
             title: 'Dashboard',
             icon: Icons.menu,
@@ -29,15 +32,24 @@ class _DashboardState extends State<Dashboard> {
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            const Text(
+            Text(
               'Upcoming Events',
+              style: Theme.of(context).textTheme.titleLarge,
             ),
             SizedBox(
               height: 220,
               child: Swiper(
                 itemCount: context.watch<Events>().eventsLength,
-                itemBuilder: (BuildContext context, int index) =>
-                    context.watch<Events>().events[index],
+                itemBuilder: (BuildContext context, int index) {
+                  return GestureDetector(
+                    onTap: () {
+                      context.read<Events>().setSelectedEvent(index);
+                      navigate(context, const EventDetails());
+                    },
+                    child: context.watch<Events>().events[index],
+                  );
+                },
+
                 viewportFraction: 0.8,
                 scale: 0.9,
                 // autoplay: true,

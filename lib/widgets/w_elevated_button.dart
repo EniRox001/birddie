@@ -18,8 +18,8 @@ class WElevatedButton extends StatelessWidget {
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
           side: outlined
-              ? BorderSide(
-                  color: const Color(
+              ? const BorderSide(
+                  color: Color(
                     0xFFFF5454,
                   ),
                   width: 2.0)
