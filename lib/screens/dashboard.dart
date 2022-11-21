@@ -1,4 +1,5 @@
 import 'package:birddie/widgets/w_appbar.dart';
+import 'package:birddie/widgets/w_elevated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:birddie/providers/event_provider.dart';
@@ -41,6 +42,48 @@ class _DashboardState extends State<Dashboard> {
                 scale: 0.9,
                 // autoplay: true,
               ),
+            ),
+            const Text(
+              'Please choose below',
+            ),
+            WElevatedButton(
+              onPressed: () {},
+              text: 'Russian Roulette',
+              outlined: true,
+            ),
+            WElevatedButton(
+              onPressed: () {},
+              text: 'Sponsored Roulette',
+              outlined: true,
+            ),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 30.0),
+              child: Divider(
+                color: Color(
+                  0xFFFF5454,
+                ),
+                thickness: 1.0,
+              ),
+            ),
+            Text(
+              'NEXT LEVEL STUFF',
+              style: Theme.of(context).textTheme.titleLarge,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 50.0),
+              child: Text(
+                'This section is only for users that have passed all verification processed',
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyMedium!
+                    .copyWith(fontStyle: FontStyle.italic),
+                textAlign: TextAlign.center,
+              ),
+            ),
+            WElevatedButton(
+              onPressed: () {},
+              text: 'Match Metrix',
+              outlined: true,
             )
           ],
         ),
