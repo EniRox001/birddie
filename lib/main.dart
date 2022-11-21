@@ -1,4 +1,6 @@
+import 'package:birddie/providers/event_provider.dart';
 import 'package:birddie/providers/login_provider.dart';
+import 'package:birddie/screens/dashboard.dart';
 import 'package:birddie/screens/onboarding_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -9,6 +11,7 @@ void main() {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => LoginSignUp()),
+        ChangeNotifierProvider(create: (_) => Events()),
       ],
       child: const MyApp(),
     ),
@@ -26,7 +29,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const OnboardingScreen(),
+      home: const Dashboard(),
     );
   }
 }
