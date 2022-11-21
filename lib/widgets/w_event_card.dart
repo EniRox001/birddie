@@ -39,22 +39,29 @@ class WEventCard extends StatelessWidget {
           padding: const EdgeInsets.all(20.0),
           child: Column(
             mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text(
-                        '$title | $location',
-                        style: Theme.of(context)
-                            .textTheme
-                            .titleLarge!
-                            .copyWith(color: Colors.white),
+                      SizedBox(
+                        child: Text(
+                          '$title | $location',
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleMedium!
+                              .copyWith(color: Colors.white),
+                        ),
                       ),
                       SizedBox(
-                        width: MediaQuery.of(context).size.width / 1.6,
+                        height: 10.0,
+                      ),
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width / 1.65,
                         child: Text(
                           description,
                           style: Theme.of(context)
@@ -66,6 +73,7 @@ class WEventCard extends StatelessWidget {
                     ],
                   ),
                   Expanded(
+                    flex: 2,
                     child: Text(
                       'N${price}k',
                       style: Theme.of(context)

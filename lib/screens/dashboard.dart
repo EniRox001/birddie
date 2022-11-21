@@ -32,7 +32,7 @@ class _DashboardState extends State<Dashboard> {
               'Upcoming Events',
             ),
             SizedBox(
-              height: 185,
+              height: 220,
               child: Swiper(
                 itemCount: context.watch<Events>().eventsLength,
                 itemBuilder: (BuildContext context, int index) =>
