@@ -2,7 +2,6 @@ import 'package:birddie/providers/event_provider.dart';
 import 'package:birddie/providers/login_provider.dart';
 import 'package:birddie/providers/russian_roulette_provider.dart';
 import 'package:birddie/screens/dashboard.dart';
-import 'package:birddie/screens/onboarding_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

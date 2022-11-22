@@ -1,10 +1,7 @@
 import 'package:birddie/screens/event_details.dart';
-
-import 'package:birddie/screens/russian_roulette.dart';
 import 'package:birddie/utils/functions.dart';
 import 'package:birddie/widgets/w_appbar.dart';
 import 'package:birddie/widgets/w_declined_roulette.dart';
-import 'package:birddie/widgets/w_elevated_button.dart';
 import 'package:birddie/widgets/w_matched_roulette.dart';
 import 'package:birddie/widgets/w_not_matched_roulette.dart';
 import 'package:birddie/widgets/w_review_roulette.dart';

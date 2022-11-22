@@ -1,6 +1,5 @@
 import 'package:birddie/controllers/russian_roulette_controllers.dart';
 import 'package:birddie/providers/russian_roulette_provider.dart';
-import 'package:birddie/screens/gender_dob.dart';
 import 'package:birddie/utils/colors.dart';
 import 'package:birddie/utils/functions.dart';
 import 'package:birddie/widgets/w_appbar.dart';
