@@ -1,3 +1,4 @@
+import 'package:birddie/controllers/profile_controllers.dart';
 import 'package:birddie/screens/dashboard.dart';
 import 'package:birddie/utils/functions.dart';
 import 'package:birddie/widgets/w_appbar.dart';
@@ -12,12 +13,6 @@ class Profile extends StatefulWidget {
   @override
   State<Profile> createState() => _ProfileState();
 }
-
-final occupationController = TextEditingController();
-final locationController = TextEditingController();
-final purposeController = TextEditingController();
-final alcoholController = TextEditingController();
-final smokeController = TextEditingController();
 
 class _ProfileState extends State<Profile> {
   @override

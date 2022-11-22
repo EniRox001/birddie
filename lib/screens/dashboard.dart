@@ -1,4 +1,5 @@
 import 'package:birddie/screens/event_details.dart';
+
 import 'package:birddie/screens/russian_roulette.dart';
 import 'package:birddie/utils/functions.dart';
 import 'package:birddie/widgets/w_appbar.dart';
@@ -6,6 +7,7 @@ import 'package:birddie/widgets/w_elevated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:birddie/providers/event_provider.dart';
+import 'package:birddie/providers/russian_roulette_provider.dart';
 import 'package:provider/provider.dart';
 
 class Dashboard extends StatefulWidget {
@@ -14,6 +16,10 @@ class Dashboard extends StatefulWidget {
   @override
   State<Dashboard> createState() => _DashboardState();
 }
+
+const upcomingFeatureSnackBar = SnackBar(
+  content: Text('This feature is coming soon... Stay Tuned!'),
+);
 
 class _DashboardState extends State<Dashboard> {
   @override
@@ -30,79 +36,106 @@ class _DashboardState extends State<Dashboard> {
           ),
         ),
         body: Column(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Text(
-              'Upcoming Events',
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
-            SizedBox(
-              height: 220,
-              child: Swiper(
-                itemCount: context.watch<Events>().eventsLength,
-                itemBuilder: (BuildContext context, int index) {
-                  return GestureDetector(
-                    onTap: () {
-                      context.read<Events>().setSelectedEvent(index);
-                      navigate(context, const EventDetails());
-                    },
-                    child: context.watch<Events>().events[index],
-                  );
-                },
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Text(
+                    'Upcoming Events',
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
+                  SizedBox(
+                    height: 220,
+                    child: Swiper(
+                      itemCount: context.watch<Events>().eventsLength,
+                      itemBuilder: (BuildContext context, int index) {
+                        return GestureDetector(
+                          onTap: () {
+                            context.read<Events>().setSelectedEvent(index);
+                            navigate(context, const EventDetails());
+                          },
+                          child: context.watch<Events>().events[index],
+                        );
+                      },
 
-                viewportFraction: 0.8,
-                scale: 0.9,
-                // autoplay: true,
+                      viewportFraction: 0.8,
+                      scale: 0.9,
+                      // autoplay: true,
+                    ),
+                  ),
+                ],
               ),
             ),
-            const Text(
-              'Please choose below',
-            ),
-            WElevatedButton(
-              onPressed: () {
-                navigate(
-                  context,
-                  const RussianRoullete(),
-                );
-              },
-              text: 'Russian Roulette',
-              outlined: true,
-            ),
-            WElevatedButton(
-              onPressed: () {},
-              text: 'Sponsored Roulette',
-              outlined: true,
-            ),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 30.0),
-              child: Divider(
-                color: Color(
-                  0xFFFF5454,
-                ),
-                thickness: 1.0,
-              ),
-            ),
-            Text(
-              'NEXT LEVEL STUFF',
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 50.0),
-              child: Text(
-                'This section is only for users that have passed all verification processed',
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyMedium!
-                    .copyWith(fontStyle: FontStyle.italic),
-                textAlign: TextAlign.center,
-              ),
-            ),
-            WElevatedButton(
-              onPressed: () {},
-              text: 'Match Metrix',
-              outlined: true,
-            )
+            //TODO: Show match review based on provider preference
+            context.watch<RussianRoulletes>().matched == 'matched'
+                ? Text('matched')
+                : context.watch<RussianRoulletes>().matched == 'review'
+                    ? Text('Review')
+                    : context.watch<RussianRoulletes>().matched == 'declined'
+                        ? Text('Declined')
+                        : Expanded(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                const Text(
+                                  'Please choose below',
+                                ),
+                                WElevatedButton(
+                                  onPressed: () {
+                                    navigate(
+                                      context,
+                                      const RussianRoullete(),
+                                    );
+                                  },
+                                  text: 'Russian Roulette',
+                                  outlined: true,
+                                ),
+                                WElevatedButton(
+                                  onPressed: () {
+                                    ScaffoldMessenger.of(context)
+                                        .showSnackBar(upcomingFeatureSnackBar);
+                                  },
+                                  text: 'Sponsored Roulette',
+                                  outlined: true,
+                                ),
+                                const Padding(
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 30.0),
+                                  child: Divider(
+                                    color: Color(
+                                      0xFFFF5454,
+                                    ),
+                                    thickness: 1.0,
+                                  ),
+                                ),
+                                Text(
+                                  'NEXT LEVEL STUFF',
+                                  style: Theme.of(context).textTheme.titleLarge,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 50.0),
+                                  child: Text(
+                                    'This section is only for users that have passed all verification processed',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyMedium!
+                                        .copyWith(fontStyle: FontStyle.italic),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                                WElevatedButton(
+                                  onPressed: () {
+                                    ScaffoldMessenger.of(context)
+                                        .showSnackBar(upcomingFeatureSnackBar);
+                                  },
+                                  text: 'Match Metrix',
+                                  outlined: true,
+                                ),
+                              ],
+                            ),
+                          ),
           ],
         ),
       ),

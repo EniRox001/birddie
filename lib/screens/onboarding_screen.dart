@@ -1,3 +1,4 @@
+import 'package:birddie/controllers/onboarding_screen_controller.dart';
 import 'package:birddie/screens/login_main.dart';
 import 'package:birddie/utils/functions.dart';
 import 'package:birddie/utils/images.dart';
@@ -12,8 +13,6 @@ class OnboardingScreen extends StatefulWidget {
 }
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
-  PageController pageController = PageController();
-
   @override
   void dispose() {
     pageController;

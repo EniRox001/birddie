@@ -1,3 +1,4 @@
+import 'package:birddie/controllers/user_info_controllers.dart';
 import 'package:birddie/screens/gender_dob.dart';
 import 'package:birddie/utils/functions.dart';
 import 'package:birddie/utils/images.dart';
@@ -13,9 +14,15 @@ class UserInfo extends StatefulWidget {
 }
 
 class _UserInfoState extends State<UserInfo> {
-  TextEditingController firstNameController = TextEditingController();
-  TextEditingController lastNameController = TextEditingController();
-  TextEditingController occupationController = TextEditingController();
+  @override
+  void dispose() {
+    firstNameController;
+    lastNameController;
+    occupationController;
+
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

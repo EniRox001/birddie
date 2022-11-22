@@ -1,3 +1,4 @@
+import 'package:birddie/controllers/login_main_controllers.dart';
 import 'package:birddie/screens/otp_verification.dart';
 import 'package:birddie/utils/functions.dart';
 import 'package:birddie/widgets/w_elevated_button.dart';
@@ -16,8 +17,6 @@ class LoginMain extends StatefulWidget {
 }
 
 class _LoginMainState extends State<LoginMain> {
-  TextEditingController phoneNumberController = TextEditingController();
-
   @override
   void dispose() {
     phoneNumberController;

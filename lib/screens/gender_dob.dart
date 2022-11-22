@@ -1,3 +1,4 @@
+import 'package:birddie/controllers/gender_dob_controllers.dart';
 import 'package:birddie/screens/profile.dart';
 import 'package:birddie/utils/functions.dart';
 import 'package:birddie/utils/images.dart';
@@ -15,11 +16,6 @@ class GenderDOB extends StatefulWidget {
 }
 
 class _GenderDOBState extends State<GenderDOB> {
-  TextEditingController dateOfBirthController = TextEditingController();
-  int selectedOption = 1;
-  bool termsAndConditions = false;
-  bool promotionPremission = false;
-
   void setSelectedOption(int i) {
     setState(() {
       selectedOption = i;

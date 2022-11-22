@@ -1,3 +1,4 @@
+import 'package:birddie/controllers/otp_verification_controllers.dart';
 import 'package:birddie/screens/user_info.dart';
 import 'package:birddie/utils/functions.dart';
 import 'package:birddie/utils/images.dart';
@@ -16,7 +17,12 @@ class OtpVerification extends StatefulWidget {
 }
 
 class _OtpVerificationState extends State<OtpVerification> {
-  TextEditingController otpController = TextEditingController();
+  @override
+  void dispose() {
+    otpController;
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

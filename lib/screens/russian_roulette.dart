@@ -1,3 +1,5 @@
+import 'package:birddie/controllers/russian_roulette_controllers.dart';
+import 'package:birddie/providers/russian_roulette_provider.dart';
 import 'package:birddie/screens/gender_dob.dart';
 import 'package:birddie/utils/colors.dart';
 import 'package:birddie/utils/functions.dart';
@@ -6,6 +8,7 @@ import 'package:birddie/widgets/w_elevated_button.dart';
 import 'package:birddie/widgets/w_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 class RussianRoullete extends StatefulWidget {
   const RussianRoullete({super.key});
@@ -15,14 +18,6 @@ class RussianRoullete extends StatefulWidget {
 }
 
 class _RussianRoulleteState extends State<RussianRoullete> {
-  TextEditingController minAgeController = TextEditingController();
-  TextEditingController maxAgeController = TextEditingController();
-  TextEditingController locationController = TextEditingController();
-  TextEditingController dateSetupController = TextEditingController();
-  TextEditingController dateController = TextEditingController();
-  TextEditingController timeController = TextEditingController();
-  TextEditingController spendingGaugeController = TextEditingController();
-  TextEditingController payBillController = TextEditingController();
   bool termsAndConditionsRoulette = false;
 
   @override
@@ -157,9 +152,12 @@ class _RussianRoulleteState extends State<RussianRoullete> {
                       height: 10.0,
                     ),
                     WElevatedButton(
-                      onPressed: () => navigateBack(context),
+                      onPressed: () {
+                        context.read<RussianRoulletes>().setMatch('');
+                        navigateBack(context);
+                      },
                       text: 'MATCH ME',
-                    )
+                    ),
                   ],
                 ),
               ),
