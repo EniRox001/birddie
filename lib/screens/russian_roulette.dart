@@ -7,14 +7,14 @@ import 'package:birddie/widgets/w_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class SponsoredRoullete extends StatefulWidget {
-  const SponsoredRoullete({super.key});
+class RussianRoullete extends StatefulWidget {
+  const RussianRoullete({super.key});
 
   @override
-  State<SponsoredRoullete> createState() => _SponsoredRoulleteState();
+  State<RussianRoullete> createState() => _RussianRoulleteState();
 }
 
-class _SponsoredRoulleteState extends State<SponsoredRoullete> {
+class _RussianRoulleteState extends State<RussianRoullete> {
   TextEditingController minAgeController = TextEditingController();
   TextEditingController maxAgeController = TextEditingController();
   TextEditingController locationController = TextEditingController();
@@ -47,7 +47,7 @@ class _SponsoredRoulleteState extends State<SponsoredRoullete> {
           automaticallyImplyLeading: false,
           flexibleSpace: WAppBar(
             onBackPressed: () => navigateBack(context),
-            title: 'Match Filter: Sponsored Roullete',
+            title: 'Match Filter: Russian Roulette',
             subData: false,
           ),
         ),

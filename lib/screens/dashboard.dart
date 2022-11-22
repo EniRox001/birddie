@@ -1,5 +1,5 @@
 import 'package:birddie/screens/event_details.dart';
-import 'package:birddie/screens/sponsored_roulette.dart';
+import 'package:birddie/screens/russian_roulette.dart';
 import 'package:birddie/utils/functions.dart';
 import 'package:birddie/widgets/w_appbar.dart';
 import 'package:birddie/widgets/w_elevated_button.dart';
@@ -60,17 +60,17 @@ class _DashboardState extends State<Dashboard> {
               'Please choose below',
             ),
             WElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                navigate(
+                  context,
+                  const RussianRoullete(),
+                );
+              },
               text: 'Russian Roulette',
               outlined: true,
             ),
             WElevatedButton(
-              onPressed: () {
-                navigate(
-                  context,
-                  const SponsoredRoullete(),
-                );
-              },
+              onPressed: () {},
               text: 'Sponsored Roulette',
               outlined: true,
             ),
