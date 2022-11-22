@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class RussianRoulletes extends ChangeNotifier {
-  String _matched = 'matched';
+  String _matchState = 'not matched';
 
-  String get matched => _matched;
+  String get matchState => _matchState;
 
-  void setMatch(String match) {
-    _matched = match;
+  void setMatchState(String match) {
+    _matchState = match;
     notifyListeners();
   }
 }

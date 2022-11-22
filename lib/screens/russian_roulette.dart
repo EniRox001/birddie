@@ -153,7 +153,7 @@ class _RussianRoulleteState extends State<RussianRoullete> {
                     ),
                     WElevatedButton(
                       onPressed: () {
-                        context.read<RussianRoulletes>().setMatch('');
+                        context.read<RussianRoulletes>().setMatchState('');
                         navigateBack(context);
                       },
                       text: 'MATCH ME',

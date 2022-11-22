@@ -3,7 +3,11 @@ import 'package:birddie/screens/event_details.dart';
 import 'package:birddie/screens/russian_roulette.dart';
 import 'package:birddie/utils/functions.dart';
 import 'package:birddie/widgets/w_appbar.dart';
+import 'package:birddie/widgets/w_declined_roulette.dart';
 import 'package:birddie/widgets/w_elevated_button.dart';
+import 'package:birddie/widgets/w_matched_roulette.dart';
+import 'package:birddie/widgets/w_not_matched_roulette.dart';
+import 'package:birddie/widgets/w_review_roulette.dart';
 import 'package:flutter/material.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:birddie/providers/event_provider.dart';
@@ -68,74 +72,13 @@ class _DashboardState extends State<Dashboard> {
               ),
             ),
             //TODO: Show match review based on provider preference
-            context.watch<RussianRoulletes>().matched == 'matched'
-                ? Text('matched')
-                : context.watch<RussianRoulletes>().matched == 'review'
-                    ? Text('Review')
-                    : context.watch<RussianRoulletes>().matched == 'declined'
-                        ? Text('Declined')
-                        : Expanded(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                const Text(
-                                  'Please choose below',
-                                ),
-                                WElevatedButton(
-                                  onPressed: () {
-                                    navigate(
-                                      context,
-                                      const RussianRoullete(),
-                                    );
-                                  },
-                                  text: 'Russian Roulette',
-                                  outlined: true,
-                                ),
-                                WElevatedButton(
-                                  onPressed: () {
-                                    ScaffoldMessenger.of(context)
-                                        .showSnackBar(upcomingFeatureSnackBar);
-                                  },
-                                  text: 'Sponsored Roulette',
-                                  outlined: true,
-                                ),
-                                const Padding(
-                                  padding:
-                                      EdgeInsets.symmetric(horizontal: 30.0),
-                                  child: Divider(
-                                    color: Color(
-                                      0xFFFF5454,
-                                    ),
-                                    thickness: 1.0,
-                                  ),
-                                ),
-                                Text(
-                                  'NEXT LEVEL STUFF',
-                                  style: Theme.of(context).textTheme.titleLarge,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 50.0),
-                                  child: Text(
-                                    'This section is only for users that have passed all verification processed',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyMedium!
-                                        .copyWith(fontStyle: FontStyle.italic),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                                WElevatedButton(
-                                  onPressed: () {
-                                    ScaffoldMessenger.of(context)
-                                        .showSnackBar(upcomingFeatureSnackBar);
-                                  },
-                                  text: 'Match Metrix',
-                                  outlined: true,
-                                ),
-                              ],
-                            ),
-                          ),
+            context.watch<RussianRoulletes>().matchState == 'matched'
+                ? const MatchedRoulette()
+                : context.watch<RussianRoulletes>().matchState == 'reviewing'
+                    ? const ReviewRoulette()
+                    : context.watch<RussianRoulletes>().matchState == 'declined'
+                        ? const DeclinedRoulette()
+                        : const NotMatchedRoulette()
           ],
         ),
       ),
