@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class RussianRoulletes extends ChangeNotifier {
   //TODO: Set up model to automatically add data to matched events
