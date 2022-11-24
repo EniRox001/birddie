@@ -1,5 +1,6 @@
 import 'package:birddie/models/events.dart';
 import 'package:birddie/models/user_model.dart';
+import 'package:birddie/providers/event_provider.dart';
 import 'package:birddie/providers/user_provider.dart';
 import 'package:mongo_dart/mongo_dart.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,7 @@ late DbCollection userCollection;
 late DbCollection eventsCollection;
 
 late dynamic event;
-late int eventsLength;
+late dynamic selectedEvent;
 
 connectDB() async {
   var db = await Db.create(
@@ -53,6 +54,7 @@ Future createEvent(BuildContext context) async {
     uniqueId,
     'Black Panther 2',
     'Come and watch the premiere of the most anticipated marvel movie of the century, only at fastnet cinema',
+    'Ikeja',
     '3',
     [],
     2,
@@ -65,9 +67,28 @@ Future createEvent(BuildContext context) async {
 getEvents() async {
   await eventsCollection.find().toList().then(
     (value) {
-      eventsLength = value.length;
       event = value;
-      print(event);
+    },
+  );
+}
+
+Future reserveSlot(BuildContext context) async {
+  await eventsCollection.update(
+    where.eq(
+      'id',
+      context.read<EventProviders>().id,
+    ),
+    {
+      "id": context.read<EventProviders>().id,
+      "title": context.read<EventProviders>().title,
+      "description": context.read<EventProviders>().description,
+      "location": context.read<EventProviders>().location,
+      "price": context.read<EventProviders>().price,
+      "attending": context.read<EventProviders>().attending,
+      "slot_left": context.read<EventProviders>().slotsLeft - 1,
+      "date": context.read<EventProviders>().date,
+      "time": context.read<EventProviders>().time,
+      "reserved": true,
     },
   );
 }

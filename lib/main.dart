@@ -15,7 +15,7 @@ void main() async {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => UserProvider()),
-        ChangeNotifierProvider(create: (_) => Events()),
+        ChangeNotifierProvider(create: (_) => EventProviders()),
         ChangeNotifierProvider(create: (_) => RussianRoulletes()),
       ],
       child: const MyApp(),
@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const OnboardingScreen(),
+      home: const Dashboard(),
     );
   }
 }

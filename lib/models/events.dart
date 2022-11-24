@@ -4,6 +4,7 @@ class Events {
   ObjectId id;
   String title;
   String description;
+  String location;
   String price;
   List attending;
   int slotsLeft;
@@ -16,6 +17,7 @@ class Events {
       'id': id,
       'title': title,
       'description': description,
+      'location': location,
       'price': price,
       'attending': attending,
       'slot_left': slotsLeft,
@@ -29,6 +31,7 @@ class Events {
     this.id,
     this.title,
     this.description,
+    this.location,
     this.price,
     this.attending,
     this.slotsLeft,

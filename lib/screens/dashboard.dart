@@ -56,45 +56,36 @@ class _DashboardState extends State<Dashboard> {
                   SizedBox(
                     height: 220,
                     child: Swiper(
-                      itemCount: eventsLength,
+                      itemCount: event.length,
                       itemBuilder: (context, index) {
                         return GestureDetector(
+                          onTap: () {
+                            selectedEvent = event[index];
+                            Provider.of<EventProviders>(context, listen: false)
+                                .setSelectedId(selectedEvent["id"]);
+                            print(selectedEvent);
+                            print(
+                                "Selected Doc ID: ${context.read<EventProviders>().id}");
+                            navigate(context, const EventDetails());
+                          },
                           child: WEventCard(
                             backgroundColor: Colors.red,
                             onAttendeePressed: () {},
-                            location: "Ikeja",
-                            price: '5',
+                            location: event[index]['location'],
+                            price: event[index]['price'],
                             title: event[index]['title'],
-                            description:
-                                'Come and relive those good times, hang with old friends and make new one hang with old friends and having...',
-                            slotsLeft: 2,
-                            date: '2nd February 2022',
-                            time: '16:00:00',
+                            description: event[index]['description'],
+                            slotsLeft: event[index]['slot_left'],
+                            date: event[index]['date'],
+                            time: event[index]['time'],
                           ),
                         );
                       },
+                      viewportFraction: 0.8,
+                      scale: 0.9,
+                      autoplay: false,
                     ),
                   )
-                  //TODO: Fix Event Card to read from events database;
-                  // SizedBox(
-                  //   height: 220,
-                  //   child: Swiper(
-                  //     itemCount: context.watch<Events>().eventsLength,
-                  //     itemBuilder: (BuildContext context, int index) {
-                  //       return GestureDetector(
-                  //         onTap: () {
-                  //           context.read<Events>().setSelectedEvent(index);
-                  //           navigate(context, const EventDetails());
-                  //         },
-                  //         child: context.watch<Events>().events[index],
-                  //       );
-                  //     },
-
-                  //     viewportFraction: 0.8,
-                  //     scale: 0.9,
-                  //     // autoplay: true,
-                  //   ),
-                  // ),
                 ],
               ),
             ),
