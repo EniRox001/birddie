@@ -1,4 +1,5 @@
 import 'package:birddie/controllers/login_main_controllers.dart';
+import 'package:birddie/providers/user_provider.dart';
 import 'package:birddie/screens/otp_verification.dart';
 import 'package:birddie/utils/functions.dart';
 import 'package:birddie/widgets/w_elevated_button.dart';
@@ -7,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:birddie/utils/images.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:birddie/providers/login_provider.dart';
 
 class LoginMain extends StatefulWidget {
   const LoginMain({super.key});
@@ -75,7 +75,7 @@ class _LoginMainState extends State<LoginMain> {
                 onPressed: () {
                   //TODO: Send otp to phone number
                   context
-                      .read<LoginSignUp>()
+                      .read<User>()
                       .setPhoneNumber(phoneNumberController.text);
                   navigate(context, const OtpVerification());
                 },

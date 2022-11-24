@@ -7,7 +7,7 @@ import 'package:birddie/widgets/w_inputfield.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:birddie/providers/login_provider.dart';
+import 'package:birddie/providers/user_provider.dart';
 
 class OtpVerification extends StatefulWidget {
   const OtpVerification({super.key});
@@ -63,7 +63,7 @@ class _OtpVerificationState extends State<OtpVerification> {
                 ),
               ),
               Text(
-                '+234${context.watch<LoginSignUp>().phoneNumber}',
+                '+234${context.watch<User>().phoneNumber}',
                 style: GoogleFonts.lato(
                   color: Colors.white,
                   fontStyle: FontStyle.italic,

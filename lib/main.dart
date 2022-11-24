@@ -1,17 +1,19 @@
+import 'package:birddie/cloud_functions/database_functions.dart';
 import 'package:birddie/providers/event_provider.dart';
-import 'package:birddie/providers/login_provider.dart';
 import 'package:birddie/providers/russian_roulette_provider.dart';
+import 'package:birddie/providers/user_provider.dart';
 import 'package:birddie/screens/dashboard.dart';
 import 'package:birddie/screens/onboarding_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await connectDB();
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => LoginSignUp()),
+        ChangeNotifierProvider(create: (_) => User()),
         ChangeNotifierProvider(create: (_) => Events()),
         ChangeNotifierProvider(create: (_) => RussianRoulletes()),
       ],
