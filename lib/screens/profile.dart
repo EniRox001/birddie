@@ -1,3 +1,4 @@
+import 'package:birddie/cloud_functions/database_functions.dart';
 import 'package:birddie/controllers/profile_controllers.dart';
 import 'package:birddie/providers/user_provider.dart';
 import 'package:birddie/screens/dashboard.dart';
@@ -138,7 +139,7 @@ class _ProfileState extends State<Profile> {
                 children: [
                   WTextField(
                     controller: occupationController,
-                    hintText: context.read<User>().occupation,
+                    hintText: context.read<UserProvider>().occupation,
                   ),
                   const SizedBox(
                     height: 10.0,
@@ -193,24 +194,29 @@ class _ProfileState extends State<Profile> {
               ),
             ),
             WElevatedButton(
-              onPressed: () {
-                context.read<User>().setProfileVideo('profileVideoLink');
-                context.read<User>().setProfilePicture('profilePictureLink');
+              onPressed: () async {
                 context
-                    .read<User>()
+                    .read<UserProvider>()
+                    .setProfileVideo('profileVideoLink');
+                context
+                    .read<UserProvider>()
+                    .setProfilePicture('profilePictureLink');
+                context
+                    .read<UserProvider>()
                     .setOccupation(occupationController.text.toLowerCase());
                 context
-                    .read<User>()
+                    .read<UserProvider>()
                     .setLocation(locationController.text.toLowerCase());
                 context
-                    .read<User>()
+                    .read<UserProvider>()
                     .setLookingFor(purposeController.text.toLowerCase());
-                context.read<User>().setDrinkAlcohol(false);
-                context.read<User>().setSmoke(true);
+                context.read<UserProvider>().setDrinkAlcohol(false);
+                context.read<UserProvider>().setSmoke(true);
                 // navigate(context, const Dashboard());
-                print(
-                  'User Data\n\tPhone Number: ${context.read<User>().phoneNumber}\n\tFirst Name: ${context.read<User>().firstName}\n\tLast Name: ${context.read<User>().lastName}\n\tOccupation: ${context.read<User>().occupation}\n\tGender: ${context.read<User>().gender}\n\tDate of Birth: ${context.read<User>().dateOfBirth}\n\tProfile Picture: ${context.read<User>().profilePicture}\n\tProfile Video: ${context.read<User>().profileVideo}\n\tLocation: ${context.read<User>().location}\n\tLooking For: ${context.read<User>().lookingFor}\n\tDrink Alcohol?: ${context.read<User>().drinkAlcohol}\n\tSmoke?: ${context.read<User>().smoke}',
-                );
+
+                await createUser(context)
+                    .then((value) => navigate(context, const Dashboard()));
+                // navigate(context, const Dashboard());
               },
               text: 'SAVE',
             ),

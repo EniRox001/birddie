@@ -185,9 +185,9 @@ class _GenderDOBState extends State<GenderDOB> {
                 ),
                 WElevatedButton(
                     onPressed: () {
-                      context.read<User>().setGender(selectedGender);
+                      context.read<UserProvider>().setGender(selectedGender);
                       context
-                          .read<User>()
+                          .read<UserProvider>()
                           .setDateOfBirth(dateOfBirthController.text);
                       navigate(context, const Profile());
                     },

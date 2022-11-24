@@ -84,12 +84,12 @@ class _UserInfoState extends State<UserInfo> {
                 WElevatedButton(
                     onPressed: () {
                       context
-                          .read<User>()
+                          .read<UserProvider>()
                           .setFirstName(firstNameController.text.toLowerCase());
                       context
-                          .read<User>()
+                          .read<UserProvider>()
                           .setLastName(lastNameController.text.toLowerCase());
-                      context.read<User>().setOccupation(
+                      context.read<UserProvider>().setOccupation(
                           occupationController.text.toLowerCase());
                       navigate(context, const GenderDOB());
                     },

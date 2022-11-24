@@ -63,7 +63,7 @@ class _OtpVerificationState extends State<OtpVerification> {
                 ),
               ),
               Text(
-                context.watch<User>().phoneNumber.toString(),
+                context.watch<UserProvider>().phoneNumber.toString(),
                 style: GoogleFonts.lato(
                   color: Colors.white,
                   fontStyle: FontStyle.italic,

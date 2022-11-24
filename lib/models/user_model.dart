@@ -7,19 +7,19 @@ class User {
   String lastName;
   String occupation;
   String gender;
-  DateTime dateOfBirth;
+  String dateOfBirth;
   String profilePicture;
   String profileVideo;
   String location;
   String lookingFor;
-  bool drinkAlcohol;
-  bool smoke;
+  String drinkAlcohol;
+  String smoke;
 
   Map<String, dynamic> toMap() {
     return {
       'id': id,
       'phone_number': phoneNumber,
-      'email_address': firstName,
+      'first_name': firstName,
       'last_name': lastName,
       'occupation': occupation,
       'gender': gender,

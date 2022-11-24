@@ -75,7 +75,7 @@ class _LoginMainState extends State<LoginMain> {
                 onPressed: () {
                   //TODO: Send otp to phone number
                   context
-                      .read<User>()
+                      .read<UserProvider>()
                       .setPhoneNumber(phoneNumberController.text);
                   navigate(context, const OtpVerification());
                 },

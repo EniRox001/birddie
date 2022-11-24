@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class User extends ChangeNotifier {
+class UserProvider extends ChangeNotifier {
   late String _phoneNumber;
   late String _firstName;
   late String _lastName;

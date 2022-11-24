@@ -13,7 +13,7 @@ void main() async {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => User()),
+        ChangeNotifierProvider(create: (_) => UserProvider()),
         ChangeNotifierProvider(create: (_) => Events()),
         ChangeNotifierProvider(create: (_) => RussianRoulletes()),
       ],
