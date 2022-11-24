@@ -1,7 +1,9 @@
 import 'package:birddie/cloud_functions/database_functions.dart';
+import 'package:birddie/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:birddie/widgets/w_event_card.dart';
 import 'package:mongo_dart/mongo_dart.dart';
+import 'package:provider/provider.dart';
 
 class EventProviders extends ChangeNotifier {
   ObjectId _id = selectedEvent['_id'];
@@ -13,7 +15,6 @@ class EventProviders extends ChangeNotifier {
   late int _slotsLeft = selectedEvent['slot_left'];
   late String _date = selectedEvent['date'];
   late String _time = selectedEvent['time'];
-  late bool _reserved = selectedEvent['reserved'];
 
   ObjectId get id => _id;
   String get title => _title;
@@ -24,17 +25,23 @@ class EventProviders extends ChangeNotifier {
   int get slotsLeft => _slotsLeft;
   String get date => _date;
   String get time => _time;
-  bool get reserved => _reserved;
 
-  void setSelectedId(ObjectId id) async {
-    _id = id;
+  void setSelected() async {
+    _id = selectedEvent['id'];
+    _title = selectedEvent['title'];
+    _description = selectedEvent['description'];
+    _location = selectedEvent['location'];
+    _price = selectedEvent['price'];
+    _attending = selectedEvent['attending'];
+    _slotsLeft = selectedEvent['slot_left'];
+    _date = selectedEvent['date'];
+    _time = selectedEvent['time'];
   }
 
   void setReservedSlot(BuildContext context) async {
-    await reserveSlot(context);
-    await getEvents();
-    _reserved = true;
+    reserveSlot(context);
     _slotsLeft -= 1;
+    getEvents();
     notifyListeners();
   }
 }

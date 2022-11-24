@@ -212,13 +212,11 @@ class _ProfileState extends State<Profile> {
                     .setLookingFor(purposeController.text.toLowerCase());
                 context.read<UserProvider>().setDrinkAlcohol(false);
                 context.read<UserProvider>().setSmoke(true);
-                // navigate(context, const Dashboard());
 
+                //TODO: Remove Create Event Function
                 await createEvent(context);
                 await createUser(context)
                     .then((value) => navigate(context, const Dashboard()));
-
-                // navigate(context, const Dashboard());
               },
               text: 'SAVE',
             ),

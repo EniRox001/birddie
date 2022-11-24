@@ -1,4 +1,5 @@
 import 'package:birddie/providers/event_provider.dart';
+import 'package:birddie/providers/user_provider.dart';
 import 'package:birddie/utils/colors.dart';
 import 'package:birddie/utils/functions.dart';
 import 'package:birddie/widgets/w_appbar.dart';
@@ -148,7 +149,10 @@ class EventDetails extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 20.0),
-                    context.watch<EventProviders>().reserved
+                    context
+                            .watch<EventProviders>()
+                            .attending
+                            .contains(context.read<UserProvider>().phoneNumber)
                         ? Text(
                             'You Got A Slot',
                             style: Theme.of(context).textTheme.bodyLarge,
@@ -158,7 +162,10 @@ class EventDetails extends StatelessWidget {
                     const SizedBox(
                       height: 10.0,
                     ),
-                    context.watch<EventProviders>().reserved
+                    context
+                            .watch<EventProviders>()
+                            .attending
+                            .contains(context.read<UserProvider>().phoneNumber)
                         ? const SizedBox()
                         : WElevatedButton(
                             onPressed: () {
@@ -172,7 +179,10 @@ class EventDetails extends StatelessWidget {
                   ],
                 ),
               ),
-              context.watch<EventProviders>().reserved
+              context
+                      .watch<EventProviders>()
+                      .attending
+                      .contains(context.read<UserProvider>().phoneNumber)
                   ? Container(
                       decoration: BoxDecoration(
                           color: CustomColors.fadedRedColor,

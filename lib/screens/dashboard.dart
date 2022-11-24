@@ -62,10 +62,8 @@ class _DashboardState extends State<Dashboard> {
                           onTap: () {
                             selectedEvent = event[index];
                             Provider.of<EventProviders>(context, listen: false)
-                                .setSelectedId(selectedEvent["id"]);
-                            print(selectedEvent);
-                            print(
-                                "Selected Doc ID: ${context.read<EventProviders>().id}");
+                                .setSelected();
+
                             navigate(context, const EventDetails());
                           },
                           child: WEventCard(

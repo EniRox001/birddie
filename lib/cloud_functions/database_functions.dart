@@ -60,7 +60,6 @@ Future createEvent(BuildContext context) async {
     2,
     '20/12/2022',
     '16:00:00',
-    false,
   ).toMap());
 }
 
@@ -70,6 +69,11 @@ getEvents() async {
       event = value;
     },
   );
+}
+
+addAttending(BuildContext context, List list) {
+  list.add(context.read<UserProvider>().phoneNumber);
+  return list;
 }
 
 Future reserveSlot(BuildContext context) async {
@@ -84,11 +88,11 @@ Future reserveSlot(BuildContext context) async {
       "description": context.read<EventProviders>().description,
       "location": context.read<EventProviders>().location,
       "price": context.read<EventProviders>().price,
-      "attending": context.read<EventProviders>().attending,
+      "attending":
+          addAttending(context, context.read<EventProviders>().attending),
       "slot_left": context.read<EventProviders>().slotsLeft - 1,
       "date": context.read<EventProviders>().date,
       "time": context.read<EventProviders>().time,
-      "reserved": true,
     },
   );
 }

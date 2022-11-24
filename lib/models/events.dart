@@ -10,7 +10,6 @@ class Events {
   int slotsLeft;
   String date;
   String time;
-  bool reserved;
 
   Map<String, dynamic> toMap() {
     return {
@@ -23,7 +22,6 @@ class Events {
       'slot_left': slotsLeft,
       'date': date,
       'time': time,
-      'reserved': reserved,
     };
   }
 
@@ -37,6 +35,5 @@ class Events {
     this.slotsLeft,
     this.date,
     this.time,
-    this.reserved,
   );
 }
