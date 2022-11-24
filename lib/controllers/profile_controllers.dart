@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-final occupationController = TextEditingController();
-final locationController = TextEditingController();
-final purposeController = TextEditingController();
-final alcoholController = TextEditingController();
-final smokeController = TextEditingController();
+TextEditingController occupationController = TextEditingController();
+TextEditingController locationController = TextEditingController();
+TextEditingController purposeController = TextEditingController();
+TextEditingController alcoholController = TextEditingController();
+TextEditingController smokeController = TextEditingController();

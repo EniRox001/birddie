@@ -46,25 +46,26 @@ class _DashboardState extends State<Dashboard> {
                     'Upcoming Events',
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
-                  SizedBox(
-                    height: 220,
-                    child: Swiper(
-                      itemCount: context.watch<Events>().eventsLength,
-                      itemBuilder: (BuildContext context, int index) {
-                        return GestureDetector(
-                          onTap: () {
-                            context.read<Events>().setSelectedEvent(index);
-                            navigate(context, const EventDetails());
-                          },
-                          child: context.watch<Events>().events[index],
-                        );
-                      },
+                  //TODO: Fix Event Card to read from events database;
+                  // SizedBox(
+                  //   height: 220,
+                  //   child: Swiper(
+                  //     itemCount: context.watch<Events>().eventsLength,
+                  //     itemBuilder: (BuildContext context, int index) {
+                  //       return GestureDetector(
+                  //         onTap: () {
+                  //           context.read<Events>().setSelectedEvent(index);
+                  //           navigate(context, const EventDetails());
+                  //         },
+                  //         child: context.watch<Events>().events[index],
+                  //       );
+                  //     },
 
-                      viewportFraction: 0.8,
-                      scale: 0.9,
-                      // autoplay: true,
-                    ),
-                  ),
+                  //     viewportFraction: 0.8,
+                  //     scale: 0.9,
+                  //     // autoplay: true,
+                  //   ),
+                  // ),
                 ],
               ),
             ),

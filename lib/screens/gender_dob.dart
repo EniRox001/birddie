@@ -1,4 +1,5 @@
 import 'package:birddie/controllers/gender_dob_controllers.dart';
+import 'package:birddie/providers/user_provider.dart';
 import 'package:birddie/screens/profile.dart';
 import 'package:birddie/utils/functions.dart';
 import 'package:birddie/utils/images.dart';
@@ -7,6 +8,7 @@ import 'package:birddie/widgets/w_inputfield.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:birddie/widgets/w_gender_dob.dart';
+import 'package:provider/provider.dart';
 
 class GenderDOB extends StatefulWidget {
   const GenderDOB({super.key});
@@ -18,7 +20,7 @@ class GenderDOB extends StatefulWidget {
 class _GenderDOBState extends State<GenderDOB> {
   void setSelectedOption(int i) {
     setState(() {
-      selectedOption = i;
+      selectedGender = i;
     });
   }
 
@@ -97,7 +99,7 @@ class _GenderDOBState extends State<GenderDOB> {
                           },
                           child: Container(
                             decoration: BoxDecoration(
-                              color: selectedOption == 1
+                              color: selectedGender == 1
                                   ? Colors.red
                                   : Colors.white,
                               borderRadius: BorderRadius.circular(
@@ -107,12 +109,12 @@ class _GenderDOBState extends State<GenderDOB> {
                             child: Padding(
                               padding: EdgeInsets.symmetric(
                                 vertical: 8.0,
-                                horizontal: selectedOption == 1 ? 50.0 : 20.0,
+                                horizontal: selectedGender == 1 ? 50.0 : 20.0,
                               ),
                               child: Text(
                                 'MALE',
                                 style: GoogleFonts.lato(
-                                  color: selectedOption == 1
+                                  color: selectedGender == 1
                                       ? Colors.amber
                                       : Colors.black,
                                 ),
@@ -126,7 +128,7 @@ class _GenderDOBState extends State<GenderDOB> {
                           },
                           child: Container(
                             decoration: BoxDecoration(
-                              color: selectedOption == 2
+                              color: selectedGender == 2
                                   ? Colors.red
                                   : Colors.white,
                               borderRadius: BorderRadius.circular(
@@ -136,12 +138,12 @@ class _GenderDOBState extends State<GenderDOB> {
                             child: Padding(
                               padding: EdgeInsets.symmetric(
                                 vertical: 8.0,
-                                horizontal: selectedOption == 2 ? 50.0 : 20.0,
+                                horizontal: selectedGender == 2 ? 50.0 : 20.0,
                               ),
                               child: Text(
                                 'FEMALE',
                                 style: GoogleFonts.lato(
-                                  color: selectedOption == 2
+                                  color: selectedGender == 2
                                       ? Colors.amber
                                       : Colors.black,
                                 ),
@@ -183,6 +185,10 @@ class _GenderDOBState extends State<GenderDOB> {
                 ),
                 WElevatedButton(
                     onPressed: () {
+                      context.read<User>().setGender(selectedGender);
+                      context
+                          .read<User>()
+                          .setDateOfBirth(dateOfBirthController.text);
                       navigate(context, const Profile());
                     },
                     text: 'SIGNUP')

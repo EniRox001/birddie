@@ -18,8 +18,9 @@ class WTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: controller,
       keyboardType: inputType,
-      inputFormatters: [],
+      inputFormatters: const [],
       decoration: InputDecoration(
         isDense: true,
         contentPadding: const EdgeInsets.all(10),

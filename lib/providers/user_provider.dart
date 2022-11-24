@@ -29,7 +29,7 @@ class User extends ChangeNotifier {
   String get smoke => _smoke;
 
   void setPhoneNumber(String number) {
-    _phoneNumber = number;
+    _phoneNumber = "+234$number";
     notifyListeners();
   }
 

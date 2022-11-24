@@ -1,10 +1,12 @@
 import 'package:birddie/controllers/user_info_controllers.dart';
+import 'package:birddie/providers/user_provider.dart';
 import 'package:birddie/screens/gender_dob.dart';
 import 'package:birddie/utils/functions.dart';
 import 'package:birddie/utils/images.dart';
 import 'package:birddie/widgets/w_elevated_button.dart';
 import 'package:birddie/widgets/w_inputfield.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class UserInfo extends StatefulWidget {
   const UserInfo({super.key});
@@ -81,6 +83,14 @@ class _UserInfoState extends State<UserInfo> {
                 ),
                 WElevatedButton(
                     onPressed: () {
+                      context
+                          .read<User>()
+                          .setFirstName(firstNameController.text.toLowerCase());
+                      context
+                          .read<User>()
+                          .setLastName(lastNameController.text.toLowerCase());
+                      context.read<User>().setOccupation(
+                          occupationController.text.toLowerCase());
                       navigate(context, const GenderDOB());
                     },
                     text: 'NEXT'),

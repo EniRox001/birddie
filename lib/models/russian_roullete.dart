@@ -8,6 +8,7 @@ class RussianRoullete {
   DateTime time;
   int spendingGauge;
   String whoPays;
+  String matchState;
 
   Map<String, dynamic> toMap() {
     return {
@@ -20,6 +21,7 @@ class RussianRoullete {
       'time': time,
       'spending_gauge': spendingGauge,
       'who_pays': whoPays,
+      'matchState': matchState,
     };
   }
 
@@ -33,5 +35,6 @@ class RussianRoullete {
     this.time,
     this.spendingGauge,
     this.whoPays,
+    this.matchState,
   );
 }

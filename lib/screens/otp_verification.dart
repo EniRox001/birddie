@@ -63,7 +63,7 @@ class _OtpVerificationState extends State<OtpVerification> {
                 ),
               ),
               Text(
-                '+234${context.watch<User>().phoneNumber}',
+                context.watch<User>().phoneNumber.toString(),
                 style: GoogleFonts.lato(
                   color: Colors.white,
                   fontStyle: FontStyle.italic,
