@@ -1,4 +1,5 @@
 import 'package:birddie/controllers/profile_controllers.dart';
+import 'package:birddie/providers/user_provider.dart';
 import 'package:birddie/screens/dashboard.dart';
 import 'package:birddie/utils/functions.dart';
 import 'package:birddie/widgets/w_appbar.dart';
@@ -6,6 +7,7 @@ import 'package:birddie/widgets/w_elevated_button.dart';
 import 'package:birddie/widgets/w_profile_media_widget.dart';
 import 'package:birddie/widgets/w_textfield.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -136,7 +138,7 @@ class _ProfileState extends State<Profile> {
                 children: [
                   WTextField(
                     controller: occupationController,
-                    hintText: 'Occupation',
+                    hintText: context.read<User>().occupation,
                   ),
                   const SizedBox(
                     height: 10.0,
@@ -192,7 +194,23 @@ class _ProfileState extends State<Profile> {
             ),
             WElevatedButton(
               onPressed: () {
-                navigate(context, const Dashboard());
+                context.read<User>().setProfileVideo('profileVideoLink');
+                context.read<User>().setProfilePicture('profilePictureLink');
+                context
+                    .read<User>()
+                    .setOccupation(occupationController.text.toLowerCase());
+                context
+                    .read<User>()
+                    .setLocation(locationController.text.toLowerCase());
+                context
+                    .read<User>()
+                    .setLookingFor(purposeController.text.toLowerCase());
+                context.read<User>().setDrinkAlcohol(false);
+                context.read<User>().setSmoke(true);
+                // navigate(context, const Dashboard());
+                print(
+                  'User Data\n\tPhone Number: ${context.read<User>().phoneNumber}\n\tFirst Name: ${context.read<User>().firstName}\n\tLast Name: ${context.read<User>().lastName}\n\tOccupation: ${context.read<User>().occupation}\n\tGender: ${context.read<User>().gender}\n\tDate of Birth: ${context.read<User>().dateOfBirth}\n\tProfile Picture: ${context.read<User>().profilePicture}\n\tProfile Video: ${context.read<User>().profileVideo}\n\tLocation: ${context.read<User>().location}\n\tLooking For: ${context.read<User>().lookingFor}\n\tDrink Alcohol?: ${context.read<User>().drinkAlcohol}\n\tSmoke?: ${context.read<User>().smoke}',
+                );
               },
               text: 'SAVE',
             ),
