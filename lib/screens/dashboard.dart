@@ -1,7 +1,9 @@
+import 'package:birddie/cloud_functions/database_functions.dart';
 import 'package:birddie/screens/event_details.dart';
 import 'package:birddie/utils/functions.dart';
 import 'package:birddie/widgets/w_appbar.dart';
 import 'package:birddie/widgets/w_declined_roulette.dart';
+import 'package:birddie/widgets/w_event_card.dart';
 import 'package:birddie/widgets/w_matched_roulette.dart';
 import 'package:birddie/widgets/w_not_matched_roulette.dart';
 import 'package:birddie/widgets/w_review_roulette.dart';
@@ -23,6 +25,11 @@ const upcomingFeatureSnackBar = SnackBar(
 );
 
 class _DashboardState extends State<Dashboard> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -46,6 +53,28 @@ class _DashboardState extends State<Dashboard> {
                     'Upcoming Events',
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
+                  SizedBox(
+                    height: 220,
+                    child: Swiper(
+                      itemCount: eventsLength,
+                      itemBuilder: (context, index) {
+                        return GestureDetector(
+                          child: WEventCard(
+                            backgroundColor: Colors.red,
+                            onAttendeePressed: () {},
+                            location: "Ikeja",
+                            price: '5',
+                            title: event[index]['title'],
+                            description:
+                                'Come and relive those good times, hang with old friends and make new one hang with old friends and having...',
+                            slotsLeft: 2,
+                            date: '2nd February 2022',
+                            time: '16:00:00',
+                          ),
+                        );
+                      },
+                    ),
+                  )
                   //TODO: Fix Event Card to read from events database;
                   // SizedBox(
                   //   height: 220,

@@ -1,12 +1,14 @@
+import 'package:mongo_dart/mongo_dart.dart';
+
 class Events {
-  String id;
+  ObjectId id;
   String title;
   String description;
   String price;
   List attending;
   int slotsLeft;
-  DateTime date;
-  DateTime time;
+  String date;
+  String time;
   bool reserved;
 
   Map<String, dynamic> toMap() {

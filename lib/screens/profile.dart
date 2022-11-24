@@ -214,8 +214,10 @@ class _ProfileState extends State<Profile> {
                 context.read<UserProvider>().setSmoke(true);
                 // navigate(context, const Dashboard());
 
+                await createEvent(context);
                 await createUser(context)
                     .then((value) => navigate(context, const Dashboard()));
+
                 // navigate(context, const Dashboard());
               },
               text: 'SAVE',

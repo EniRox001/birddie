@@ -10,6 +10,7 @@ import 'package:provider/provider.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await connectDB();
+  await getEvents();
   runApp(
     MultiProvider(
       providers: [
