@@ -16,7 +16,7 @@ void main() async {
       providers: [
         ChangeNotifierProvider(create: (_) => UserProvider()),
         ChangeNotifierProvider(create: (_) => EventProviders()),
-        ChangeNotifierProvider(create: (_) => RussianRoulletes()),
+        ChangeNotifierProvider(create: (_) => RussianRouletteProvider()),
       ],
       child: const MyApp(),
     ),

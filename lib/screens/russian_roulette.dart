@@ -1,3 +1,4 @@
+import 'package:birddie/cloud_functions/database_functions.dart';
 import 'package:birddie/controllers/russian_roulette_controllers.dart';
 import 'package:birddie/providers/russian_roulette_provider.dart';
 import 'package:birddie/utils/colors.dart';
@@ -17,8 +18,6 @@ class RussianRoullete extends StatefulWidget {
 }
 
 class _RussianRoulleteState extends State<RussianRoullete> {
-  bool termsAndConditionsRoulette = false;
-
   @override
   void dispose() {
     minAgeController;
@@ -152,7 +151,47 @@ class _RussianRoulleteState extends State<RussianRoullete> {
                     ),
                     WElevatedButton(
                       onPressed: () {
-                        context.read<RussianRoulletes>().setMatchState('');
+                        context
+                            .read<RussianRouletteProvider>()
+                            .setMinAge(int.parse(minAgeController.text));
+
+                        context
+                            .read<RussianRouletteProvider>()
+                            .setMaxAge(int.parse(maxAgeController.text));
+
+                        context
+                            .read<RussianRouletteProvider>()
+                            .setLocation(locationController.text);
+
+                        context
+                            .read<RussianRouletteProvider>()
+                            .setDateSetup(dateSetupController.text);
+
+                        context
+                            .read<RussianRouletteProvider>()
+                            .setDate(dateController.text);
+
+                        context
+                            .read<RussianRouletteProvider>()
+                            .setTime(timeController.text);
+
+                        context
+                            .read<RussianRouletteProvider>()
+                            .setSpendingGauge(
+                                int.parse(spendingGaugeController.text));
+
+                        context
+                            .read<RussianRouletteProvider>()
+                            .setWhoPays(payBillController.text);
+
+                        context
+                            .read<RussianRouletteProvider>()
+                            .setMatchState('reviewing');
+
+                        Provider.of<RussianRouletteProvider>(context,
+                                listen: false)
+                            .setRussianRoulette(context);
+
                         navigateBack(context);
                       },
                       text: 'MATCH ME',

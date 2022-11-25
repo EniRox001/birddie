@@ -88,11 +88,13 @@ class _DashboardState extends State<Dashboard> {
               ),
             ),
             //TODO: Show match review based on provider preference
-            context.watch<RussianRoulletes>().matchState == 'matched'
+            context.watch<RussianRouletteProvider>().matchState == 'matched'
                 ? const MatchedRoulette()
-                : context.watch<RussianRoulletes>().matchState == 'reviewing'
+                : context.watch<RussianRouletteProvider>().matchState ==
+                        'reviewing'
                     ? const ReviewRoulette()
-                    : context.watch<RussianRoulletes>().matchState == 'declined'
+                    : context.watch<RussianRouletteProvider>().matchState ==
+                            'declined'
                         ? const DeclinedRoulette()
                         : const NotMatchedRoulette()
           ],

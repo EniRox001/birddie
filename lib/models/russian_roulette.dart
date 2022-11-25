@@ -1,11 +1,13 @@
+import 'package:mongo_dart/mongo_dart.dart';
+
 class RussianRoullete {
-  String id;
+  ObjectId id;
   int minAge;
   int maxAge;
   String location;
   String dateSetup;
-  DateTime date;
-  DateTime time;
+  String date;
+  String time;
   int spendingGauge;
   String whoPays;
   String matchState;

@@ -1,8 +1,10 @@
+import 'package:birddie/cloud_functions/database_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:mongo_dart/mongo_dart.dart';
 
-class RussianRoulletes extends ChangeNotifier {
+class RussianRouletteProvider extends ChangeNotifier {
   //TODO: Set up model to automatically add data to matched events
-  late String _id;
+  late ObjectId _id;
   late int _minAge;
   late int _maxAge;
   late String _location;
@@ -13,7 +15,7 @@ class RussianRoulletes extends ChangeNotifier {
   late String _whoPays;
   String _matchState = 'not matched';
 
-  String get id => _id;
+  ObjectId get id => _id;
   int get minAge => _minAge;
   int get maxAge => _maxAge;
   String get location => _location;
@@ -23,11 +25,6 @@ class RussianRoulletes extends ChangeNotifier {
   int get spendingGauge => _spendingGauge;
   String get whoPays => _whoPays;
   String get matchState => _matchState;
-
-  void setId(String id) {
-    _id = id;
-    notifyListeners();
-  }
 
   void setMinAge(int minAge) {
     _minAge = minAge;
@@ -71,6 +68,11 @@ class RussianRoulletes extends ChangeNotifier {
 
   void setMatchState(String match) {
     _matchState = match;
+    notifyListeners();
+  }
+
+  void setRussianRoulette(BuildContext context) {
+    addRussianRoulette(context);
     notifyListeners();
   }
 }

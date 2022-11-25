@@ -1,6 +1,8 @@
 import 'package:birddie/models/events.dart';
+import 'package:birddie/models/russian_roulette.dart';
 import 'package:birddie/models/user_model.dart';
 import 'package:birddie/providers/event_provider.dart';
+import 'package:birddie/providers/russian_roulette_provider.dart';
 import 'package:birddie/providers/user_provider.dart';
 import 'package:birddie/utils/functions.dart';
 import 'package:mongo_dart/mongo_dart.dart';
@@ -13,6 +15,7 @@ ObjectId uniqueId = ObjectId();
 //Initialize late collections
 late DbCollection userCollection;
 late DbCollection eventsCollection;
+late DbCollection russianRouletteCollection;
 
 late dynamic event;
 late dynamic selectedEvent;
@@ -25,10 +28,12 @@ connectDB() async {
 
   DbCollection userDatabase = db.collection('users');
   DbCollection eventDatabase = db.collection('events');
+  DbCollection russianRouletteDatabase = db.collection('russianRoulette');
 
   //Add reference to the intialized database collections
   userCollection = userDatabase;
   eventsCollection = eventDatabase;
+  russianRouletteCollection = russianRouletteDatabase;
 }
 
 Future createUser(BuildContext context) async {
@@ -118,4 +123,38 @@ Future reserveSlot(BuildContext context) async {
       "time": context.read<EventProviders>().time,
     },
   );
+}
+
+addRussianRoulette(BuildContext context) async {
+  await russianRouletteCollection.insert(
+    RussianRoullete(
+      uniqueId,
+      context.read<RussianRouletteProvider>().minAge,
+      context.read<RussianRouletteProvider>().maxAge,
+      context.read<RussianRouletteProvider>().location,
+      context.read<RussianRouletteProvider>().dateSetup,
+      context.read<RussianRouletteProvider>().date,
+      context.read<RussianRouletteProvider>().time,
+      context.read<RussianRouletteProvider>().spendingGauge,
+      context.read<RussianRouletteProvider>().matchState,
+      context.read<RussianRouletteProvider>().whoPays,
+    ).toMap(),
+  );
+}
+
+//Function to set the match state based on String input
+setRussianRouletteMatchState(BuildContext context, String matchState) async {
+  await russianRouletteCollection
+      .update(where.eq('id', context.read<RussianRouletteProvider>().id), {
+    'id': context.read<RussianRouletteProvider>().id,
+    'min_age': context.read<RussianRouletteProvider>().minAge,
+    'max_age': context.read<RussianRouletteProvider>().maxAge,
+    'location': context.read<RussianRouletteProvider>().location,
+    'date_setup': context.read<RussianRouletteProvider>().dateSetup,
+    'date': context.read<RussianRouletteProvider>().date,
+    'time': context.read<RussianRouletteProvider>().time,
+    'spending_gauge': context.read<RussianRouletteProvider>().spendingGauge,
+    'who_pays': context.read<RussianRouletteProvider>().whoPays,
+    'matchState': matchState,
+  });
 }

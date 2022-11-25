@@ -1,5 +1,7 @@
 import 'package:birddie/utils/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:birddie/providers/russian_roulette_provider.dart';
 
 class ReviewRoulette extends StatelessWidget {
   const ReviewRoulette({super.key});
@@ -90,18 +92,18 @@ class ReviewRoulette extends StatelessWidget {
                               style: Theme.of(context).textTheme.titleMedium,
                             ),
                             Text(
-                              'Fastnet Cinema',
+                              context.read<RussianRouletteProvider>().location,
                               style: Theme.of(context).textTheme.titleLarge,
                             ),
                             const SizedBox(
                               height: 10.0,
                             ),
                             Text(
-                              'Yola Adamawa State',
+                              context.read<RussianRouletteProvider>().location,
                               style: Theme.of(context).textTheme.titleMedium,
                             ),
                             Text(
-                              'Cinema Date',
+                              context.read<RussianRouletteProvider>().dateSetup,
                               style: Theme.of(context).textTheme.titleMedium,
                             ),
                             const SizedBox(
@@ -112,7 +114,7 @@ class ReviewRoulette extends StatelessWidget {
                               style: Theme.of(context).textTheme.bodyMedium,
                             ),
                             Text(
-                              '24 - 30',
+                              '${context.read<RussianRouletteProvider>().minAge} - ${context.read<RussianRouletteProvider>().maxAge}',
                               style: Theme.of(context)
                                   .textTheme
                                   .titleMedium!
@@ -134,6 +136,7 @@ class ReviewRoulette extends StatelessWidget {
                             mainAxisSize: MainAxisSize.min,
                             children: <Widget>[
                               Text(
+                                //tODO: Show time remaining till verification
                                 '09',
                                 style: Theme.of(context)
                                     .textTheme
