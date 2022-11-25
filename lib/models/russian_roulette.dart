@@ -2,6 +2,7 @@ import 'package:mongo_dart/mongo_dart.dart';
 
 class RussianRoullete {
   ObjectId id;
+  ObjectId matchedPerson;
   int minAge;
   int maxAge;
   String location;
@@ -15,6 +16,7 @@ class RussianRoullete {
   Map<String, dynamic> toMap() {
     return {
       'id': id,
+      'matchedPerson': matchedPerson,
       'min_age': minAge,
       'max_age': maxAge,
       'location': location,
@@ -29,6 +31,7 @@ class RussianRoullete {
 
   RussianRoullete(
     this.id,
+    this.matchedPerson,
     this.minAge,
     this.maxAge,
     this.location,

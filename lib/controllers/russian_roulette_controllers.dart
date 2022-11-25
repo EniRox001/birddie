@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+String russianRouletteDate = '';
 TextEditingController minAgeController = TextEditingController();
 TextEditingController maxAgeController = TextEditingController();
 TextEditingController locationController = TextEditingController();

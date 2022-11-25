@@ -1,6 +1,7 @@
 import 'package:birddie/controllers/gender_dob_controllers.dart';
 import 'package:birddie/providers/user_provider.dart';
 import 'package:birddie/screens/profile.dart';
+import 'package:birddie/utils/colors.dart';
 import 'package:birddie/utils/functions.dart';
 import 'package:birddie/utils/images.dart';
 import 'package:birddie/widgets/w_elevated_button.dart';
@@ -9,6 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:birddie/widgets/w_gender_dob.dart';
 import 'package:provider/provider.dart';
+
+String dateOfBirth = '';
 
 class GenderDOB extends StatefulWidget {
   const GenderDOB({super.key});
@@ -26,8 +29,6 @@ class _GenderDOBState extends State<GenderDOB> {
 
   @override
   void dispose() {
-    dateOfBirthController;
-
     super.dispose();
   }
 
@@ -158,9 +159,37 @@ class _GenderDOBState extends State<GenderDOB> {
                 const SizedBox(
                   height: 20.0,
                 ),
-                WInputField(
-                    controller: dateOfBirthController,
-                    hintText: 'DATE OF BIRTH'),
+                GestureDetector(
+                  onTap: () async {
+                    await selectBirthDate(context);
+                    // ignore: use_build_context_synchronously
+                    context.read<UserProvider>().setDateOfBirth(dateOfBirth);
+                    print(context.read<UserProvider>().dateOfBirth.trim());
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: CustomColors.mainWhiteColor,
+                      borderRadius: BorderRadius.circular(30.0),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 50.0,
+                        vertical: 13.0,
+                      ),
+                      child: context.watch<UserProvider>().gender == ''
+                          ? Text(
+                              'DATE OF BIRTH',
+                              style: Theme.of(context).textTheme.titleMedium,
+                              textAlign: TextAlign.start,
+                            )
+                          : Text(
+                              context.watch<UserProvider>().dateOfBirth,
+                              style: Theme.of(context).textTheme.titleMedium,
+                              textAlign: TextAlign.start,
+                            ),
+                    ),
+                  ),
+                ),
                 WRememberMe(
                   isChecked: termsAndConditions,
                   text: 'I Accept The Terms & Conditions',
@@ -186,9 +215,6 @@ class _GenderDOBState extends State<GenderDOB> {
                 WElevatedButton(
                     onPressed: () {
                       context.read<UserProvider>().setGender(selectedGender);
-                      context
-                          .read<UserProvider>()
-                          .setDateOfBirth(dateOfBirthController.text);
                       navigate(context, const Profile());
                     },
                     text: 'SIGNUP')

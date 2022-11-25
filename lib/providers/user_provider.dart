@@ -1,49 +1,24 @@
+import 'package:birddie/cloud_functions/cloudinary_functions.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:mongo_dart/mongo_dart.dart';
 import 'package:birddie/cloud_functions/database_functions.dart';
 
-class CreateUserProvider extends ChangeNotifier {
-  late String _phoneNumber;
-  late String _firstName;
-  late String _lastName;
-  late String _occupation;
-  late String _gender;
-  late String _dateOfBirth;
-  late String _profilePicture;
-  late String _profileVideo;
-  late String _location;
-  late String _lookingFor;
-  late String _drinkAlcohol;
-  late String _smoke;
-
-  String get phoneNumber => _phoneNumber;
-  String get firstName => _firstName;
-  String get lastName => _lastName;
-  String get occupation => _occupation;
-  String get gender => _gender;
-  String get dateOfBirth => _dateOfBirth;
-  String get profilePicture => _profilePicture;
-  String get profileVideo => _profileVideo;
-  String get location => _location;
-  String get lookingFor => _lookingFor;
-  String get drinkAlcohol => _drinkAlcohol;
-  String get smoke => _smoke;
-}
-
 class UserProvider extends ChangeNotifier {
+  late ObjectId _id;
   late String _phoneNumber;
   late String _firstName;
   late String _lastName;
   late String _occupation;
   late String _gender;
   late String _dateOfBirth;
-  late String _profilePicture;
-  late String _profileVideo;
+  String _profilePicture = profilePictureUrl;
+  String _profileVideo = profileVideoUrl;
   late String _location;
   late String _lookingFor;
-  late String _drinkAlcohol;
-  late String _smoke;
+  String _drinkAlcohol = 'no';
+  String _smoke = 'no';
 
+  ObjectId get id => _id;
   String get phoneNumber => _phoneNumber;
   String get firstName => _firstName;
   String get lastName => _lastName;
@@ -59,6 +34,7 @@ class UserProvider extends ChangeNotifier {
 
   //Function to be called if user exists in the database;
   void setUser() async {
+    _id = loggedInUser[0]['id'];
     _phoneNumber = loggedInUser[0]['phone_number'];
     _firstName = loggedInUser[0]['first_name'];
     _lastName = loggedInUser[0]['last_name'];
@@ -128,21 +104,13 @@ class UserProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setDrinkAlcohol(bool drinkAlcohol) {
-    if (drinkAlcohol == true) {
-      _drinkAlcohol = 'yes';
-    } else {
-      _drinkAlcohol = 'no';
-    }
+  void setDrinkAlcohol(String drinkAlcohol) {
+    _drinkAlcohol = drinkAlcohol;
     notifyListeners();
   }
 
-  void setSmoke(bool smoke) {
-    if (smoke == true) {
-      _smoke = 'yes';
-    } else {
-      _smoke = 'no';
-    }
+  void setSmoke(String smoke) {
+    _smoke = smoke;
     notifyListeners();
   }
 }

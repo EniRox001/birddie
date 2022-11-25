@@ -1,6 +1,7 @@
 import 'package:birddie/controllers/user_info_controllers.dart';
 import 'package:birddie/providers/user_provider.dart';
 import 'package:birddie/screens/gender_dob.dart';
+import 'package:birddie/screens/profile.dart';
 import 'package:birddie/utils/functions.dart';
 import 'package:birddie/utils/images.dart';
 import 'package:birddie/widgets/w_elevated_button.dart';

@@ -1,9 +1,6 @@
 import 'package:birddie/cloud_functions/database_functions.dart';
-import 'package:birddie/providers/user_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:birddie/widgets/w_event_card.dart';
 import 'package:mongo_dart/mongo_dart.dart';
-import 'package:provider/provider.dart';
 
 class EventProviders extends ChangeNotifier {
   late ObjectId _id;

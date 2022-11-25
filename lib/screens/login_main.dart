@@ -3,7 +3,7 @@ import 'package:birddie/controllers/login_main_controllers.dart';
 import 'package:birddie/providers/user_provider.dart';
 import 'package:birddie/screens/dashboard.dart';
 import 'package:birddie/screens/otp_verification.dart';
-import 'package:birddie/utils/functions.dart';
+
 import 'package:birddie/widgets/w_elevated_button.dart';
 import 'package:birddie/widgets/w_phone_inputfield.dart';
 import 'package:flutter/material.dart';

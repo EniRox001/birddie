@@ -1,11 +1,14 @@
+import 'package:birddie/cloud_functions/cloudinary_functions.dart';
 import 'package:birddie/cloud_functions/database_functions.dart';
 import 'package:birddie/controllers/profile_controllers.dart';
+import 'package:birddie/controllers/user_info_controllers.dart';
 import 'package:birddie/providers/user_provider.dart';
 import 'package:birddie/screens/dashboard.dart';
 import 'package:birddie/utils/functions.dart';
 import 'package:birddie/widgets/w_appbar.dart';
 import 'package:birddie/widgets/w_elevated_button.dart';
 import 'package:birddie/widgets/w_profile_media_widget.dart';
+import 'package:birddie/widgets/w_profile_media_widget_video.dart';
 import 'package:birddie/widgets/w_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -28,6 +31,10 @@ class _ProfileState extends State<Profile> {
 
     super.dispose();
   }
+
+  var selectedAlcoholValue = 'no';
+  var selectedSmokeValue = 'no';
+  var items = ['yes', 'no'];
 
   @override
   Widget build(BuildContext context) {
@@ -105,7 +112,7 @@ class _ProfileState extends State<Profile> {
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
                   children: [
-                    WProfileMediaWidget(
+                    WProfileMediaWidgetVideo(
                       onPressed: () {},
                       flex: 2,
                       text: 'ADD VIDEO',
@@ -114,7 +121,9 @@ class _ProfileState extends State<Profile> {
                       width: 20.0,
                     ),
                     WProfileMediaWidget(
-                      onPressed: () {},
+                      onPressed: () {
+                        setProfilePicture(context);
+                      },
                       flex: 1,
                       text: 'ADD A PROFILE PICTURE',
                     ),
@@ -176,19 +185,30 @@ class _ProfileState extends State<Profile> {
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 children: [
-                  WTextField(
-                    controller: alcoholController,
-                    hintText: 'Drink Alcohol?',
+                  WDropDownWidget(
+                    labelText: 'Drink Alcohol?',
+                    selectedValue: selectedSmokeValue,
+                    items: items,
+                    onChanged: (String? value) {
+                      setState(() {
+                        selectedSmokeValue = value!;
+                      });
+                      context.read<UserProvider>().setDrinkAlcohol(value!);
+                    },
                   ),
                   const SizedBox(
                     height: 10.0,
                   ),
-                  WTextField(
-                    controller: smokeController,
-                    hintText: 'Smoke?',
-                  ),
-                  const SizedBox(
-                    height: 10.0,
+                  WDropDownWidget(
+                    labelText: 'Smoke?',
+                    selectedValue: selectedAlcoholValue,
+                    items: items,
+                    onChanged: (String? value) {
+                      setState(() {
+                        selectedAlcoholValue = value!;
+                      });
+                      context.read<UserProvider>().setSmoke(value!);
+                    },
                   ),
                 ],
               ),
@@ -210,8 +230,6 @@ class _ProfileState extends State<Profile> {
                 context
                     .read<UserProvider>()
                     .setLookingFor(purposeController.text.toLowerCase());
-                context.read<UserProvider>().setDrinkAlcohol(false);
-                context.read<UserProvider>().setSmoke(true);
                 await createUser(context)
                     .then((value) => navigate(context, const Dashboard()));
               },
@@ -221,5 +239,47 @@ class _ProfileState extends State<Profile> {
         ),
       ),
     );
+  }
+}
+
+class WDropDownWidget extends StatelessWidget {
+  const WDropDownWidget({
+    Key? key,
+    required this.labelText,
+    required this.selectedValue,
+    required this.items,
+    required this.onChanged,
+  }) : super(key: key);
+
+  final String labelText;
+  final String selectedValue;
+  final List<String> items;
+  final Function(String?)? onChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    return DropdownButtonFormField(
+        decoration: InputDecoration(
+          isDense: true,
+          contentPadding: const EdgeInsets.all(10),
+
+          // labelStyle: const TextStyle(color: Colors.black),
+          focusedBorder: const OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.red, width: 1.0),
+          ),
+          enabledBorder: const OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.black, width: 1.0),
+          ),
+          labelText: labelText,
+        ),
+        value: selectedValue,
+        isExpanded: true,
+        items: items.map((String items) {
+          return DropdownMenuItem(
+            value: items,
+            child: Text(items),
+          );
+        }).toList(),
+        onChanged: onChanged);
   }
 }

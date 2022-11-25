@@ -1,6 +1,8 @@
-import 'package:birddie/cloud_functions/database_functions.dart';
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:birddie/controllers/russian_roulette_controllers.dart';
 import 'package:birddie/providers/russian_roulette_provider.dart';
+import 'package:birddie/providers/user_provider.dart';
 import 'package:birddie/utils/colors.dart';
 import 'package:birddie/utils/functions.dart';
 import 'package:birddie/widgets/w_appbar.dart';
@@ -111,11 +113,39 @@ class _RussianRoulleteState extends State<RussianRoullete> {
                       text: 'Select Date & Time',
                       widget: Row(
                         children: [
-                          Flexible(
-                            child: WTextField(
-                              controller: dateController,
-                              hintText: 'Date',
-                              inputType: TextInputType.datetime,
+                          Expanded(
+                            child: GestureDetector(
+                              onTap: () async {
+                                await selectRussianRoulleteDate(context);
+                                context
+                                    .read<RussianRouletteProvider>()
+                                    .setDate(russianRouletteDate);
+                                print(context
+                                    .read<RussianRouletteProvider>()
+                                    .date);
+                              },
+                              child: Container(
+                                height: 40.0,
+                                decoration: BoxDecoration(
+                                    color: Colors.transparent,
+                                    border: Border.all(
+                                        color: Colors.black, width: 1.0),
+                                    borderRadius: BorderRadius.circular(5.0)),
+                                child: Center(
+                                  child: context
+                                              .read<RussianRouletteProvider>()
+                                              .date ==
+                                          ""
+                                      ? const Text(
+                                          "Date",
+                                        )
+                                      : Text(
+                                          context
+                                              .read<RussianRouletteProvider>()
+                                              .date,
+                                        ),
+                                ),
+                              ),
                             ),
                           ),
                           Flexible(
@@ -151,6 +181,9 @@ class _RussianRoulleteState extends State<RussianRoullete> {
                     ),
                     WElevatedButton(
                       onPressed: () {
+                        context
+                            .read<RussianRouletteProvider>()
+                            .setMatchedUser(context.read<UserProvider>().id);
                         context
                             .read<RussianRouletteProvider>()
                             .setMinAge(int.parse(minAgeController.text));

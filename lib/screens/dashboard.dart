@@ -1,4 +1,5 @@
 import 'package:birddie/cloud_functions/database_functions.dart';
+import 'package:birddie/providers/user_provider.dart';
 import 'package:birddie/screens/event_details.dart';
 import 'package:birddie/utils/functions.dart';
 import 'package:birddie/widgets/w_appbar.dart';
@@ -87,16 +88,21 @@ class _DashboardState extends State<Dashboard> {
                 ],
               ),
             ),
-            //TODO: Show match review based on provider preference
-            context.watch<RussianRouletteProvider>().matchState == 'matched'
+            context.watch<RussianRouletteProvider>().matchState == 'matched' &&
+                    context.watch<RussianRouletteProvider>().matchedPerson !=
+                        context.read<UserProvider>().id
                 ? const MatchedRoulette()
                 : context.watch<RussianRouletteProvider>().matchState ==
-                        'reviewing'
+                            'reviewing' &&
+                        context
+                                .watch<RussianRouletteProvider>()
+                                .matchedPerson ==
+                            context.watch<UserProvider>().id
                     ? const ReviewRoulette()
                     : context.watch<RussianRouletteProvider>().matchState ==
                             'declined'
                         ? const DeclinedRoulette()
-                        : const NotMatchedRoulette()
+                        : const NotMatchedRoulette(),
           ],
         ),
       ),

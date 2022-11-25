@@ -4,6 +4,7 @@ import 'package:birddie/models/user_model.dart';
 import 'package:birddie/providers/event_provider.dart';
 import 'package:birddie/providers/russian_roulette_provider.dart';
 import 'package:birddie/providers/user_provider.dart';
+import 'package:birddie/screens/dashboard.dart';
 import 'package:birddie/utils/functions.dart';
 import 'package:mongo_dart/mongo_dart.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +19,7 @@ late DbCollection eventsCollection;
 late DbCollection russianRouletteCollection;
 
 late dynamic event;
+late dynamic russianRoulette;
 late dynamic selectedEvent;
 late dynamic loggedInUser;
 
@@ -71,7 +73,11 @@ Future getUser(
       navigate(context, onNoUser);
     } else {
       loggedInUser = value;
+
       context.read<UserProvider>().setUser();
+
+      context.read<RussianRouletteProvider>().getRussianRoulettes(context);
+
       navigate(context, onUser);
     }
   });
@@ -128,7 +134,8 @@ Future reserveSlot(BuildContext context) async {
 addRussianRoulette(BuildContext context) async {
   await russianRouletteCollection.insert(
     RussianRoullete(
-      uniqueId,
+      context.read<UserProvider>().id,
+      context.read<UserProvider>().id,
       context.read<RussianRouletteProvider>().minAge,
       context.read<RussianRouletteProvider>().maxAge,
       context.read<RussianRouletteProvider>().location,
@@ -136,8 +143,8 @@ addRussianRoulette(BuildContext context) async {
       context.read<RussianRouletteProvider>().date,
       context.read<RussianRouletteProvider>().time,
       context.read<RussianRouletteProvider>().spendingGauge,
-      context.read<RussianRouletteProvider>().matchState,
       context.read<RussianRouletteProvider>().whoPays,
+      context.read<RussianRouletteProvider>().matchState,
     ).toMap(),
   );
 }
@@ -147,6 +154,10 @@ setRussianRouletteMatchState(BuildContext context, String matchState) async {
   await russianRouletteCollection
       .update(where.eq('id', context.read<RussianRouletteProvider>().id), {
     'id': context.read<RussianRouletteProvider>().id,
+
+    //TODO: This should change automatically or dynamically to matched user
+    'matchedPerson': context.read<UserProvider>().id,
+
     'min_age': context.read<RussianRouletteProvider>().minAge,
     'max_age': context.read<RussianRouletteProvider>().maxAge,
     'location': context.read<RussianRouletteProvider>().location,
@@ -157,4 +168,20 @@ setRussianRouletteMatchState(BuildContext context, String matchState) async {
     'who_pays': context.read<RussianRouletteProvider>().whoPays,
     'matchState': matchState,
   });
+}
+
+Future getRussianRoulette(BuildContext context) async {
+  await russianRouletteCollection
+      .find(where.eq('id', context.read<UserProvider>().id))
+      .toList()
+      .then(
+    (value) {
+      if (value.isNotEmpty) {
+        russianRoulette = value[0];
+        context.read<RussianRouletteProvider>().setLoggedRussianRoulette();
+      } else {
+        navigate(context, const Dashboard());
+      }
+    },
+  );
 }

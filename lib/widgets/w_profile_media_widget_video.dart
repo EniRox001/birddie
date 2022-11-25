@@ -2,8 +2,8 @@ import 'package:birddie/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class WProfileMediaWidget extends StatelessWidget {
-  const WProfileMediaWidget({
+class WProfileMediaWidgetVideo extends StatelessWidget {
+  const WProfileMediaWidgetVideo({
     Key? key,
     required this.onPressed,
     required this.flex,
@@ -22,12 +22,6 @@ class WProfileMediaWidget extends StatelessWidget {
         onTap: onPressed,
         child: Container(
           decoration: BoxDecoration(
-            image: DecorationImage(
-              image: NetworkImage(
-                context.read<UserProvider>().profilePicture,
-              ),
-              fit: BoxFit.cover,
-            ),
             border: Border.all(color: const Color(0xFFFF5454), width: 2.0),
             borderRadius: BorderRadius.circular(30.0),
           ),

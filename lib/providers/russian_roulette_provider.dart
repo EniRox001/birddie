@@ -3,19 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:mongo_dart/mongo_dart.dart';
 
 class RussianRouletteProvider extends ChangeNotifier {
-  //TODO: Set up model to automatically add data to matched events
   late ObjectId _id;
+  late ObjectId _matchedPerson;
   late int _minAge;
   late int _maxAge;
   late String _location;
   late String _dateSetup;
-  late String _date;
+  String _date = '';
   late String _time;
   late int _spendingGauge;
   late String _whoPays;
   String _matchState = 'not matched';
 
   ObjectId get id => _id;
+  ObjectId get matchedPerson => _matchedPerson;
   int get minAge => _minAge;
   int get maxAge => _maxAge;
   String get location => _location;
@@ -25,6 +26,33 @@ class RussianRouletteProvider extends ChangeNotifier {
   int get spendingGauge => _spendingGauge;
   String get whoPays => _whoPays;
   String get matchState => _matchState;
+
+  void setLoggedRussianRoulette() {
+    _id = russianRoulette['id'];
+    _matchedPerson = russianRoulette['matchedPerson'];
+    _minAge = russianRoulette['min_age'];
+    _maxAge = russianRoulette['max_age'];
+    _location = russianRoulette['location'];
+    _dateSetup = russianRoulette['date_setup'];
+    _date = russianRoulette['date'];
+    _time = russianRoulette['time'];
+    _spendingGauge = russianRoulette['spending_gauge'];
+    _whoPays = russianRoulette['who_pays'];
+    _matchState = russianRoulette['matchState'];
+
+    notifyListeners();
+  }
+
+  void getRussianRoulettes(BuildContext context) {
+    getRussianRoulette(context);
+
+    notifyListeners();
+  }
+
+  void setMatchedUser(ObjectId id) {
+    _matchedPerson = id;
+    notifyListeners();
+  }
 
   void setMinAge(int minAge) {
     _minAge = minAge;
