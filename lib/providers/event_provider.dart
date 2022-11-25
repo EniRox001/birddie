@@ -6,15 +6,15 @@ import 'package:mongo_dart/mongo_dart.dart';
 import 'package:provider/provider.dart';
 
 class EventProviders extends ChangeNotifier {
-  ObjectId _id = selectedEvent['_id'];
-  late String _title = selectedEvent['title'];
-  late String _description = selectedEvent['description'];
-  late String _location = selectedEvent['location'];
-  late String _price = selectedEvent['price'];
-  late List _attending = selectedEvent['attending'];
-  late int _slotsLeft = selectedEvent['slot_left'];
-  late String _date = selectedEvent['date'];
-  late String _time = selectedEvent['time'];
+  late ObjectId _id;
+  late String _title;
+  late String _description;
+  late String _location;
+  late String _price;
+  late List _attending;
+  late int _slotsLeft;
+  late String _date;
+  late String _time;
 
   ObjectId get id => _id;
   String get title => _title;

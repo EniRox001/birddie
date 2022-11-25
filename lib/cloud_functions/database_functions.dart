@@ -2,6 +2,7 @@ import 'package:birddie/models/events.dart';
 import 'package:birddie/models/user_model.dart';
 import 'package:birddie/providers/event_provider.dart';
 import 'package:birddie/providers/user_provider.dart';
+import 'package:birddie/utils/functions.dart';
 import 'package:mongo_dart/mongo_dart.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -15,6 +16,7 @@ late DbCollection eventsCollection;
 
 late dynamic event;
 late dynamic selectedEvent;
+late dynamic loggedInUser;
 
 connectDB() async {
   var db = await Db.create(
@@ -47,6 +49,27 @@ Future createUser(BuildContext context) async {
       context.read<UserProvider>().smoke,
     ).toMap(),
   );
+}
+
+Future getUser(
+  BuildContext context,
+  Widget onNoUser,
+  Widget onUser,
+) async {
+  userCollection
+      .find(
+        where.eq("phone_number", context.read<UserProvider>().phoneNumber),
+      )
+      .toList()
+      .then((value) {
+    if (value.isEmpty) {
+      navigate(context, onNoUser);
+    } else {
+      loggedInUser = value;
+      context.read<UserProvider>().setUser();
+      navigate(context, onUser);
+    }
+  });
 }
 
 Future createEvent(BuildContext context) async {
