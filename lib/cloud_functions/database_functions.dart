@@ -169,7 +169,7 @@ russianRoulleteAutoMatch(BuildContext context) async {
           if (value.isEmpty ||
               value[1]['phone_number'] ==
                   context.read<UserProvider>().phoneNumber) {
-            print('no record found');
+            setRussianRouletteMatchState(context, true);
           } else {
             matchedPerson = value[1];
             setRussianRouletteMatchState(context, true);

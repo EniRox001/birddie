@@ -88,11 +88,13 @@ class _DashboardState extends State<Dashboard> {
                 ],
               ),
             ),
-            //TODO: Add reviewed Roulette
             context.watch<RussianRouletteProvider>().matchState == false &&
                     context.watch<RussianRouletteProvider>().inMatched == ''
                 ? const NotMatchedRoulette()
-                : const MatchedRoulette(),
+                : context.watch<RussianRouletteProvider>().matchState == true &&
+                        context.watch<RussianRouletteProvider>().inMatched != ""
+                    ? const ReviewRoulette()
+                    : const MatchedRoulette(),
           ],
         ),
       ),
