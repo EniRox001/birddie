@@ -4,7 +4,7 @@ import 'package:mongo_dart/mongo_dart.dart';
 
 class RussianRouletteProvider extends ChangeNotifier {
   late ObjectId _id;
-  late ObjectId _matchedPerson;
+  late String _phoneNumber;
   late int _minAge;
   late int _maxAge;
   late String _location;
@@ -13,10 +13,11 @@ class RussianRouletteProvider extends ChangeNotifier {
   late String _time;
   late int _spendingGauge;
   late String _whoPays;
-  String _matchState = 'not matched';
+  bool _matchState = false;
+  String _inMatched = '';
 
   ObjectId get id => _id;
-  ObjectId get matchedPerson => _matchedPerson;
+  String get phoneNumber => _phoneNumber;
   int get minAge => _minAge;
   int get maxAge => _maxAge;
   String get location => _location;
@@ -25,11 +26,12 @@ class RussianRouletteProvider extends ChangeNotifier {
   String get time => _time;
   int get spendingGauge => _spendingGauge;
   String get whoPays => _whoPays;
-  String get matchState => _matchState;
+  bool get matchState => _matchState;
+  String get inMatched => _inMatched;
 
   void setLoggedRussianRoulette() {
     _id = russianRoulette['id'];
-    _matchedPerson = russianRoulette['matchedPerson'];
+    _phoneNumber = russianRoulette['phone_number'];
     _minAge = russianRoulette['min_age'];
     _maxAge = russianRoulette['max_age'];
     _location = russianRoulette['location'];
@@ -45,12 +47,6 @@ class RussianRouletteProvider extends ChangeNotifier {
 
   void getRussianRoulettes(BuildContext context) {
     getRussianRoulette(context);
-
-    notifyListeners();
-  }
-
-  void setMatchedUser(ObjectId id) {
-    _matchedPerson = id;
     notifyListeners();
   }
 
@@ -94,13 +90,28 @@ class RussianRouletteProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setMatchState(String match) {
+  void setMatchState(bool match) {
     _matchState = match;
     notifyListeners();
   }
 
   void setRussianRoulette(BuildContext context) {
     addRussianRoulette(context);
+    notifyListeners();
+  }
+
+  void autoMatchRoulette(BuildContext context) {
+    russianRoulleteAutoMatch(context);
+    notifyListeners();
+  }
+
+  void setInMatched(BuildContext context, String number) {
+    _inMatched = number;
+    notifyListeners();
+  }
+
+  void checkInMatchedCollection(BuildContext context) {
+    checkMatchedCollection(context);
     notifyListeners();
   }
 }

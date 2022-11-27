@@ -26,7 +26,6 @@ class _RussianRoulleteState extends State<RussianRoullete> {
     maxAgeController;
     locationController;
     dateSetupController;
-    dateController;
     timeController;
     spendingGaugeController;
     payBillController;
@@ -133,7 +132,7 @@ class _RussianRoulleteState extends State<RussianRoullete> {
                                     borderRadius: BorderRadius.circular(5.0)),
                                 child: Center(
                                   child: context
-                                              .read<RussianRouletteProvider>()
+                                              .watch<RussianRouletteProvider>()
                                               .date ==
                                           ""
                                       ? const Text(
@@ -141,7 +140,7 @@ class _RussianRoulleteState extends State<RussianRoullete> {
                                         )
                                       : Text(
                                           context
-                                              .read<RussianRouletteProvider>()
+                                              .watch<RussianRouletteProvider>()
                                               .date,
                                         ),
                                 ),
@@ -183,9 +182,6 @@ class _RussianRoulleteState extends State<RussianRoullete> {
                       onPressed: () {
                         context
                             .read<RussianRouletteProvider>()
-                            .setMatchedUser(context.read<UserProvider>().id);
-                        context
-                            .read<RussianRouletteProvider>()
                             .setMinAge(int.parse(minAgeController.text));
 
                         context
@@ -200,9 +196,8 @@ class _RussianRoulleteState extends State<RussianRoullete> {
                             .read<RussianRouletteProvider>()
                             .setDateSetup(dateSetupController.text);
 
-                        context
-                            .read<RussianRouletteProvider>()
-                            .setDate(dateController.text);
+                        context.read<RussianRouletteProvider>().setDate(
+                            context.read<RussianRouletteProvider>().date);
 
                         context
                             .read<RussianRouletteProvider>()
@@ -219,12 +214,14 @@ class _RussianRoulleteState extends State<RussianRoullete> {
 
                         context
                             .read<RussianRouletteProvider>()
-                            .setMatchState('reviewing');
+                            .setMatchState(false);
 
                         Provider.of<RussianRouletteProvider>(context,
                                 listen: false)
                             .setRussianRoulette(context);
-
+                        Provider.of<RussianRouletteProvider>(context,
+                                listen: false)
+                            .autoMatchRoulette(context);
                         navigateBack(context);
                       },
                       text: 'MATCH ME',

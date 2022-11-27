@@ -17,11 +17,13 @@ ObjectId uniqueId = ObjectId();
 late DbCollection userCollection;
 late DbCollection eventsCollection;
 late DbCollection russianRouletteCollection;
+late DbCollection matchedCollection;
 
 late dynamic event;
 late dynamic russianRoulette;
 late dynamic selectedEvent;
 late dynamic loggedInUser;
+late dynamic matchedPerson;
 
 connectDB() async {
   var db = await Db.create(
@@ -31,11 +33,13 @@ connectDB() async {
   DbCollection userDatabase = db.collection('users');
   DbCollection eventDatabase = db.collection('events');
   DbCollection russianRouletteDatabase = db.collection('russianRoulette');
+  DbCollection matchedDatabase = db.collection('matched');
 
   //Add reference to the intialized database collections
   userCollection = userDatabase;
   eventsCollection = eventDatabase;
   russianRouletteCollection = russianRouletteDatabase;
+  matchedCollection = matchedDatabase;
 }
 
 Future createUser(BuildContext context) async {
@@ -135,7 +139,7 @@ addRussianRoulette(BuildContext context) async {
   await russianRouletteCollection.insert(
     RussianRoullete(
       context.read<UserProvider>().id,
-      context.read<UserProvider>().id,
+      context.read<UserProvider>().phoneNumber,
       context.read<RussianRouletteProvider>().minAge,
       context.read<RussianRouletteProvider>().maxAge,
       context.read<RussianRouletteProvider>().location,
@@ -149,25 +153,100 @@ addRussianRoulette(BuildContext context) async {
   );
 }
 
-//Function to set the match state based on String input
-setRussianRouletteMatchState(BuildContext context, String matchState) async {
+russianRoulleteAutoMatch(BuildContext context) async {
   await russianRouletteCollection
-      .update(where.eq('id', context.read<RussianRouletteProvider>().id), {
-    'id': context.read<RussianRouletteProvider>().id,
+      .find(
+        {
+          'min_age': context.read<RussianRouletteProvider>().minAge,
+          'max_age': context.read<RussianRouletteProvider>().maxAge,
+          'date_setup': context.read<RussianRouletteProvider>().dateSetup,
+        },
+      )
+      .toList()
+      .then(
+        (value) {
+          //Check if another person in the database has such criterias
+          if (value.isEmpty ||
+              value[1]['phone_number'] ==
+                  context.read<UserProvider>().phoneNumber) {
+            print('no record found');
+          } else {
+            matchedPerson = value[1];
+            setRussianRouletteMatchState(context, true);
+            addMatchedCollection(context);
+            checkMatchedCollection(context);
+            print(value[1]);
+          }
+        },
+      );
+}
 
-    //TODO: This should change automatically or dynamically to matched user
-    'matchedPerson': context.read<UserProvider>().id,
+addMatchedCollection(BuildContext context) async {
+  await matchedCollection.insert(
+    {
+      'id': uniqueId,
+      'matchedOne': context.read<UserProvider>().phoneNumber,
+      'matchedTwo': matchedPerson['phone_number'],
+    },
+  );
+}
 
-    'min_age': context.read<RussianRouletteProvider>().minAge,
-    'max_age': context.read<RussianRouletteProvider>().maxAge,
-    'location': context.read<RussianRouletteProvider>().location,
-    'date_setup': context.read<RussianRouletteProvider>().dateSetup,
-    'date': context.read<RussianRouletteProvider>().date,
-    'time': context.read<RussianRouletteProvider>().time,
-    'spending_gauge': context.read<RussianRouletteProvider>().spendingGauge,
-    'who_pays': context.read<RussianRouletteProvider>().whoPays,
-    'matchState': matchState,
-  });
+checkMatchedCollection(BuildContext context) async {
+  await matchedCollection
+      .find(where.eq('matchedOne', context.read<UserProvider>().phoneNumber))
+      .toList()
+      .then(
+    (value) {
+      if (value.isEmpty) {
+        print('not in matched, error somewhere');
+      } else {
+        print(value[0]);
+        context.read<RussianRouletteProvider>().setInMatched(
+              context,
+              value[0]['matchedOne'],
+            );
+      }
+    },
+  );
+}
+
+//Function to set the match state based on String input
+setRussianRouletteMatchState(BuildContext context, bool matchState) async {
+  await russianRouletteCollection.update(
+    where.eq('id', context.read<RussianRouletteProvider>().id),
+    {
+      'id': context.read<RussianRouletteProvider>().id,
+      'phone_number': context.read<UserProvider>().phoneNumber,
+      //TODO: This should change automatically or dynamically to matched user
+      'min_age': context.read<RussianRouletteProvider>().minAge,
+      'max_age': context.read<RussianRouletteProvider>().maxAge,
+      'location': context.read<RussianRouletteProvider>().location,
+      'date_setup': context.read<RussianRouletteProvider>().dateSetup,
+      'date': context.read<RussianRouletteProvider>().date,
+      'time': context.read<RussianRouletteProvider>().time,
+      'spending_gauge': context.read<RussianRouletteProvider>().spendingGauge,
+      'who_pays': context.read<RussianRouletteProvider>().whoPays,
+      'matchState': matchState,
+    },
+  );
+
+  await russianRouletteCollection.update(
+    where.eq('id', matchedPerson['id']),
+    {
+      'id': matchedPerson['id'],
+      'phone_number': matchedPerson['phone_number'],
+      //TODO: This should change automatically or dynamically to matched user
+      'min_age': matchedPerson['min_age'],
+      'max_age': matchedPerson['max_age'],
+      'location': matchedPerson['location'],
+      'date_setup': matchedPerson['date_setup'],
+      'date': matchedPerson['date'],
+      'time': matchedPerson['time'],
+      'spending_gauge': matchedPerson['spending_gauge'],
+      'who_pays': matchedPerson['who_pays'],
+      'matchState': matchState,
+    },
+  );
 }
 
 Future getRussianRoulette(BuildContext context) async {
