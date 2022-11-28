@@ -292,7 +292,6 @@ Future getRussianRoulette(BuildContext context) async {
       },
     );
   } catch (e) {
-    print('yee');
     context.read<RussianRouletteProvider>().setNullRussianRoulette();
     navigate(context, const Dashboard());
   }
