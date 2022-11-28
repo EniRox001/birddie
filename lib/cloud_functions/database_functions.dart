@@ -20,14 +20,14 @@ late DbCollection russianRouletteCollection;
 late DbCollection matchedCollection;
 
 late dynamic event;
-late dynamic russianRoulette;
+var russianRoulette = {};
 late dynamic selectedEvent;
 late dynamic loggedInUser;
 late dynamic matchedPerson;
 
 connectDB() async {
   var db = await Db.create(
-      "mongodb+srv://enirox:Pwafukadi@cluster0.4iczrsa.mongodb.net/?retryWrites=true&w=majority");
+      "mongodb+srv://enirox:Pwafukadi@cluster0.4iczrsa.mongodb.net/?retryWrites=true&w=m.0 k20   ajority");
   await db.open();
 
   DbCollection userDatabase = db.collection('users');
@@ -159,26 +159,34 @@ russianRoulleteAutoMatch(BuildContext context) async {
         {
           'min_age': context.read<RussianRouletteProvider>().minAge,
           'max_age': context.read<RussianRouletteProvider>().maxAge,
-          'date_setup': context.read<RussianRouletteProvider>().dateSetup,
+          // 'date_setup': context.read<RussianRouletteProvider>().dateSetup,
+          'matchState': false,
         },
       )
       .toList()
-      .then(
-        (value) {
-          //Check if another person in the database has such criterias
-          if (value.isEmpty ||
-              value[1]['phone_number'] ==
-                  context.read<UserProvider>().phoneNumber) {
-            setRussianRouletteMatchState(context, true);
-          } else {
-            matchedPerson = value[1];
-            setRussianRouletteMatchState(context, true);
-            addMatchedCollection(context);
-            checkMatchedCollection(context);
-            print(value[1]);
+      .then((value) {
+        // Check if another person in the database has such criterias
+        if (value.isNotEmpty) {
+          for (int i = 0; i < value.length; i++) {
+            if (value[i]['phone_number'] ==
+                context.read<UserProvider>().phoneNumber) {
+            } else if (value[i]['phone_number'] !=
+                context.read<UserProvider>().phoneNumber) {
+              matchedPerson = value[i];
+              addMatchedCollection(context);
+              checkMatchedOneCollection(context);
+              checkMatchedTwoCollection(context);
+              setRussianRouletteMatchState(context, true);
+            }
           }
-        },
-      );
+        }
+      }
+          // if (value.isEmpty ||
+          //     value[1]['phone_number'] ==
+          //         context.read<UserProvider>().phoneNumber) {
+          // } else {
+
+          );
 }
 
 addMatchedCollection(BuildContext context) async {
@@ -191,7 +199,7 @@ addMatchedCollection(BuildContext context) async {
   );
 }
 
-checkMatchedCollection(BuildContext context) async {
+checkMatchedOneCollection(BuildContext context) async {
   await matchedCollection
       .find(where.eq('matchedOne', context.read<UserProvider>().phoneNumber))
       .toList()
@@ -201,9 +209,28 @@ checkMatchedCollection(BuildContext context) async {
         print('not in matched, error somewhere');
       } else {
         print(value[0]);
-        context.read<RussianRouletteProvider>().setInMatched(
+        context.read<RussianRouletteProvider>().setInMatchedOne(
               context,
               value[0]['matchedOne'],
+            );
+      }
+    },
+  );
+}
+
+checkMatchedTwoCollection(BuildContext context) async {
+  await matchedCollection
+      .find(where.eq('matchedTwo', context.read<UserProvider>().phoneNumber))
+      .toList()
+      .then(
+    (value) {
+      if (value.isEmpty) {
+        print('not in matched, error somewhere');
+      } else {
+        print(value[0]);
+        context.read<RussianRouletteProvider>().setInMatchedTwo(
+              context,
+              value[0]['matchedTwo'],
             );
       }
     },
@@ -250,17 +277,23 @@ setRussianRouletteMatchState(BuildContext context, bool matchState) async {
 }
 
 Future getRussianRoulette(BuildContext context) async {
-  await russianRouletteCollection
-      .find(where.eq('id', context.read<UserProvider>().id))
-      .toList()
-      .then(
-    (value) {
-      if (value.isNotEmpty) {
-        russianRoulette = value[0];
-        context.read<RussianRouletteProvider>().setLoggedRussianRoulette();
-      } else {
-        navigate(context, const Dashboard());
-      }
-    },
-  );
+  try {
+    await russianRouletteCollection
+        .find(where.eq('id', context.read<UserProvider>().id))
+        .toList()
+        .then(
+      (value) {
+        print(value);
+        if (value.isNotEmpty) {
+          russianRoulette = value[0];
+          context.read<RussianRouletteProvider>().setLoggedRussianRoulette();
+          context.read<RussianRouletteProvider>().autoMatchRoulette(context);
+        } else {}
+      },
+    );
+  } catch (e) {
+    print('yee');
+    context.read<RussianRouletteProvider>().setNullRussianRoulette();
+    navigate(context, const Dashboard());
+  }
 }

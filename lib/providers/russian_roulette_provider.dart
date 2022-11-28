@@ -2,8 +2,10 @@ import 'package:birddie/cloud_functions/database_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:mongo_dart/mongo_dart.dart';
 
+ObjectId uninitializedId = ObjectId();
+
 class RussianRouletteProvider extends ChangeNotifier {
-  late ObjectId _id;
+  ObjectId _id = uninitializedId;
   late String _phoneNumber;
   late int _minAge;
   late int _maxAge;
@@ -14,7 +16,8 @@ class RussianRouletteProvider extends ChangeNotifier {
   late int _spendingGauge;
   late String _whoPays;
   bool _matchState = false;
-  String _inMatched = '';
+  String _inMatchedOne = '';
+  String _inMatchedTwo = '';
 
   ObjectId get id => _id;
   String get phoneNumber => _phoneNumber;
@@ -27,7 +30,8 @@ class RussianRouletteProvider extends ChangeNotifier {
   int get spendingGauge => _spendingGauge;
   String get whoPays => _whoPays;
   bool get matchState => _matchState;
-  String get inMatched => _inMatched;
+  String get inMatchedOne => _inMatchedOne;
+  String get inMatchedTwo => _inMatchedTwo;
 
   void setLoggedRussianRoulette() {
     _id = russianRoulette['id'];
@@ -41,6 +45,22 @@ class RussianRouletteProvider extends ChangeNotifier {
     _spendingGauge = russianRoulette['spending_gauge'];
     _whoPays = russianRoulette['who_pays'];
     _matchState = russianRoulette['matchState'];
+
+    notifyListeners();
+  }
+
+  void setNullRussianRoulette() {
+    _id = uninitializedId;
+    _phoneNumber = phoneNumber;
+    _minAge = minAge;
+    _maxAge = maxAge;
+    _location = location;
+    _dateSetup = dateSetup;
+    _date = date;
+    _time = time;
+    _spendingGauge = spendingGauge;
+    _whoPays = whoPays;
+    _matchState = matchState;
 
     notifyListeners();
   }
@@ -105,13 +125,19 @@ class RussianRouletteProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setInMatched(BuildContext context, String number) {
-    _inMatched = number;
+  void setInMatchedOne(BuildContext context, String number) {
+    _inMatchedOne = number;
+    notifyListeners();
+  }
+
+  void setInMatchedTwo(BuildContext context, String number) {
+    _inMatchedTwo = number;
     notifyListeners();
   }
 
   void checkInMatchedCollection(BuildContext context) {
-    checkMatchedCollection(context);
+    checkMatchedOneCollection(context);
+    checkMatchedTwoCollection(context);
     notifyListeners();
   }
 }
