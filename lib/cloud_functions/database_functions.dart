@@ -288,6 +288,8 @@ Future getRussianRoulette(BuildContext context) async {
           russianRoulette = value[0];
           context.read<RussianRouletteProvider>().setLoggedRussianRoulette();
           context.read<RussianRouletteProvider>().autoMatchRoulette(context);
+          checkMatchedOneCollection(context);
+          checkMatchedTwoCollection(context);
         } else {}
       },
     );

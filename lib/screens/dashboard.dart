@@ -40,10 +40,6 @@ class _DashboardState extends State<Dashboard> {
             actions: <Widget>[
               TextButton(
                 onPressed: () {
-                  context
-                      .read<RussianRouletteProvider>()
-                      .setNullRussianRoulette();
-                  navigateBack(context);
                   navigateBack(context);
                 },
                 child: const Text('No'),
@@ -104,6 +100,13 @@ class _DashboardState extends State<Dashboard> {
                               context
                                   .read<RussianRouletteProvider>()
                                   .autoMatchRoulette(context);
+
+                              print(context
+                                  .read<RussianRouletteProvider>()
+                                  .inMatchedOne);
+                              print(context
+                                  .read<RussianRouletteProvider>()
+                                  .inMatchedTwo);
                             },
                             child: WEventCard(
                               backgroundColor: Colors.red,

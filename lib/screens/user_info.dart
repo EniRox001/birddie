@@ -17,6 +17,8 @@ class UserInfo extends StatefulWidget {
 }
 
 class _UserInfoState extends State<UserInfo> {
+  final _formKey = GlobalKey<FormState>();
+
   @override
   void dispose() {
     firstNameController;
@@ -63,39 +65,63 @@ class _UserInfoState extends State<UserInfo> {
           ),
           Positioned(
             bottom: 50.0,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                WInputField(
-                    controller: firstNameController, hintText: 'FIRST NAME'),
-                const SizedBox(
-                  height: 10.0,
-                ),
-                WInputField(
-                    controller: lastNameController, hintText: 'LAST NAME'),
-                const SizedBox(
-                  height: 10.0,
-                ),
-                WInputField(
-                    controller: occupationController, hintText: 'OCCUPATION'),
-                const SizedBox(
-                  height: 80.0,
-                ),
-                WElevatedButton(
-                    onPressed: () {
-                      context
-                          .read<UserProvider>()
-                          .setFirstName(firstNameController.text.toLowerCase());
-                      context
-                          .read<UserProvider>()
-                          .setLastName(lastNameController.text.toLowerCase());
-                      context.read<UserProvider>().setOccupation(
-                          occupationController.text.toLowerCase());
-                      navigate(context, const GenderDOB());
-                    },
-                    text: 'NEXT'),
-              ],
+            child: Form(
+              key: _formKey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  WInputField(
+                      validator: (val) {
+                        if (val!.isEmpty && val.length < 2) {
+                          return 'Enter valid first name';
+                        }
+                        return null;
+                      },
+                      controller: firstNameController,
+                      hintText: 'FIRST NAME'),
+                  const SizedBox(
+                    height: 10.0,
+                  ),
+                  WInputField(
+                      validator: (val) {
+                        if (val!.isEmpty && val.length < 2) {
+                          return 'Enter valid last name';
+                        }
+                        return null;
+                      },
+                      controller: lastNameController,
+                      hintText: 'LAST NAME'),
+                  const SizedBox(
+                    height: 10.0,
+                  ),
+                  WInputField(
+                      validator: (val) {
+                        if (val!.isEmpty && val.length < 2) {
+                          return 'Enter valid occupation';
+                        }
+                        return null;
+                      },
+                      controller: occupationController,
+                      hintText: 'OCCUPATION'),
+                  const SizedBox(
+                    height: 80.0,
+                  ),
+                  WElevatedButton(
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          context.read<UserProvider>().setFirstName(
+                              firstNameController.text.toLowerCase());
+                          context.read<UserProvider>().setLastName(
+                              lastNameController.text.toLowerCase());
+                          context.read<UserProvider>().setOccupation(
+                              occupationController.text.toLowerCase());
+                          navigate(context, const GenderDOB());
+                        }
+                      },
+                      text: 'NEXT'),
+                ],
+              ),
             ),
           ),
         ],

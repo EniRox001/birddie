@@ -19,6 +19,7 @@ class LoginMain extends StatefulWidget {
 }
 
 class _LoginMainState extends State<LoginMain> {
+  final _formKey = GlobalKey<FormState>();
   @override
   void dispose() {
     phoneNumberController;
@@ -51,40 +52,46 @@ class _LoginMainState extends State<LoginMain> {
               ),
             ),
           ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Image.asset(
-                OnboardingImages.birddieLogo,
-                scale: 8,
-              ),
-              const SizedBox(
-                height: 20.0,
-              ),
-              Text(
-                'Enter your Phone Number',
-                style: GoogleFonts.lato(
-                  color: Colors.white,
-                  fontStyle: FontStyle.italic,
-                  fontSize: 16.0,
+          Form(
+            key: _formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Image.asset(
+                  OnboardingImages.birddieLogo,
+                  scale: 8,
                 ),
-              ),
-              const SizedBox(
-                height: 10.0,
-              ),
-              WPhoneInputField(controller: phoneNumberController),
-              WElevatedButton(
-                onPressed: () {
-                  //TODO: Send otp to phone number
-                  context
-                      .read<UserProvider>()
-                      .setPhoneNumber(phoneNumberController.text);
+                const SizedBox(
+                  height: 20.0,
+                ),
+                Text(
+                  'Enter your Phone Number',
+                  style: GoogleFonts.lato(
+                    color: Colors.white,
+                    fontStyle: FontStyle.italic,
+                    fontSize: 16.0,
+                  ),
+                ),
+                const SizedBox(
+                  height: 10.0,
+                ),
+                WPhoneInputField(controller: phoneNumberController),
+                WElevatedButton(
+                  onPressed: () {
+                    //TODO: Send otp to phone number
+                    if (_formKey.currentState!.validate()) {
+                      context
+                          .read<UserProvider>()
+                          .setPhoneNumber(phoneNumberController.text);
 
-                  getUser(context, const OtpVerification(), const Dashboard());
-                },
-                text: 'NEXT',
-              )
-            ],
+                      getUser(
+                          context, const OtpVerification(), const Dashboard());
+                    }
+                  },
+                  text: 'NEXT',
+                )
+              ],
+            ),
           )
         ],
       ),

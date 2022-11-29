@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:birddie/providers/user_provider.dart';
+import 'package:birddie/utils/extensions.dart';
 
 class OtpVerification extends StatefulWidget {
   const OtpVerification({super.key});
@@ -17,6 +18,8 @@ class OtpVerification extends StatefulWidget {
 }
 
 class _OtpVerificationState extends State<OtpVerification> {
+  final _formKey = GlobalKey<FormState>();
+
   @override
   void dispose() {
     otpController;
@@ -47,57 +50,67 @@ class _OtpVerificationState extends State<OtpVerification> {
               ),
             ),
           ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset(
-                OnboardingImages.birddieLogo,
-                scale: 8,
-              ),
-              Text(
-                'Enter Code Sent To',
-                style: GoogleFonts.lato(
-                  color: Colors.white,
-                  fontStyle: FontStyle.italic,
-                  fontSize: 16.0,
+          Form(
+            key: _formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(
+                  OnboardingImages.birddieLogo,
+                  scale: 8,
                 ),
-              ),
-              Text(
-                context.watch<UserProvider>().phoneNumber.toString(),
-                style: GoogleFonts.lato(
-                  color: Colors.white,
-                  fontStyle: FontStyle.italic,
-                  fontSize: 20.0,
+                Text(
+                  'Enter Code Sent To',
+                  style: GoogleFonts.lato(
+                    color: Colors.white,
+                    fontStyle: FontStyle.italic,
+                    fontSize: 16.0,
+                  ),
                 ),
-              ),
-              const SizedBox(
-                height: 10.0,
-              ),
-              WInputField(
-                controller: otpController,
-                hintText: 'OTP Code',
-              ),
-              TextButton(
-                onPressed: () {
-                  //TODO: Resend OTP to user
-                },
-                child: Text(
-                  'Resend OTP',
+                Text(
+                  context.watch<UserProvider>().phoneNumber.toString(),
                   style: GoogleFonts.lato(
                     color: Colors.white,
                     fontStyle: FontStyle.italic,
                     fontSize: 20.0,
                   ),
                 ),
-              ),
-              WElevatedButton(
-                onPressed: () {
-                  //TODO: Verify OTP
-                  navigate(context, const UserInfo());
-                },
-                text: 'VERIFY',
-              ),
-            ],
+                const SizedBox(
+                  height: 10.0,
+                ),
+                WInputField(
+                  validator: (val) {
+                    if (val!.isNotEmpty && val.length < 6) {
+                      return 'Enter valid OTP';
+                    }
+                    return null;
+                  },
+                  controller: otpController,
+                  hintText: 'OTP Code',
+                ),
+                TextButton(
+                  onPressed: () {},
+                  child: Text(
+                    'Resend OTP',
+                    style: GoogleFonts.lato(
+                      color: Colors.white,
+                      fontStyle: FontStyle.italic,
+                      fontSize: 20.0,
+                    ),
+                  ),
+                ),
+                WElevatedButton(
+                  onPressed: () {
+                    //TODO: Verify OTP
+                    if (_formKey.currentState!.validate()) {
+                      navigate(context, const UserInfo());
+                      // print('hello');
+                    }
+                  },
+                  text: 'VERIFY',
+                ),
+              ],
+            ),
           )
         ],
       ),
