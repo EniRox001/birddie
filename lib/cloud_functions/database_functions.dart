@@ -6,9 +6,11 @@ import 'package:birddie/providers/russian_roulette_provider.dart';
 import 'package:birddie/providers/user_provider.dart';
 import 'package:birddie/screens/dashboard.dart';
 import 'package:birddie/utils/functions.dart';
+import 'package:flutter_chat_ui/flutter_chat_ui.dart';
 import 'package:mongo_dart/mongo_dart.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 
 //User ID to reference collections across database
 ObjectId uniqueId = ObjectId();
@@ -24,6 +26,9 @@ var russianRoulette = {};
 late dynamic selectedEvent;
 late dynamic loggedInUser;
 late dynamic matchedPerson;
+late dynamic chatMessage;
+List chatCollection = [];
+late dynamic selectedMatchedCollection;
 
 connectDB() async {
   var db = await Db.create(
@@ -114,6 +119,12 @@ addAttending(BuildContext context, List list) {
   return list;
 }
 
+addMessage(List list, message) {
+  list.insert(0, message);
+  print(list);
+  return list;
+}
+
 Future reserveSlot(BuildContext context) async {
   await eventsCollection.update(
     where.eq(
@@ -180,13 +191,7 @@ russianRoulleteAutoMatch(BuildContext context) async {
             }
           }
         }
-      }
-          // if (value.isEmpty ||
-          //     value[1]['phone_number'] ==
-          //         context.read<UserProvider>().phoneNumber) {
-          // } else {
-
-          );
+      });
 }
 
 addMatchedCollection(BuildContext context) async {
@@ -195,9 +200,32 @@ addMatchedCollection(BuildContext context) async {
       'id': uniqueId,
       'matchedOne': context.read<UserProvider>().phoneNumber,
       'matchedTwo': matchedPerson['phone_number'],
+      'chats': []
     },
   );
 }
+
+chatAddMessage(BuildContext context) async {
+  matchedCollection.update(
+      where.eq('matchedOne', context.read<UserProvider>().phoneNumber), {
+    'id': selectedMatchedCollection['id'],
+    'matchedOne': context.read<UserProvider>().phoneNumber,
+    'matchedTwo': selectedMatchedCollection['matchedTwo'],
+    'chat_collection': addMessage(
+        context.read<RussianRouletteProvider>().chatList, chatMessage),
+  });
+}
+
+// chatAddMessageAlt(BuildContext context) async {
+//   matchedCollection.update(
+//       where.eq('matchedTwo', context.read<UserProvider>().phoneNumber), {
+//     'id': selectedMatchedCollection['id'],
+//     'matchedOne': ,
+//     'matchedTwo': selectedMatchedCollection['matchedTwo'],
+//     'chat_collection': addMessage(
+//         context.read<RussianRouletteProvider>().chatList, chatMessage),
+//   });
+// }
 
 checkMatchedOneCollection(BuildContext context) async {
   await matchedCollection
@@ -209,6 +237,8 @@ checkMatchedOneCollection(BuildContext context) async {
         print('not in matched, error somewhere');
       } else {
         print(value[0]);
+        selectedMatchedCollection = value[0];
+        chatCollection = value[0]['chat_collection'];
         context.read<RussianRouletteProvider>().setInMatchedOne(
               context,
               value[0]['matchedOne'],
@@ -228,6 +258,8 @@ checkMatchedTwoCollection(BuildContext context) async {
         print('not in matched, error somewhere');
       } else {
         print(value[0]);
+        selectedMatchedCollection = value[0];
+        chatCollection = value[0]['chat_collection'];
         context.read<RussianRouletteProvider>().setInMatchedTwo(
               context,
               value[0]['matchedTwo'],

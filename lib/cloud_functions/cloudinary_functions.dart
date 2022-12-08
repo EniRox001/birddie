@@ -6,8 +6,7 @@ import 'package:provider/provider.dart';
 
 final cloudinary = CloudinaryPublic('myogamechanic', 'kf3reywm', cache: false);
 
-String profilePictureUrl =
-    "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png";
+String profilePictureUrl = '';
 String profileVideoUrl = '';
 
 final ImagePicker profilePicturePicker = ImagePicker();
@@ -26,11 +25,8 @@ setProfilePicture(BuildContext context) async {
     profilePictureUrl = response.secureUrl;
     // ignore: use_build_context_synchronously
     context.read<UserProvider>().setProfilePicture(profilePictureUrl);
-    print(response.secureUrl);
-  } on CloudinaryException catch (e) {
-    print(e.message);
-    print(e.request);
-  }
+    // ignore: empty_catches
+  } on CloudinaryException {}
 }
 
 setProfileVideo(BuildContext context) async {
@@ -44,10 +40,8 @@ setProfileVideo(BuildContext context) async {
         resourceType: CloudinaryResourceType.Image,
       ),
     );
+    // ignore: use_build_context_synchronously
     context.read<UserProvider>().setProfilePicture(response.secureUrl);
-    print(response.secureUrl);
-  } on CloudinaryException catch (e) {
-    print(e.message);
-    print(e.request);
-  }
+    // ignore: empty_catches
+  } on CloudinaryException {}
 }

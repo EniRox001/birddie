@@ -2,22 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class WTextField extends StatelessWidget {
-  const WTextField({
-    Key? key,
-    required this.controller,
-    required this.hintText,
-    this.inputType = TextInputType.text,
-    this.inputFormatters = const <TextInputFormatter>[],
-  }) : super(key: key);
+  const WTextField(
+      {Key? key,
+      required this.controller,
+      required this.hintText,
+      this.inputType = TextInputType.text,
+      this.inputFormatters = const <TextInputFormatter>[],
+      this.validator})
+      : super(key: key);
 
   final TextEditingController controller;
   final String hintText;
   final TextInputType inputType;
   final List inputFormatters;
+  final String? Function(String?)? validator;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      validator: validator,
       controller: controller,
       keyboardType: inputType,
       inputFormatters: const [],

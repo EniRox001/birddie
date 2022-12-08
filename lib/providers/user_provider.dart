@@ -1,5 +1,6 @@
 import 'package:birddie/cloud_functions/cloudinary_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_chat_ui/flutter_chat_ui.dart';
 import 'package:mongo_dart/mongo_dart.dart';
 import 'package:birddie/cloud_functions/database_functions.dart';
 
@@ -9,8 +10,8 @@ class UserProvider extends ChangeNotifier {
   late String _firstName;
   late String _lastName;
   late String _occupation;
-  late String _gender;
-  late String _dateOfBirth;
+  String _gender = "male";
+  String _dateOfBirth = 'Date of Birth';
   String _profilePicture = profilePictureUrl;
   String _profileVideo = profileVideoUrl;
   late String _location;

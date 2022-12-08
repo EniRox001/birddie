@@ -1,23 +1,27 @@
 import 'package:birddie/cloud_functions/database_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
+import 'package:flutter_chat_ui/flutter_chat_ui.dart';
 import 'package:mongo_dart/mongo_dart.dart';
 
 ObjectId uninitializedId = ObjectId();
 
 class RussianRouletteProvider extends ChangeNotifier {
   ObjectId _id = uninitializedId;
-  late String _phoneNumber;
-  late int _minAge;
-  late int _maxAge;
-  late String _location;
-  late String _dateSetup;
+  String _phoneNumber = '';
+  int _minAge = 0;
+  int _maxAge = 100;
+  String _location = '';
+  String _dateSetup = '';
   String _date = '';
-  late String _time;
-  late int _spendingGauge;
-  late String _whoPays;
+  String _time = '';
+  int _spendingGauge = 0;
+  String _whoPays = '';
   bool _matchState = false;
   String _inMatchedOne = '';
   String _inMatchedTwo = '';
+  List<types.Message> _chat = [];
+  List _chatList = [];
 
   ObjectId get id => _id;
   String get phoneNumber => _phoneNumber;
@@ -32,6 +36,8 @@ class RussianRouletteProvider extends ChangeNotifier {
   bool get matchState => _matchState;
   String get inMatchedOne => _inMatchedOne;
   String get inMatchedTwo => _inMatchedTwo;
+  List<types.Message> get chat => _chat;
+  List get chatList => _chatList;
 
   void setLoggedRussianRoulette() {
     _id = russianRoulette['id'];
@@ -45,7 +51,8 @@ class RussianRouletteProvider extends ChangeNotifier {
     _spendingGauge = russianRoulette['spending_gauge'];
     _whoPays = russianRoulette['who_pays'];
     _matchState = russianRoulette['matchState'];
-
+    _chat = List.from(chatCollection);
+    _chatList = List.from(chatCollection);
     notifyListeners();
   }
 
@@ -61,7 +68,8 @@ class RussianRouletteProvider extends ChangeNotifier {
     _spendingGauge = spendingGauge;
     _whoPays = whoPays;
     _matchState = matchState;
-
+    _chat = chat;
+    _chatList = chatList;
     notifyListeners();
   }
 
@@ -138,6 +146,20 @@ class RussianRouletteProvider extends ChangeNotifier {
   void checkInMatchedCollection(BuildContext context) {
     checkMatchedOneCollection(context);
     checkMatchedTwoCollection(context);
+    notifyListeners();
+  }
+
+  void setLocalChatState() {
+    _chat = List.from(chatCollection);
+    notifyListeners();
+  }
+
+  void addMessage(BuildContext context, message, chatMessage) {
+    _chat.insert(0, message);
+    _chatList.insert(0, chatMessage);
+    chatAddMessage(context);
+    // chatAddMessageAlt(context);
+    setLocalChatState();
     notifyListeners();
   }
 }

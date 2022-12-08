@@ -43,6 +43,7 @@ dependencies:
   card_swiper: ^2.0.4
   image_picker: ^0.8.6
   cloudinary_public: ^0.20.0
+  flutter_chat_ui: ^1.6.6
 
 dev_dependencies:
   flutter_test:

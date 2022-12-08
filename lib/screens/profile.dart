@@ -113,7 +113,9 @@ class _ProfileState extends State<Profile> {
                 child: Row(
                   children: [
                     WProfileMediaWidgetVideo(
-                      onPressed: () {},
+                      onPressed: () {
+                        setProfileVideo(context);
+                      },
                       flex: 2,
                       text: 'ADD VIDEO',
                     ),
