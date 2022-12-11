@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
-class WInputField extends StatelessWidget {
-  const WInputField({
+class WOtpField extends StatelessWidget {
+  const WOtpField({
     Key? key,
     required this.controller,
     required this.hintText,
@@ -20,6 +21,9 @@ class WInputField extends StatelessWidget {
       width: MediaQuery.of(context).size.width / 1.25,
       height: 50.0,
       child: TextFormField(
+        inputFormatters: <TextInputFormatter>[
+          FilteringTextInputFormatter.digitsOnly
+        ],
         keyboardType: inputType,
         validator: validator,
         textAlign: TextAlign.center,

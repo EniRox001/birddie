@@ -1,14 +1,12 @@
+import 'package:birddie/cloud_functions/phone_auth.dart';
 import 'package:birddie/controllers/otp_verification_controllers.dart';
-import 'package:birddie/screens/user_info.dart';
-import 'package:birddie/utils/functions.dart';
 import 'package:birddie/utils/images.dart';
 import 'package:birddie/widgets/w_elevated_button.dart';
-import 'package:birddie/widgets/w_inputfield.dart';
+import 'package:birddie/widgets/w_otp_input_field.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:birddie/providers/user_provider.dart';
-import 'package:birddie/utils/extensions.dart';
 
 class OtpVerification extends StatefulWidget {
   const OtpVerification({super.key});
@@ -78,7 +76,8 @@ class _OtpVerificationState extends State<OtpVerification> {
                 const SizedBox(
                   height: 10.0,
                 ),
-                WInputField(
+                WOtpField(
+                  inputType: TextInputType.number,
                   validator: (val) {
                     if (val!.isNotEmpty && val.length < 6) {
                       return 'Enter valid OTP';
@@ -101,11 +100,37 @@ class _OtpVerificationState extends State<OtpVerification> {
                 ),
                 WElevatedButton(
                   onPressed: () {
-                    //TODO: Verify OTP
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return const SizedBox(
+                            height: 20.0,
+                            width: 20.0,
+                            child: Center(
+                              child: CircularProgressIndicator(),
+                            ),
+                          );
+                        });
                     if (_formKey.currentState!.validate()) {
-                      navigate(context, const UserInfo());
-                      // print('hello');
+                      verifyCode(
+                        otpController.text.trim(),
+                        context,
+                      );
                     }
+                    Future.delayed(const Duration(seconds: 3), () {
+                      setState(() {
+                        showModalBottomSheet(
+                          context: context,
+                          builder: (context) => Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Text(
+                              codeMessage,
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        );
+                      });
+                    });
                   },
                   text: 'VERIFY',
                 ),

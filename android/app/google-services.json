@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "472927375157",
+    "project_id": "birddie-74cf6",
+    "storage_bucket": "birddie-74cf6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:472927375157:android:ccab4b9eb83bd1e725867c",
+        "android_client_info": {
+          "package_name": "com.example.birddie"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "472927375157-6url6s4v7np1ej992ium2vm00vmpoifb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCM7T_U0xgDRWsEXUpjostpEy1Aj2R-jcY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "472927375157-6url6s4v7np1ej992ium2vm00vmpoifb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

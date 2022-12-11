@@ -9,14 +9,14 @@ import 'package:birddie/widgets/w_inputfield.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class UserInfo extends StatefulWidget {
-  const UserInfo({super.key});
+class AddUserInfo extends StatefulWidget {
+  const AddUserInfo({super.key});
 
   @override
-  State<UserInfo> createState() => _UserInfoState();
+  State<AddUserInfo> createState() => _AddUserInfoState();
 }
 
-class _UserInfoState extends State<UserInfo> {
+class _AddUserInfoState extends State<AddUserInfo> {
   final _formKey = GlobalKey<FormState>();
 
   @override

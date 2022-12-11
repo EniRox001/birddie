@@ -1,4 +1,5 @@
 import 'package:birddie/cloud_functions/database_functions.dart';
+import 'package:birddie/cloud_functions/phone_auth.dart';
 import 'package:birddie/controllers/login_main_controllers.dart';
 import 'package:birddie/providers/user_provider.dart';
 import 'package:birddie/screens/dashboard.dart';
@@ -84,8 +85,11 @@ class _LoginMainState extends State<LoginMain> {
                           .read<UserProvider>()
                           .setPhoneNumber(phoneNumberController.text);
 
-                      getUser(
-                          context, const OtpVerification(), const Dashboard());
+                      print(context.read<UserProvider>().phoneNumber.trim());
+                      verifyNumber(
+                        context.read<UserProvider>().phoneNumber.trim(),
+                        context,
+                      );
                     }
                   },
                   text: 'NEXT',
