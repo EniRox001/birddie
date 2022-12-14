@@ -148,6 +148,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.0.6"
+  easy_splash_screen:
+    dependency: "direct main"
+    description:
+      name: easy_splash_screen
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.4"
   equatable:
     dependency: transitive
     description:

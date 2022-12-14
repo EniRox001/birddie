@@ -4,6 +4,9 @@ import 'package:birddie/providers/russian_roulette_provider.dart';
 import 'package:birddie/providers/user_provider.dart';
 import 'package:birddie/screens/dashboard.dart';
 import 'package:birddie/screens/onboarding_screen.dart';
+import 'package:birddie/utils/colors.dart';
+import 'package:birddie/utils/images.dart';
+import 'package:easy_splash_screen/easy_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -39,7 +42,23 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const OnboardingScreen(),
+      home: EasySplashScreen(
+        showLoader: false,
+        logo: Image.asset(
+          OnboardingImages.birddieLogo,
+        ),
+        title: const Text(
+          "Birddie",
+          style: TextStyle(
+            fontSize: 18.0,
+            fontWeight: FontWeight.bold,
+            color: CustomColors.mainWhiteColor,
+          ),
+        ),
+        backgroundColor: CustomColors.mainRedColor,
+        navigator: const OnboardingScreen(),
+        durationInSeconds: 5,
+      ),
     );
   }
 }

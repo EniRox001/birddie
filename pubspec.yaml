@@ -46,6 +46,7 @@ dependencies:
   flutter_chat_ui: ^1.6.6
   firebase_core: ^2.4.0
   firebase_auth: ^4.2.0
+  easy_splash_screen: ^1.0.4
 
 dev_dependencies:
   flutter_test:
