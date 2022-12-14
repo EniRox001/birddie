@@ -51,9 +51,8 @@ class _ProfileState extends State<Profile> {
             },
           ),
         ),
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        body: ListView(
+          padding: const EdgeInsets.all(15.0),
           children: [
             const SizedBox(
               height: 10.0,
@@ -107,30 +106,27 @@ class _ProfileState extends State<Profile> {
                 ),
               ],
             ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  children: [
-                    WProfileMediaWidgetVideo(
-                      onPressed: () {
-                        setProfileVideo(context);
-                      },
-                      flex: 2,
-                      text: 'ADD VIDEO',
-                    ),
-                    const SizedBox(
-                      width: 20.0,
-                    ),
-                    WProfileMediaWidget(
-                      onPressed: () {
-                        setProfilePicture(context);
-                      },
-                      flex: 1,
-                      text: 'ADD A PROFILE PICTURE',
-                    ),
-                  ],
-                ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  WProfileMediaWidgetVideo(
+                    onPressed: () {
+                      setProfilePicture(context);
+                    },
+                    text: 'ADD A PROFILE PICTURE',
+                  ),
+                  const SizedBox(
+                    width: 20.0,
+                  ),
+                  WProfileMediaWidget(
+                    onPressed: () {
+                      setProfileVideo(context);
+                    },
+                    text: 'ADD VIDEO',
+                  ),
+                ],
               ),
             ),
             Padding(
@@ -145,7 +141,7 @@ class _ProfileState extends State<Profile> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.symmetric(vertical: 28.0),
               child: Column(
                 children: [
                   WTextField(
@@ -153,14 +149,14 @@ class _ProfileState extends State<Profile> {
                     hintText: context.read<UserProvider>().occupation,
                   ),
                   const SizedBox(
-                    height: 10.0,
+                    height: 20.0,
                   ),
                   WTextField(
                     controller: locationController,
                     hintText: 'My Location',
                   ),
                   const SizedBox(
-                    height: 10.0,
+                    height: 20.0,
                   ),
                   WTextField(
                     controller: purposeController,
@@ -184,7 +180,7 @@ class _ProfileState extends State<Profile> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.symmetric(vertical: 28.0),
               child: Column(
                 children: [
                   WDropDownWidget(
@@ -199,7 +195,7 @@ class _ProfileState extends State<Profile> {
                     },
                   ),
                   const SizedBox(
-                    height: 10.0,
+                    height: 20.0,
                   ),
                   WDropDownWidget(
                     labelText: 'Smoke?',
