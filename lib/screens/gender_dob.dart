@@ -5,7 +5,6 @@ import 'package:birddie/utils/colors.dart';
 import 'package:birddie/utils/functions.dart';
 import 'package:birddie/utils/images.dart';
 import 'package:birddie/widgets/w_elevated_button.dart';
-import 'package:birddie/widgets/w_inputfield.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:birddie/widgets/w_gender_dob.dart';
@@ -164,7 +163,6 @@ class _GenderDOBState extends State<GenderDOB> {
                     await selectBirthDate(context);
                     // ignore: use_build_context_synchronously
                     context.read<UserProvider>().setDateOfBirth(dateOfBirth);
-                    print(context.read<UserProvider>().dateOfBirth.trim());
                   },
                   child: Container(
                     decoration: BoxDecoration(

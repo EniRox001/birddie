@@ -1,7 +1,7 @@
 import 'package:birddie/cloud_functions/database_functions.dart';
 import 'package:flutter/material.dart';
+// ignore: depend_on_referenced_packages
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
-import 'package:flutter_chat_ui/flutter_chat_ui.dart';
 import 'package:mongo_dart/mongo_dart.dart';
 
 ObjectId uninitializedId = ObjectId();

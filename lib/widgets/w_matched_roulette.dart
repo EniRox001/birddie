@@ -1,12 +1,9 @@
-import 'package:birddie/cloud_functions/database_functions.dart';
-import 'package:birddie/providers/russian_roulette_provider.dart';
 import 'package:birddie/screens/chat_screen.dart';
 import 'package:birddie/utils/colors.dart';
 import 'package:birddie/utils/functions.dart';
 import 'package:birddie/widgets/w_elevated_button.dart';
 import 'package:birddie/widgets/w_mini_elevated_button.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class MatchedRoulette extends StatelessWidget {
   const MatchedRoulette({super.key});

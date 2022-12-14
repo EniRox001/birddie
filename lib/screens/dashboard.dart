@@ -1,16 +1,12 @@
 import 'package:birddie/cloud_functions/database_functions.dart';
-import 'package:birddie/providers/user_provider.dart';
-import 'package:birddie/screens/event_details.dart';
 import 'package:birddie/utils/functions.dart';
 import 'package:birddie/widgets/w_appbar.dart';
-import 'package:birddie/widgets/w_declined_roulette.dart';
 import 'package:birddie/widgets/w_event_card.dart';
 import 'package:birddie/widgets/w_matched_roulette.dart';
 import 'package:birddie/widgets/w_not_matched_roulette.dart';
 import 'package:birddie/widgets/w_review_roulette.dart';
 import 'package:flutter/material.dart';
 import 'package:card_swiper/card_swiper.dart';
-import 'package:birddie/providers/event_provider.dart';
 import 'package:birddie/providers/russian_roulette_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -100,13 +96,6 @@ class _DashboardState extends State<Dashboard> {
                               context
                                   .read<RussianRouletteProvider>()
                                   .autoMatchRoulette(context);
-
-                              print(context
-                                  .read<RussianRouletteProvider>()
-                                  .inMatchedOne);
-                              print(context
-                                  .read<RussianRouletteProvider>()
-                                  .inMatchedTwo);
                             },
                             child: WEventCard(
                               backgroundColor: Colors.red,

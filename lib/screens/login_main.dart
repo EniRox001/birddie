@@ -1,8 +1,5 @@
-import 'package:birddie/cloud_functions/database_functions.dart';
-import 'package:birddie/cloud_functions/phone_auth.dart';
 import 'package:birddie/controllers/login_main_controllers.dart';
 import 'package:birddie/providers/user_provider.dart';
-import 'package:birddie/screens/dashboard.dart';
 import 'package:birddie/screens/otp_verification.dart';
 
 import 'package:birddie/widgets/w_elevated_button.dart';
@@ -79,17 +76,21 @@ class _LoginMainState extends State<LoginMain> {
                 WPhoneInputField(controller: phoneNumberController),
                 WElevatedButton(
                   onPressed: () {
+                    // ignore: todo
                     //TODO: Send otp to phone number
                     if (_formKey.currentState!.validate()) {
                       context
                           .read<UserProvider>()
                           .setPhoneNumber(phoneNumberController.text);
-
-                      print(context.read<UserProvider>().phoneNumber.trim());
-                      verifyNumber(
-                        context.read<UserProvider>().phoneNumber.trim(),
-                        context,
-                      );
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const OtpVerification(),
+                          ));
+                      // verifyNumber(
+                      //   context.read<UserProvider>().phoneNumber.trim(),
+                      //   context,
+                      // );
                     }
                   },
                   text: 'NEXT',

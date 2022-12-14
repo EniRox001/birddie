@@ -2,7 +2,6 @@
 
 import 'package:birddie/controllers/russian_roulette_controllers.dart';
 import 'package:birddie/providers/russian_roulette_provider.dart';
-import 'package:birddie/providers/user_provider.dart';
 import 'package:birddie/utils/colors.dart';
 import 'package:birddie/utils/functions.dart';
 import 'package:birddie/widgets/w_appbar.dart';
@@ -119,9 +118,6 @@ class _RussianRoulleteState extends State<RussianRoullete> {
                                 context
                                     .read<RussianRouletteProvider>()
                                     .setDate(russianRouletteDate);
-                                print(context
-                                    .read<RussianRouletteProvider>()
-                                    .date);
                               },
                               child: Container(
                                 height: 40.0,

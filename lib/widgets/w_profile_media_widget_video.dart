@@ -1,6 +1,4 @@
-import 'package:birddie/providers/user_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class WProfileMediaWidgetVideo extends StatelessWidget {
   const WProfileMediaWidgetVideo({

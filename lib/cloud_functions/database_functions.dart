@@ -6,11 +6,9 @@ import 'package:birddie/providers/russian_roulette_provider.dart';
 import 'package:birddie/providers/user_provider.dart';
 import 'package:birddie/screens/dashboard.dart';
 import 'package:birddie/utils/functions.dart';
-import 'package:flutter_chat_ui/flutter_chat_ui.dart';
 import 'package:mongo_dart/mongo_dart.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 
 //User ID to reference collections across database
 ObjectId uniqueId = ObjectId();
@@ -121,7 +119,6 @@ addAttending(BuildContext context, List list) {
 
 addMessage(List list, message) {
   list.insert(0, message);
-  print(list);
   return list;
 }
 
@@ -234,9 +231,7 @@ checkMatchedOneCollection(BuildContext context) async {
       .then(
     (value) {
       if (value.isEmpty) {
-        print('not in matched, error somewhere');
       } else {
-        print(value[0]);
         selectedMatchedCollection = value[0];
         chatCollection = value[0]['chat_collection'];
         context.read<RussianRouletteProvider>().setInMatchedOne(
@@ -255,9 +250,7 @@ checkMatchedTwoCollection(BuildContext context) async {
       .then(
     (value) {
       if (value.isEmpty) {
-        print('not in matched, error somewhere');
       } else {
-        print(value[0]);
         selectedMatchedCollection = value[0];
         chatCollection = value[0]['chat_collection'];
         context.read<RussianRouletteProvider>().setInMatchedTwo(
@@ -276,7 +269,6 @@ setRussianRouletteMatchState(BuildContext context, bool matchState) async {
     {
       'id': context.read<RussianRouletteProvider>().id,
       'phone_number': context.read<UserProvider>().phoneNumber,
-      //TODO: This should change automatically or dynamically to matched user
       'min_age': context.read<RussianRouletteProvider>().minAge,
       'max_age': context.read<RussianRouletteProvider>().maxAge,
       'location': context.read<RussianRouletteProvider>().location,
@@ -294,7 +286,6 @@ setRussianRouletteMatchState(BuildContext context, bool matchState) async {
     {
       'id': matchedPerson['id'],
       'phone_number': matchedPerson['phone_number'],
-      //TODO: This should change automatically or dynamically to matched user
       'min_age': matchedPerson['min_age'],
       'max_age': matchedPerson['max_age'],
       'location': matchedPerson['location'],
@@ -315,7 +306,6 @@ Future getRussianRoulette(BuildContext context) async {
         .toList()
         .then(
       (value) {
-        print(value);
         if (value.isNotEmpty) {
           russianRoulette = value[0];
           context.read<RussianRouletteProvider>().setLoggedRussianRoulette();

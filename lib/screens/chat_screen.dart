@@ -40,7 +40,6 @@ class _ChatScreenState extends State<ChatScreen> {
 
   void _addMessage(types.Message message) {
     chatMessage = message.toString();
-    print(chatMessage);
 
     context
         .read<RussianRouletteProvider>()

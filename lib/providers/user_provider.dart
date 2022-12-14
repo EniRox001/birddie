@@ -1,6 +1,5 @@
 import 'package:birddie/cloud_functions/cloudinary_functions.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_chat_ui/flutter_chat_ui.dart';
 import 'package:mongo_dart/mongo_dart.dart';
 import 'package:birddie/cloud_functions/database_functions.dart';
 

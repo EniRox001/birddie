@@ -2,7 +2,6 @@ import 'package:birddie/cloud_functions/database_functions.dart';
 import 'package:birddie/providers/event_provider.dart';
 import 'package:birddie/providers/russian_roulette_provider.dart';
 import 'package:birddie/providers/user_provider.dart';
-import 'package:birddie/screens/dashboard.dart';
 import 'package:birddie/screens/onboarding_screen.dart';
 import 'package:birddie/utils/colors.dart';
 import 'package:birddie/utils/images.dart';

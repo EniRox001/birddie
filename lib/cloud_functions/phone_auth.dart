@@ -4,8 +4,6 @@ import 'package:birddie/screens/otp_verification.dart';
 import 'package:birddie/screens/user_info.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:birddie/providers/user_provider.dart';
 
 FirebaseAuth auth = FirebaseAuth.instance;
 
@@ -15,7 +13,6 @@ var verficationIdRecieved = '';
 
 verifyNumber(String number, BuildContext context) async {
   try {
-    print('object');
     await auth.verifyPhoneNumber(
       phoneNumber: number,
       verificationCompleted: (PhoneAuthCredential credential) {},
@@ -24,7 +21,6 @@ verifyNumber(String number, BuildContext context) async {
       },
       codeSent: (String verificationId, int? resendToken) {
         verficationIdRecieved = verificationId;
-        print("verificationId $verificationId");
         verifyResponse = 'Valid number provided';
 
         Navigator.push(
@@ -36,9 +32,8 @@ verifyNumber(String number, BuildContext context) async {
       },
       codeAutoRetrievalTimeout: (String verificationId) {},
     );
-  } on FirebaseException catch (e) {
-    print('error: $e');
-  }
+    // ignore: empty_catches
+  } on FirebaseException {}
 }
 
 String codeMessage = '';
@@ -54,7 +49,6 @@ verifyCode(String code, BuildContext context) async {
       },
     );
   } on FirebaseAuthException catch (e) {
-    print(e.code);
     switch (e.code) {
       case 'invalid-verification-code':
         codeMessage = 'The provided code is invalid';
