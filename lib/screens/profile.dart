@@ -1,5 +1,6 @@
 import 'package:birddie/cloud_functions/cloudinary_functions.dart';
 import 'package:birddie/cloud_functions/database_functions.dart';
+import 'package:birddie/cloud_functions/shared_prefernces.dart';
 import 'package:birddie/controllers/profile_controllers.dart';
 import 'package:birddie/controllers/user_info_controllers.dart';
 import 'package:birddie/providers/user_provider.dart';
@@ -228,8 +229,11 @@ class _ProfileState extends State<Profile> {
                 context
                     .read<UserProvider>()
                     .setLookingFor(purposeController.text.toLowerCase());
-                await createUser(context)
-                    .then((value) => navigate(context, const Dashboard()));
+
+                await createUser(context).then((value) {
+                  setFirstTime(false, context.read<UserProvider>().phoneNumber);
+                  navigate(context, const Dashboard());
+                });
               },
               text: 'SAVE',
             ),

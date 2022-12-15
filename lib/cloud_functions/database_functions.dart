@@ -1,3 +1,4 @@
+import 'package:birddie/cloud_functions/shared_prefernces.dart';
 import 'package:birddie/models/events.dart';
 import 'package:birddie/models/russian_roulette.dart';
 import 'package:birddie/models/user_model.dart';
@@ -5,6 +6,7 @@ import 'package:birddie/providers/event_provider.dart';
 import 'package:birddie/providers/russian_roulette_provider.dart';
 import 'package:birddie/providers/user_provider.dart';
 import 'package:birddie/screens/dashboard.dart';
+import 'package:birddie/screens/login_main.dart';
 import 'package:birddie/utils/functions.dart';
 import 'package:mongo_dart/mongo_dart.dart';
 import 'package:flutter/material.dart';
@@ -65,6 +67,23 @@ Future createUser(BuildContext context) async {
   );
 }
 
+Future<Widget> autoLogin(BuildContext context, String? phoneNumber) async {
+  userCollection
+      .find(
+        where.eq("phone_number", phoneNumber),
+      )
+      .toList()
+      .then((value) {
+    print(value);
+    loggedInUser = value;
+
+    context.read<UserProvider>().setUser();
+
+    context.read<RussianRouletteProvider>().getRussianRoulettes(context);
+  });
+  return const Dashboard();
+}
+
 Future getUser(
   BuildContext context,
   Widget onNoUser,
@@ -84,7 +103,7 @@ Future getUser(
       context.read<UserProvider>().setUser();
 
       context.read<RussianRouletteProvider>().getRussianRoulettes(context);
-
+      setFirstTime(false, context.read<UserProvider>().phoneNumber);
       navigate(context, onUser);
     }
   });

@@ -1,7 +1,9 @@
 import 'package:birddie/cloud_functions/database_functions.dart';
+import 'package:birddie/cloud_functions/shared_prefernces.dart';
 import 'package:birddie/providers/event_provider.dart';
 import 'package:birddie/providers/russian_roulette_provider.dart';
 import 'package:birddie/providers/user_provider.dart';
+import 'package:birddie/screens/login_main.dart';
 import 'package:birddie/screens/onboarding_screen.dart';
 import 'package:birddie/utils/colors.dart';
 import 'package:birddie/utils/images.dart';
@@ -16,6 +18,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await initSharedPref();
   await connectDB();
   await getEvents();
   runApp(
@@ -30,10 +33,22 @@ void main() async {
   );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  Future<Widget> checkPrefs() async {
+    if (firstTime == null && loggedInNum == null) {
+      return Future.value(const OnboardingScreen());
+    } else {
+      return autoLogin(context, loggedInNum);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -55,7 +70,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
         backgroundColor: CustomColors.mainRedColor,
-        navigator: const OnboardingScreen(),
+        futureNavigator: checkPrefs(),
         durationInSeconds: 5,
       ),
     );

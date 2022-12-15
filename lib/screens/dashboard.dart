@@ -1,4 +1,5 @@
 import 'package:birddie/cloud_functions/database_functions.dart';
+import 'package:birddie/providers/user_provider.dart';
 import 'package:birddie/utils/functions.dart';
 import 'package:birddie/widgets/w_appbar.dart';
 import 'package:birddie/widgets/w_event_card.dart';
@@ -47,7 +48,7 @@ class _DashboardState extends State<Dashboard> {
                       .setNullRussianRoulette();
                   navigateBack(context);
                   navigateBack(context);
-                }, // <-- SEE HERE
+                },
                 child: const Text('Yes'),
               ),
             ],
