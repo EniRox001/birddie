@@ -16,3 +16,8 @@ void setFirstTime(bool firstTime, String phoneNum) async {
   prefs.setBool('firstTime', firstTime);
   prefs.setString('loggedInNum', phoneNum);
 }
+
+void setNullPref() async {
+  await prefs.remove('firstTime');
+  await prefs.remove('loggedInNum');
+}

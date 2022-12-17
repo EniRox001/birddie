@@ -1,4 +1,7 @@
+import 'package:birddie/providers/russian_roulette_provider.dart';
 import 'package:birddie/utils/colors.dart';
+import 'package:birddie/utils/functions.dart';
+import 'package:birddie/views/login/login_main.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:birddie/providers/user_provider.dart';
@@ -34,12 +37,11 @@ class WDrawer extends StatelessWidget {
             ),
           ),
           ListTile(
-            title: const Text('Item 1'),
-            onTap: () {},
-          ),
-          ListTile(
-            title: const Text('Item 2'),
-            onTap: () {},
+            title: const Text('Log out'),
+            onTap: () {
+              context.read<RussianRouletteProvider>().logOut();
+              navigate(context, const LoginMain());
+            },
           ),
         ],
       ),

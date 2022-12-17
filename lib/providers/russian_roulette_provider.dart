@@ -1,4 +1,5 @@
 import 'package:birddie/cloud_functions/database_functions.dart';
+import 'package:birddie/cloud_functions/shared_prefernces.dart';
 import 'package:flutter/material.dart';
 // ignore: depend_on_referenced_packages
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
@@ -160,6 +161,12 @@ class RussianRouletteProvider extends ChangeNotifier {
     chatAddMessage(context);
     // chatAddMessageAlt(context);
     setLocalChatState();
+    notifyListeners();
+  }
+
+  void logOut() {
+    setNullRussianRoulette();
+    setNullPref();
     notifyListeners();
   }
 }
