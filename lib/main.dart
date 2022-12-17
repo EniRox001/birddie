@@ -45,7 +45,7 @@ class _MyAppState extends State<MyApp> {
     if (firstTime == null && loggedInNum == null) {
       return Future.value(const OnboardingScreen());
     } else {
-      return autoLogin(context, loggedInNum);
+      return await autoLogin(context, loggedInNum);
     }
   }
 

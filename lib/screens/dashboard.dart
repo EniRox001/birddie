@@ -1,6 +1,9 @@
 import 'package:birddie/cloud_functions/database_functions.dart';
+import 'package:birddie/models/user_model.dart';
 import 'package:birddie/providers/user_provider.dart';
+import 'package:birddie/utils/colors.dart';
 import 'package:birddie/utils/functions.dart';
+import 'package:birddie/widgets/drawer.dart';
 import 'package:birddie/widgets/w_appbar.dart';
 import 'package:birddie/widgets/w_event_card.dart';
 import 'package:birddie/widgets/w_matched_roulette.dart';
@@ -28,119 +31,90 @@ class _DashboardState extends State<Dashboard> {
     super.initState();
   }
 
-  Future<bool> _onWillPop() async {
-    return (await showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-            title: const Text('Are you sure?'),
-            content: const Text('Do you want to exit an App'),
-            actions: <Widget>[
-              TextButton(
-                onPressed: () {
-                  navigateBack(context);
-                },
-                child: const Text('No'),
-              ),
-              TextButton(
-                onPressed: () {
-                  context
-                      .read<RussianRouletteProvider>()
-                      .setNullRussianRoulette();
-                  navigateBack(context);
-                  navigateBack(context);
-                },
-                child: const Text('Yes'),
-              ),
-            ],
-          ),
-        )) ??
-        false;
-  }
-
+  final GlobalKey<ScaffoldState> _key = GlobalKey();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: WillPopScope(
-        onWillPop: _onWillPop,
-        child: Scaffold(
-          appBar: AppBar(
-            automaticallyImplyLeading: false,
-            flexibleSpace: WAppBar(
-              title: 'Dashboard',
-              icon: Icons.menu,
-              subData: false,
-              onBackPressed: () {},
-            ),
+      child: Scaffold(
+        key: _key,
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          flexibleSpace: WAppBar(
+            title: 'Dashboard',
+            icon: Icons.menu,
+            subData: false,
+            onBackPressed: () {
+              _key.currentState!.openDrawer();
+            },
           ),
-          body: Column(
-            children: [
-              Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Text(
-                      'Upcoming Events',
-                      style: Theme.of(context).textTheme.titleLarge,
-                    ),
-                    SizedBox(
-                      height: 220,
-                      child: Swiper(
-                        itemCount: event.length,
-                        itemBuilder: (context, index) {
-                          return GestureDetector(
-                            onTap: () {
-                              // selectedEvent = event[index];
-                              // Provider.of<EventProviders>(context, listen: false)
-                              //     .setSelected();
+        ),
+        drawer: const WDrawer(),
+        body: Column(
+          children: [
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Text(
+                    'Upcoming Events',
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
+                  SizedBox(
+                    height: 220,
+                    child: Swiper(
+                      itemCount: event.length,
+                      itemBuilder: (context, index) {
+                        return GestureDetector(
+                          onTap: () {
+                            // selectedEvent = event[index];
+                            // Provider.of<EventProviders>(context, listen: false)
+                            //     .setSelected();
 
-                              // navigate(context, const EventDetails());
-                              context
-                                  .read<RussianRouletteProvider>()
-                                  .autoMatchRoulette(context);
-                            },
-                            child: WEventCard(
-                              backgroundColor: Colors.red,
-                              onAttendeePressed: () {},
-                              location: event[index]['location'],
-                              price: event[index]['price'],
-                              title: event[index]['title'],
-                              description: event[index]['description'],
-                              slotsLeft: event[index]['slot_left'],
-                              date: event[index]['date'],
-                              time: event[index]['time'],
-                            ),
-                          );
-                        },
-                        viewportFraction: 0.8,
-                        scale: 0.9,
-                        autoplay: false,
-                      ),
-                    )
-                  ],
-                ),
+                            // navigate(context, const EventDetails());
+                            context
+                                .read<RussianRouletteProvider>()
+                                .autoMatchRoulette(context);
+                          },
+                          child: WEventCard(
+                            backgroundColor: Colors.red,
+                            onAttendeePressed: () {},
+                            location: event[index]['location'],
+                            price: event[index]['price'],
+                            title: event[index]['title'],
+                            description: event[index]['description'],
+                            slotsLeft: event[index]['slot_left'],
+                            date: event[index]['date'],
+                            time: event[index]['time'],
+                          ),
+                        );
+                      },
+                      viewportFraction: 0.8,
+                      scale: 0.9,
+                      autoplay: false,
+                    ),
+                  )
+                ],
               ),
-              context.read<RussianRouletteProvider>().id == uninitializedId &&
-                      (context.watch<RussianRouletteProvider>().inMatchedOne ==
-                              "" &&
-                          context
-                                  .watch<RussianRouletteProvider>()
-                                  .inMatchedTwo ==
-                              "")
-                  ? const NotMatchedRoulette()
-                  : context.read<RussianRouletteProvider>().id !=
-                              uninitializedId &&
-                          (context
-                                      .watch<RussianRouletteProvider>()
-                                      .inMatchedOne ==
-                                  "" &&
-                              context
-                                      .watch<RussianRouletteProvider>()
-                                      .inMatchedTwo ==
-                                  "")
-                      ? const ReviewRoulette()
-                      : const MatchedRoulette(),
-            ],
-          ),
+            ),
+            context.read<RussianRouletteProvider>().id == uninitializedId &&
+                    (context.watch<RussianRouletteProvider>().inMatchedOne ==
+                            "" &&
+                        context.watch<RussianRouletteProvider>().inMatchedTwo ==
+                            "")
+                ? const NotMatchedRoulette()
+                : context.read<RussianRouletteProvider>().id !=
+                            uninitializedId &&
+                        (context
+                                    .watch<RussianRouletteProvider>()
+                                    .inMatchedOne ==
+                                "" &&
+                            context
+                                    .watch<RussianRouletteProvider>()
+                                    .inMatchedTwo ==
+                                "")
+                    ? const ReviewRoulette()
+                    : const MatchedRoulette(),
+          ],
         ),
       ),
     );

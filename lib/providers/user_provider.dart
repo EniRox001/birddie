@@ -6,8 +6,8 @@ import 'package:birddie/cloud_functions/database_functions.dart';
 class UserProvider extends ChangeNotifier {
   late ObjectId _id;
   late String _phoneNumber;
-  late String _firstName;
-  late String _lastName;
+  String _firstName = '';
+  String _lastName = '';
   late String _occupation;
   String _gender = "male";
   String _dateOfBirth = 'Date of Birth';
