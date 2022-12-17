@@ -73,10 +73,6 @@ class _RussianRoulleteState extends State<RussianRoullete> {
                 style: Theme.of(context).textTheme.titleMedium,
                 textAlign: TextAlign.center,
               ),
-              Text(context
-                  .watch<RussianRouletteProvider>()
-                  .regionList
-                  .toString()),
               const SizedBox(
                 height: 20.0,
               ),
