@@ -2,10 +2,10 @@ import 'package:birddie/providers/event_provider.dart';
 import 'package:birddie/providers/user_provider.dart';
 import 'package:birddie/utils/colors.dart';
 import 'package:birddie/utils/functions.dart';
-import 'package:birddie/widgets/w_appbar.dart';
-import 'package:birddie/widgets/w_attendee_card.dart';
-import 'package:birddie/widgets/w_divider.dart';
-import 'package:birddie/widgets/w_elevated_button.dart';
+import 'package:birddie/widgets/dashboard/w_appbar.dart';
+import 'package:birddie/widgets/dashboard/w_attendee_card.dart';
+import 'package:birddie/widgets/dashboard/w_divider.dart';
+import 'package:birddie/widgets/common/w_elevated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

@@ -1,10 +1,10 @@
-import 'package:birddie/controllers/user_info_controllers.dart';
+import 'package:birddie/controllers/login/user_info_controllers.dart';
 import 'package:birddie/providers/user_provider.dart';
-import 'package:birddie/screens/gender_dob.dart';
+import 'package:birddie/views/gender_dob.dart';
 import 'package:birddie/utils/functions.dart';
 import 'package:birddie/utils/images.dart';
-import 'package:birddie/widgets/w_elevated_button.dart';
-import 'package:birddie/widgets/w_inputfield.dart';
+import 'package:birddie/widgets/common/w_elevated_button.dart';
+import 'package:birddie/widgets/common/w_inputfield.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

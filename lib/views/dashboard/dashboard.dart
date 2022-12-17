@@ -1,14 +1,16 @@
+// ignore_for_file: unused_import
+
 import 'package:birddie/cloud_functions/database_functions.dart';
 import 'package:birddie/models/user_model.dart';
 import 'package:birddie/providers/user_provider.dart';
 import 'package:birddie/utils/colors.dart';
 import 'package:birddie/utils/functions.dart';
-import 'package:birddie/widgets/drawer.dart';
-import 'package:birddie/widgets/w_appbar.dart';
-import 'package:birddie/widgets/w_event_card.dart';
-import 'package:birddie/widgets/w_matched_roulette.dart';
-import 'package:birddie/widgets/w_not_matched_roulette.dart';
-import 'package:birddie/widgets/w_review_roulette.dart';
+import 'package:birddie/widgets/dashboard/w_drawer.dart';
+import 'package:birddie/widgets/dashboard/w_appbar.dart';
+import 'package:birddie/widgets/dashboard/w_event_card.dart';
+import 'package:birddie/widgets/dashboard/w_matched_roulette.dart';
+import 'package:birddie/widgets/dashboard/w_not_matched_roulette.dart';
+import 'package:birddie/widgets/dashboard/w_review_roulette.dart';
 import 'package:flutter/material.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:birddie/providers/russian_roulette_provider.dart';

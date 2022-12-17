@@ -1,16 +1,16 @@
 import 'package:birddie/cloud_functions/cloudinary_functions.dart';
 import 'package:birddie/cloud_functions/database_functions.dart';
 import 'package:birddie/cloud_functions/shared_prefernces.dart';
-import 'package:birddie/controllers/profile_controllers.dart';
-import 'package:birddie/controllers/user_info_controllers.dart';
+import 'package:birddie/controllers/login/profile_controllers.dart';
+import 'package:birddie/controllers/login/user_info_controllers.dart';
 import 'package:birddie/providers/user_provider.dart';
-import 'package:birddie/screens/dashboard.dart';
+import 'package:birddie/views/dashboard/dashboard.dart';
 import 'package:birddie/utils/functions.dart';
-import 'package:birddie/widgets/w_appbar.dart';
-import 'package:birddie/widgets/w_elevated_button.dart';
-import 'package:birddie/widgets/w_profile_media_widget.dart';
-import 'package:birddie/widgets/w_profile_media_widget_video.dart';
-import 'package:birddie/widgets/w_textfield.dart';
+import 'package:birddie/widgets/dashboard/w_appbar.dart';
+import 'package:birddie/widgets/common/w_elevated_button.dart';
+import 'package:birddie/widgets/login/w_profile_media_widget.dart';
+import 'package:birddie/widgets/login/w_profile_media_widget_video.dart';
+import 'package:birddie/widgets/common/w_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

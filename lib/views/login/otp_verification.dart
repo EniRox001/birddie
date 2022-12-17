@@ -1,10 +1,10 @@
 import 'package:birddie/cloud_functions/phone_auth.dart';
-import 'package:birddie/controllers/otp_verification_controllers.dart';
-import 'package:birddie/screens/dashboard.dart';
-import 'package:birddie/screens/user_info.dart';
+import 'package:birddie/controllers/login/otp_verification_controllers.dart';
+import 'package:birddie/views/dashboard/dashboard.dart';
+import 'package:birddie/views/login/user_info.dart';
 import 'package:birddie/utils/images.dart';
-import 'package:birddie/widgets/w_elevated_button.dart';
-import 'package:birddie/widgets/w_otp_input_field.dart';
+import 'package:birddie/widgets/common/w_elevated_button.dart';
+import 'package:birddie/widgets/login/w_otp_input_field.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';

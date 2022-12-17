@@ -1,8 +1,8 @@
-import 'package:birddie/screens/chat_screen.dart';
+import 'package:birddie/views/dashboard/chat_screen.dart';
 import 'package:birddie/utils/colors.dart';
 import 'package:birddie/utils/functions.dart';
-import 'package:birddie/widgets/w_elevated_button.dart';
-import 'package:birddie/widgets/w_mini_elevated_button.dart';
+import 'package:birddie/widgets/common/w_elevated_button.dart';
+import 'package:birddie/widgets/common/w_mini_elevated_button.dart';
 import 'package:flutter/material.dart';
 
 class MatchedRoulette extends StatelessWidget {

@@ -1,8 +1,8 @@
+import 'package:birddie/widgets/common/w_elevated_button.dart';
+import 'package:birddie/widgets/common/w_phone_inputfield.dart';
 import 'package:flutter/material.dart';
 import 'package:birddie/utils/images.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'w_elevated_button.dart';
-import 'w_phone_inputfield.dart';
 
 class WOnboardingSignUp extends StatelessWidget {
   const WOnboardingSignUp(

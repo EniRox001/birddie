@@ -1,6 +1,6 @@
-import 'package:birddie/screens/russian_roulette.dart';
+import 'package:birddie/views/russian_roulette.dart';
 import 'package:birddie/utils/functions.dart';
-import 'package:birddie/widgets/w_elevated_button.dart';
+import 'package:birddie/widgets/common/w_elevated_button.dart';
 import 'package:flutter/material.dart';
 
 class DeclinedRoulette extends StatelessWidget {

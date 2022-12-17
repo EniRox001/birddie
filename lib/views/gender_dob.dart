@@ -1,13 +1,13 @@
-import 'package:birddie/controllers/gender_dob_controllers.dart';
+import 'package:birddie/controllers/login/gender_dob_controllers.dart';
 import 'package:birddie/providers/user_provider.dart';
-import 'package:birddie/screens/profile.dart';
+import 'package:birddie/views/profile.dart';
 import 'package:birddie/utils/colors.dart';
 import 'package:birddie/utils/functions.dart';
 import 'package:birddie/utils/images.dart';
-import 'package:birddie/widgets/w_elevated_button.dart';
+import 'package:birddie/widgets/common/w_elevated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:birddie/widgets/w_gender_dob.dart';
+import 'package:birddie/widgets/login/w_gender_dob.dart';
 import 'package:provider/provider.dart';
 
 String dateOfBirth = '';

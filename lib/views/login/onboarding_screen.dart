@@ -1,8 +1,8 @@
-import 'package:birddie/controllers/onboarding_screen_controller.dart';
-import 'package:birddie/screens/login_main.dart';
+import 'package:birddie/controllers/login/onboarding_screen_controller.dart';
+import 'package:birddie/views/login/login_main.dart';
 import 'package:birddie/utils/functions.dart';
 import 'package:birddie/utils/images.dart';
-import 'package:birddie/widgets/onboarding_screen.dart';
+import 'package:birddie/widgets/login/onboarding_screen.dart';
 import 'package:flutter/material.dart';
 
 class OnboardingScreen extends StatefulWidget {

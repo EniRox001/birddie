@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'w_elevated_button.dart';
-import 'package:birddie/screens/russian_roulette.dart';
+import '../common/w_elevated_button.dart';
+import 'package:birddie/views/russian_roulette.dart';
 import 'package:birddie/utils/functions.dart';
 
 const upcomingFeatureSnackBar = SnackBar(

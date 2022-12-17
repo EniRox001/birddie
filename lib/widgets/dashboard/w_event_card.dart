@@ -1,4 +1,4 @@
-import 'package:birddie/widgets/w_attendee_card.dart';
+import 'package:birddie/widgets/dashboard/w_attendee_card.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable

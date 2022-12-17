@@ -1,7 +1,7 @@
 import 'package:birddie/cloud_functions/database_functions.dart';
-import 'package:birddie/screens/dashboard.dart';
-import 'package:birddie/screens/otp_verification.dart';
-import 'package:birddie/screens/user_info.dart';
+import 'package:birddie/views/dashboard/dashboard.dart';
+import 'package:birddie/views/login/otp_verification.dart';
+import 'package:birddie/views/login/user_info.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 

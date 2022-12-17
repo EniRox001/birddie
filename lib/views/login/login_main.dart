@@ -1,9 +1,9 @@
-import 'package:birddie/controllers/login_main_controllers.dart';
+import 'package:birddie/controllers/login/login_main_controllers.dart';
 import 'package:birddie/providers/user_provider.dart';
-import 'package:birddie/screens/otp_verification.dart';
+import 'package:birddie/views/login/otp_verification.dart';
 
-import 'package:birddie/widgets/w_elevated_button.dart';
-import 'package:birddie/widgets/w_phone_inputfield.dart';
+import 'package:birddie/widgets/common/w_elevated_button.dart';
+import 'package:birddie/widgets/common/w_phone_inputfield.dart';
 import 'package:flutter/material.dart';
 import 'package:birddie/utils/images.dart';
 import 'package:google_fonts/google_fonts.dart';

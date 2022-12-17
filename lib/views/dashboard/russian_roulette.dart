@@ -1,12 +1,12 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:birddie/controllers/russian_roulette_controllers.dart';
+import 'package:birddie/controllers/dashboard/russian_roulette_controllers.dart';
 import 'package:birddie/providers/russian_roulette_provider.dart';
 import 'package:birddie/utils/colors.dart';
 import 'package:birddie/utils/functions.dart';
-import 'package:birddie/widgets/w_appbar.dart';
-import 'package:birddie/widgets/w_elevated_button.dart';
-import 'package:birddie/widgets/w_textfield.dart';
+import 'package:birddie/widgets/common/w_textfield.dart';
+import 'package:birddie/widgets/dashboard/w_appbar.dart';
+import 'package:birddie/widgets/common/w_elevated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
