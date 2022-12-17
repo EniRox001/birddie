@@ -1,10 +1,8 @@
 // ignore_for_file: use_build_context_synchronously
-
 import 'package:birddie/controllers/russianRoulette/russian_roulette_controllers.dart';
 import 'package:birddie/providers/russian_roulette_provider.dart';
 import 'package:birddie/utils/colors.dart';
 import 'package:birddie/utils/functions.dart';
-import 'package:birddie/views/login/profile.dart';
 import 'package:birddie/widgets/common/w_textfield.dart';
 import 'package:birddie/widgets/dashboard/w_appbar.dart';
 import 'package:birddie/widgets/common/w_elevated_button.dart';
@@ -33,14 +31,25 @@ class _RussianRoulleteState extends State<RussianRoullete> {
     super.dispose();
   }
 
-  int selectedMinAge = 18;
-  int selectedMaxAge = 50;
-  String selectedPay = 'Me';
-  List<String> ageList = [for (var i = 18; i <= 50; i += 1) i.toString()];
-  List<String> whoPaysList = ['Me', 'Them', 'Split the bill'];
-
   @override
   Widget build(BuildContext context) {
+    int selectedMinAge = 18;
+    int selectedMaxAge = 50;
+    String selectedState = 'Any';
+    String selectedPay = 'Me';
+    String selectedRegion = 'any';
+
+    List<String> lagosRegion = ['any', 'mainland', 'island'];
+    List<String> mainlandAreas = ['any', 'ikorodu', 'ojota', 'badagry'];
+    List<String> islandAreas = [
+      'any',
+      'banana island',
+      'victoria island',
+      'eko hotels'
+    ];
+    List<String> ageList = [for (var i = 18; i <= 50; i += 1) i.toString()];
+    List<String> whoPaysList = ['Me', 'Them', 'Split the bill'];
+
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
@@ -64,6 +73,10 @@ class _RussianRoulleteState extends State<RussianRoullete> {
                 style: Theme.of(context).textTheme.titleMedium,
                 textAlign: TextAlign.center,
               ),
+              Text(context
+                  .watch<RussianRouletteProvider>()
+                  .regionList
+                  .toString()),
               const SizedBox(
                 height: 20.0,
               ),
@@ -109,12 +122,151 @@ class _RussianRoulleteState extends State<RussianRoullete> {
                         ],
                       ),
                     ),
-                    WLabelTextField(
-                      text: 'Select Location',
-                      widget: WTextField(
-                        controller: locationController,
-                        hintText: 'Select Location',
-                      ),
+                    const SizedBox(
+                      height: 25.0,
+                    ),
+                    Column(
+                      children: [
+                        Text(
+                          'Select Location',
+                          style: Theme.of(context).textTheme.bodyMedium,
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            showDialog(
+                              context: context,
+                              builder: (context) => AlertDialog(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(
+                                    10.0,
+                                  ),
+                                ),
+                                title: Text(
+                                  'Select Location',
+                                  style: Theme.of(context).textTheme.titleLarge,
+                                ),
+                                content: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: <Widget>[
+                                    const SizedBox(
+                                      height: 25.0,
+                                    ),
+                                    WDropDownWidget(
+                                      labelText: 'State',
+                                      selectedValue: context
+                                          .read<RussianRouletteProvider>()
+                                          .stateList[0],
+                                      items: context
+                                          .read<RussianRouletteProvider>()
+                                          .stateList,
+                                      onChanged: (String? value) {
+                                        print(value);
+                                        if (value == 'lagos') {
+                                          context
+                                              .read<RussianRouletteProvider>()
+                                              .setState(value!);
+                                          context
+                                              .read<RussianRouletteProvider>()
+                                              .setRegionList(lagosRegion);
+                                          // print(selectedRegionList);
+                                        } else if (value == 'abuja') {
+                                          context
+                                              .read<RussianRouletteProvider>()
+                                              .setState(value!);
+                                          context
+                                              .read<RussianRouletteProvider>()
+                                              .setRegionList([]);
+                                        }
+                                      },
+                                    ),
+                                    const SizedBox(
+                                      height: 25.0,
+                                    ),
+                                    WDropDownWidget(
+                                      labelText: 'Region',
+                                      selectedValue: context
+                                          .watch<RussianRouletteProvider>()
+                                          .regionList[0],
+                                      items: context
+                                          .watch<RussianRouletteProvider>()
+                                          .regionList,
+                                      onChanged: (String? value) {
+                                        if (value == 'mainland') {
+                                          context
+                                              .read<RussianRouletteProvider>()
+                                              .setRegion(value!);
+                                          context
+                                              .read<RussianRouletteProvider>()
+                                              .setAreaList(mainlandAreas);
+                                        } else if (value == 'island') {
+                                          context
+                                              .read<RussianRouletteProvider>()
+                                              .setRegion(value!);
+                                          context
+                                              .read<RussianRouletteProvider>()
+                                              .setAreaList(islandAreas);
+                                        }
+                                      },
+                                    ),
+                                    const SizedBox(
+                                      height: 25.0,
+                                    ),
+                                    WDropDownWidget(
+                                      labelText: 'Area',
+                                      selectedValue: context
+                                          .watch<RussianRouletteProvider>()
+                                          .areasList[0],
+                                      items: context
+                                          .watch<RussianRouletteProvider>()
+                                          .areasList,
+                                      onChanged: (String? value) {
+                                        context
+                                            .read<RussianRouletteProvider>()
+                                            .setArea(value!);
+                                      },
+                                    ),
+                                    const SizedBox(
+                                      height: 25.0,
+                                    ),
+                                    WElevatedButton(
+                                      onPressed: () {
+                                        context
+                                            .read<RussianRouletteProvider>()
+                                            .setLocation(
+                                                '${context.read<RussianRouletteProvider>().area}, ${context.read<RussianRouletteProvider>().region}, ${context.read<RussianRouletteProvider>().state}');
+                                        navigateBack(context);
+                                      },
+                                      text: 'Save Location',
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.all(12.0),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: AppColors.mainDarkColor,
+                              ),
+                              borderRadius: BorderRadius.circular(6.0),
+                            ),
+                            child: Row(
+                              children: [
+                                Text(
+                                  context
+                                      .read<RussianRouletteProvider>()
+                                      .location,
+                                  style: const TextStyle(
+                                    color: Colors.black54,
+                                    fontSize: 14.0,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                     WLabelTextField(
                       text: 'Select Date Setup',
@@ -203,10 +355,6 @@ class _RussianRoulleteState extends State<RussianRoullete> {
                         context
                             .read<RussianRouletteProvider>()
                             .setMaxAge(int.parse(maxAgeController.text));
-
-                        context
-                            .read<RussianRouletteProvider>()
-                            .setLocation(locationController.text);
 
                         context
                             .read<RussianRouletteProvider>()

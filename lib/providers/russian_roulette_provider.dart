@@ -12,7 +12,7 @@ class RussianRouletteProvider extends ChangeNotifier {
   String _phoneNumber = '';
   int _minAge = 0;
   int _maxAge = 100;
-  String _location = '';
+  String _location = 'Select Location';
   String _dateSetup = '';
   String _date = '';
   String _time = '';
@@ -23,6 +23,12 @@ class RussianRouletteProvider extends ChangeNotifier {
   String _inMatchedTwo = '';
   List<types.Message> _chat = [];
   List _chatList = [];
+  String _state = '';
+  String _region = '';
+  String _area = '';
+  final List<String> _stateList = ['any', 'lagos', 'abuja'];
+  List<String> _regionList = ['any'];
+  List<String> _areaList = ['any'];
 
   ObjectId get id => _id;
   String get phoneNumber => _phoneNumber;
@@ -39,6 +45,12 @@ class RussianRouletteProvider extends ChangeNotifier {
   String get inMatchedTwo => _inMatchedTwo;
   List<types.Message> get chat => _chat;
   List get chatList => _chatList;
+  String get state => _state;
+  String get region => _region;
+  String get area => _area;
+  List<String> get stateList => _stateList;
+  List<String> get regionList => _regionList;
+  List<String> get areasList => _areaList;
 
   void setLoggedRussianRoulette() {
     _id = russianRoulette['id'];
@@ -54,6 +66,7 @@ class RussianRouletteProvider extends ChangeNotifier {
     _matchState = russianRoulette['matchState'];
     _chat = List.from(chatCollection);
     _chatList = List.from(chatCollection);
+
     notifyListeners();
   }
 
@@ -167,6 +180,38 @@ class RussianRouletteProvider extends ChangeNotifier {
   void logOut() {
     setNullRussianRoulette();
     setNullPref();
+    notifyListeners();
+  }
+
+  void setRegionList(List<String> list) {
+    _regionList = list;
+    notifyListeners();
+  }
+
+  void setAreaList(List<String> list) {
+    _areaList = list;
+    notifyListeners();
+  }
+
+  void setState(String state) {
+    _state = state;
+    notifyListeners();
+  }
+
+  void setRegion(String region) {
+    _region = region;
+    notifyListeners();
+  }
+
+  void setArea(String area) {
+    _area = area;
+    notifyListeners();
+  }
+
+  void setDateLocation(String state, String region, String area) {
+    _state = state;
+    _region = region;
+    _area = area;
     notifyListeners();
   }
 }
