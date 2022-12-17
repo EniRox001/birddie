@@ -8,6 +8,7 @@ import 'package:birddie/views/dashboard/dashboard.dart';
 import 'package:birddie/utils/functions.dart';
 import 'package:birddie/widgets/dashboard/w_appbar.dart';
 import 'package:birddie/widgets/common/w_elevated_button.dart';
+import 'package:birddie/widgets/dashboard/w_dropdown.dart';
 import 'package:birddie/widgets/login/w_profile_media_widget.dart';
 import 'package:birddie/widgets/login/w_profile_media_widget_video.dart';
 import 'package:birddie/widgets/common/w_textfield.dart';
@@ -241,47 +242,5 @@ class _ProfileState extends State<Profile> {
         ),
       ),
     );
-  }
-}
-
-class WDropDownWidget extends StatelessWidget {
-  const WDropDownWidget({
-    Key? key,
-    required this.labelText,
-    required this.selectedValue,
-    required this.items,
-    required this.onChanged,
-  }) : super(key: key);
-
-  final String labelText;
-  final String selectedValue;
-  final List<String> items;
-  final Function(String?)? onChanged;
-
-  @override
-  Widget build(BuildContext context) {
-    return DropdownButtonFormField(
-        decoration: InputDecoration(
-          isDense: true,
-          contentPadding: const EdgeInsets.all(10),
-
-          // labelStyle: const TextStyle(color: Colors.black),
-          focusedBorder: const OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.red, width: 1.0),
-          ),
-          enabledBorder: const OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.black, width: 1.0),
-          ),
-          labelText: labelText,
-        ),
-        value: selectedValue,
-        isExpanded: true,
-        items: items.map((String items) {
-          return DropdownMenuItem(
-            value: items,
-            child: Text(items),
-          );
-        }).toList(),
-        onChanged: onChanged);
   }
 }

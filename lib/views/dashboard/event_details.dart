@@ -41,7 +41,7 @@ class EventDetails extends StatelessWidget {
                 decoration: BoxDecoration(
                   border: Border.all(
                     width: 2.0,
-                    color: CustomColors.mainRedColor,
+                    color: AppColors.mainRedColor,
                   ),
                   borderRadius: BorderRadius.circular(20.0),
                 ),
@@ -90,7 +90,7 @@ class EventDetails extends StatelessWidget {
                       children: <Widget>[
                         const Icon(
                           Icons.location_on,
-                          color: CustomColors.mainRedColor,
+                          color: AppColors.mainRedColor,
                         ),
                         Text(
                           context.watch<EventProviders>().location,
@@ -145,7 +145,7 @@ class EventDetails extends StatelessWidget {
                       style: Theme.of(context)
                           .textTheme
                           .titleLarge!
-                          .copyWith(color: CustomColors.mainRedColor),
+                          .copyWith(color: AppColors.mainRedColor),
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 20.0),
@@ -185,9 +185,9 @@ class EventDetails extends StatelessWidget {
                       .contains(context.read<UserProvider>().phoneNumber)
                   ? Container(
                       decoration: BoxDecoration(
-                          color: CustomColors.fadedRedColor,
+                          color: AppColors.fadedRedColor,
                           borderRadius: BorderRadius.circular(20.0),
-                          border: Border.all(color: CustomColors.mainRedColor)),
+                          border: Border.all(color: AppColors.mainRedColor)),
                       child: Padding(
                         padding: const EdgeInsets.all(20.0),
                         child: Text(
@@ -195,7 +195,7 @@ class EventDetails extends StatelessWidget {
                           style: Theme.of(context)
                               .textTheme
                               .bodyLarge!
-                              .copyWith(color: CustomColors.mainWhiteColor),
+                              .copyWith(color: AppColors.mainWhiteColor),
                           textAlign: TextAlign.center,
                         ),
                       ),

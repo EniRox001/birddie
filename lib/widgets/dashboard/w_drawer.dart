@@ -13,7 +13,7 @@ class WDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: CustomColors.mainWhiteColor,
+      backgroundColor: AppColors.mainWhiteColor,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
           topRight: Radius.circular(20),
@@ -25,13 +25,13 @@ class WDrawer extends StatelessWidget {
         children: [
           DrawerHeader(
             decoration: const BoxDecoration(
-              color: CustomColors.mainRedColor,
+              color: AppColors.mainRedColor,
             ),
             child: Center(
               child: Text(
                 '${context.read<UserProvider>().firstName.toTitleCase()} ${context.read<UserProvider>().lastName.toTitleCase()}',
                 style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                      color: CustomColors.mainWhiteColor,
+                      color: AppColors.mainWhiteColor,
                     ),
               ),
             ),

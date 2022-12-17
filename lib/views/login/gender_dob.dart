@@ -1,6 +1,6 @@
 import 'package:birddie/controllers/login/gender_dob_controllers.dart';
 import 'package:birddie/providers/user_provider.dart';
-import 'package:birddie/views/profile.dart';
+import 'package:birddie/views/login/profile.dart';
 import 'package:birddie/utils/colors.dart';
 import 'package:birddie/utils/functions.dart';
 import 'package:birddie/utils/images.dart';
@@ -166,7 +166,7 @@ class _GenderDOBState extends State<GenderDOB> {
                   },
                   child: Container(
                     decoration: BoxDecoration(
-                      color: CustomColors.mainWhiteColor,
+                      color: AppColors.mainWhiteColor,
                       borderRadius: BorderRadius.circular(30.0),
                     ),
                     child: Padding(

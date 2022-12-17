@@ -6,7 +6,7 @@ class WMiniButton extends StatelessWidget {
       {super.key,
       required this.onPressed,
       required this.text,
-      this.color = CustomColors.mainRedColor});
+      this.color = AppColors.mainRedColor});
 
   final VoidCallback onPressed;
   final String text;

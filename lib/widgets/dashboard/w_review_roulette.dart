@@ -37,7 +37,7 @@ class ReviewRoulette extends StatelessWidget {
                     height: MediaQuery.of(context).size.height / 10,
                     width: MediaQuery.of(context).size.width / 1.3,
                     decoration: BoxDecoration(
-                      color: CustomColors.mainRedColor,
+                      color: AppColors.mainRedColor,
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     child: Padding(
@@ -51,7 +51,7 @@ class ReviewRoulette extends StatelessWidget {
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyLarge!
-                                .copyWith(color: CustomColors.mainWhiteColor),
+                                .copyWith(color: AppColors.mainWhiteColor),
                           ),
                           Text('--/--/----',
                               style: Theme.of(context).textTheme.bodyLarge!),
@@ -127,7 +127,7 @@ class ReviewRoulette extends StatelessWidget {
                         Container(
                           padding: const EdgeInsets.all(10.0),
                           decoration: BoxDecoration(
-                            color: CustomColors.mainRedColor,
+                            color: AppColors.mainRedColor,
                             borderRadius: BorderRadius.circular(
                               10.0,
                             ),
@@ -141,8 +141,7 @@ class ReviewRoulette extends StatelessWidget {
                                 style: Theme.of(context)
                                     .textTheme
                                     .headline3!
-                                    .copyWith(
-                                        color: CustomColors.mainWhiteColor),
+                                    .copyWith(color: AppColors.mainWhiteColor),
                               ),
                               Text(
                                 'Hours left',
@@ -150,7 +149,7 @@ class ReviewRoulette extends StatelessWidget {
                                     .textTheme
                                     .subtitle1!
                                     .copyWith(
-                                      color: CustomColors.mainWhiteColor,
+                                      color: AppColors.mainWhiteColor,
                                     ),
                               ),
                             ],

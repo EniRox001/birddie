@@ -65,10 +65,10 @@ class _MyAppState extends State<MyApp> {
           style: TextStyle(
             fontSize: 18.0,
             fontWeight: FontWeight.bold,
-            color: CustomColors.mainWhiteColor,
+            color: AppColors.mainWhiteColor,
           ),
         ),
-        backgroundColor: CustomColors.mainRedColor,
+        backgroundColor: AppColors.mainRedColor,
         futureNavigator: checkPrefs(),
         durationInSeconds: 5,
       ),

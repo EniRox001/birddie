@@ -11,7 +11,7 @@ class WDivider extends StatelessWidget {
     return const Padding(
       padding: EdgeInsets.symmetric(horizontal: 10.0),
       child: Divider(
-        color: CustomColors.fadedRedColor,
+        color: AppColors.fadedRedColor,
         thickness: 2.0,
       ),
     );

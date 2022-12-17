@@ -1,12 +1,14 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:birddie/controllers/dashboard/russian_roulette_controllers.dart';
+import 'package:birddie/controllers/russianRoulette/russian_roulette_controllers.dart';
 import 'package:birddie/providers/russian_roulette_provider.dart';
 import 'package:birddie/utils/colors.dart';
 import 'package:birddie/utils/functions.dart';
+import 'package:birddie/views/login/profile.dart';
 import 'package:birddie/widgets/common/w_textfield.dart';
 import 'package:birddie/widgets/dashboard/w_appbar.dart';
 import 'package:birddie/widgets/common/w_elevated_button.dart';
+import 'package:birddie/widgets/dashboard/w_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -31,6 +33,12 @@ class _RussianRoulleteState extends State<RussianRoullete> {
     super.dispose();
   }
 
+  int selectedMinAge = 18;
+  int selectedMaxAge = 50;
+  String selectedPay = 'Me';
+  List<String> ageList = [for (var i = 18; i <= 50; i += 1) i.toString()];
+  List<String> whoPaysList = ['Me', 'Them', 'Split the bill'];
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -46,20 +54,24 @@ class _RussianRoulleteState extends State<RussianRoullete> {
         ),
         body: Padding(
           padding: const EdgeInsets.all(10.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.center,
+          child: ListView(
             children: <Widget>[
+              const SizedBox(
+                height: 20.0,
+              ),
               Text(
                 'Please, complete all fields for a more acurate matching',
                 style: Theme.of(context).textTheme.titleMedium,
                 textAlign: TextAlign.center,
               ),
+              const SizedBox(
+                height: 20.0,
+              ),
               Container(
                 padding: const EdgeInsets.all(20.0),
                 decoration: BoxDecoration(
                   border: Border.all(
-                    color: CustomColors.mainRedColor,
+                    color: AppColors.mainRedColor,
                     width: 2.0,
                   ),
                   borderRadius: BorderRadius.circular(20.0),
@@ -71,23 +83,27 @@ class _RussianRoulleteState extends State<RussianRoullete> {
                       widget: Row(
                         children: [
                           Flexible(
-                            child: WTextField(
-                              controller: minAgeController,
-                              hintText: 'Min',
-                              inputType: TextInputType.number,
-                              inputFormatters: <TextInputFormatter>[
-                                FilteringTextInputFormatter.digitsOnly
-                              ],
+                            child: WDropDownWidget(
+                              labelText: 'Min',
+                              selectedValue: selectedMinAge.toString(),
+                              items: ageList,
+                              onChanged: (String? value) {
+                                setState(() {
+                                  selectedMinAge = int.parse(value!);
+                                });
+                              },
                             ),
                           ),
                           Flexible(
-                            child: WTextField(
-                              controller: maxAgeController,
-                              hintText: 'Max',
-                              inputType: TextInputType.number,
-                              inputFormatters: <TextInputFormatter>[
-                                FilteringTextInputFormatter.digitsOnly
-                              ],
+                            child: WDropDownWidget(
+                              labelText: 'Min',
+                              selectedValue: selectedMaxAge.toString(),
+                              items: ageList,
+                              onChanged: (String? value) {
+                                setState(() {
+                                  selectedMaxAge = int.parse(value!);
+                                });
+                              },
                             ),
                           ),
                         ],
@@ -166,9 +182,13 @@ class _RussianRoulleteState extends State<RussianRoullete> {
                     ),
                     WLabelTextField(
                       text: 'Who Pays The Bill?',
-                      widget: WTextField(
-                        controller: payBillController,
-                        hintText: 'Who pays the bill?',
+                      widget: WDropDownWidget(
+                        labelText: 'Who pays the bill?',
+                        selectedValue: selectedPay,
+                        items: whoPaysList,
+                        onChanged: (String? value) {
+                          selectedPay = value!;
+                        },
                       ),
                     ),
                     const SizedBox(

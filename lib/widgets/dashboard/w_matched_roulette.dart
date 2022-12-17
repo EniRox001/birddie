@@ -39,7 +39,7 @@ class MatchedRoulette extends StatelessWidget {
                     height: MediaQuery.of(context).size.height / 10,
                     width: MediaQuery.of(context).size.width / 1.3,
                     decoration: BoxDecoration(
-                      color: CustomColors.mainRedColor,
+                      color: AppColors.mainRedColor,
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     child: Padding(
@@ -53,7 +53,7 @@ class MatchedRoulette extends StatelessWidget {
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyLarge!
-                                .copyWith(color: CustomColors.mainWhiteColor),
+                                .copyWith(color: AppColors.mainWhiteColor),
                           ),
                           Text('17/08/2022',
                               style: Theme.of(context).textTheme.bodyLarge!),
@@ -132,7 +132,7 @@ class MatchedRoulette extends StatelessWidget {
                             Container(
                               padding: const EdgeInsets.all(10.0),
                               decoration: BoxDecoration(
-                                color: CustomColors.mainRedColor,
+                                color: AppColors.mainRedColor,
                                 borderRadius: BorderRadius.circular(
                                   10.0,
                                 ),
@@ -146,7 +146,7 @@ class MatchedRoulette extends StatelessWidget {
                                         .textTheme
                                         .headline3!
                                         .copyWith(
-                                            color: CustomColors.mainWhiteColor),
+                                            color: AppColors.mainWhiteColor),
                                   ),
                                   Text(
                                     'Hours left',
@@ -154,7 +154,7 @@ class MatchedRoulette extends StatelessWidget {
                                         .textTheme
                                         .subtitle1!
                                         .copyWith(
-                                          color: CustomColors.mainWhiteColor,
+                                          color: AppColors.mainWhiteColor,
                                         ),
                                   ),
                                 ],
@@ -176,7 +176,7 @@ class MatchedRoulette extends StatelessWidget {
             ),
             child: Container(
               decoration: BoxDecoration(
-                color: CustomColors.fadedRedColor,
+                color: AppColors.fadedRedColor,
                 borderRadius: BorderRadius.circular(10.0),
               ),
               child: Row(

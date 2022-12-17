@@ -1,5 +1,5 @@
-import 'package:birddie/controllers/dashboard/russian_roulette_controllers.dart';
-import 'package:birddie/views/gender_dob.dart';
+import 'package:birddie/controllers/russianRoulette/russian_roulette_controllers.dart';
+import 'package:birddie/views/login/gender_dob.dart';
 import 'package:flutter/material.dart';
 
 navigate(BuildContext context, Widget page) {
