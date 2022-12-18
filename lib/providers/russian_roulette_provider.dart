@@ -23,9 +23,14 @@ class RussianRouletteProvider extends ChangeNotifier {
   String _inMatchedTwo = '';
   List<types.Message> _chat = [];
   List _chatList = [];
+
+  bool _stateEnabled = false;
+  bool _regionEnabled = false;
+
   String _state = '';
   String _region = '';
   String _area = '';
+
   final List<String> _stateList = ['any', 'lagos', 'abuja'];
   List<String> _regionList = ['any'];
   List<String> _areaList = ['any'];
@@ -51,6 +56,8 @@ class RussianRouletteProvider extends ChangeNotifier {
   List<String> get stateList => _stateList;
   List<String> get regionList => _regionList;
   List<String> get areasList => _areaList;
+  bool get stateEnabled => _stateEnabled;
+  bool get regionEnabled => _regionEnabled;
 
   void setLoggedRussianRoulette() {
     _id = russianRoulette['id'];
@@ -183,6 +190,13 @@ class RussianRouletteProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void setNullLocation() {
+    _regionList = ['any'];
+    _areaList = ['any'];
+
+    notifyListeners();
+  }
+
   void setRegionList(List<String> list) {
     _regionList = list;
     notifyListeners();
@@ -205,6 +219,16 @@ class RussianRouletteProvider extends ChangeNotifier {
 
   void setArea(String area) {
     _area = area;
+    notifyListeners();
+  }
+
+  void toggleStateDropDown(bool bool) {
+    _stateEnabled = bool;
+    notifyListeners();
+  }
+
+  void toggleRegionDropdown(bool bool) {
+    _regionEnabled = bool;
     notifyListeners();
   }
 

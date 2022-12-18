@@ -35,11 +35,10 @@ class _RussianRoulleteState extends State<RussianRoullete> {
   Widget build(BuildContext context) {
     int selectedMinAge = 18;
     int selectedMaxAge = 50;
-    String selectedState = 'Any';
     String selectedPay = 'Me';
-    String selectedRegion = 'any';
 
     List<String> lagosRegion = ['any', 'mainland', 'island'];
+    List<String> abujaRegion = ['any', 'one', 'two'];
     List<String> mainlandAreas = ['any', 'ikorodu', 'ojota', 'badagry'];
     List<String> islandAreas = [
       'any',
@@ -129,6 +128,16 @@ class _RussianRoulleteState extends State<RussianRoullete> {
                         ),
                         GestureDetector(
                           onTap: () {
+                            context
+                                .read<RussianRouletteProvider>()
+                                .setNullLocation();
+                            context
+                                .read<RussianRouletteProvider>()
+                                .toggleStateDropDown(false);
+                            context
+                                .read<RussianRouletteProvider>()
+                                .toggleRegionDropdown(false);
+
                             showDialog(
                               context: context,
                               builder: (context) => AlertDialog(
@@ -137,9 +146,24 @@ class _RussianRoulleteState extends State<RussianRoullete> {
                                     10.0,
                                   ),
                                 ),
-                                title: Text(
-                                  'Select Location',
-                                  style: Theme.of(context).textTheme.titleLarge,
+                                title: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    const SizedBox(),
+                                    Text(
+                                      'Select Location',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleLarge,
+                                    ),
+                                    IconButton(
+                                      onPressed: () {
+                                        navigateBack(context);
+                                      },
+                                      icon: const Icon(Icons.close),
+                                    ),
+                                  ],
                                 ),
                                 content: Column(
                                   mainAxisSize: MainAxisSize.min,
@@ -148,6 +172,9 @@ class _RussianRoulleteState extends State<RussianRoullete> {
                                       height: 25.0,
                                     ),
                                     WDropDownWidget(
+                                      ignore: context
+                                          .watch<RussianRouletteProvider>()
+                                          .stateEnabled,
                                       labelText: 'State',
                                       selectedValue: context
                                           .read<RussianRouletteProvider>()
@@ -156,7 +183,6 @@ class _RussianRoulleteState extends State<RussianRoullete> {
                                           .read<RussianRouletteProvider>()
                                           .stateList,
                                       onChanged: (String? value) {
-                                        print(value);
                                         if (value == 'lagos') {
                                           context
                                               .read<RussianRouletteProvider>()
@@ -171,14 +197,20 @@ class _RussianRoulleteState extends State<RussianRoullete> {
                                               .setState(value!);
                                           context
                                               .read<RussianRouletteProvider>()
-                                              .setRegionList([]);
+                                              .setRegionList(abujaRegion);
                                         }
+                                        context
+                                            .read<RussianRouletteProvider>()
+                                            .toggleStateDropDown(true);
                                       },
                                     ),
                                     const SizedBox(
                                       height: 25.0,
                                     ),
                                     WDropDownWidget(
+                                      ignore: context
+                                          .watch<RussianRouletteProvider>()
+                                          .regionEnabled,
                                       labelText: 'Region',
                                       selectedValue: context
                                           .watch<RussianRouletteProvider>()
@@ -202,6 +234,9 @@ class _RussianRoulleteState extends State<RussianRoullete> {
                                               .read<RussianRouletteProvider>()
                                               .setAreaList(islandAreas);
                                         }
+                                        context
+                                            .read<RussianRouletteProvider>()
+                                            .toggleRegionDropdown(true);
                                       },
                                     ),
                                     const SizedBox(
