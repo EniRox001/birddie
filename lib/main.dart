@@ -17,9 +17,12 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
   await initSharedPref();
   await connectDB();
   await getEvents();
+  await setStateList();
+
   runApp(
     MultiProvider(
       providers: [

@@ -31,7 +31,7 @@ class RussianRouletteProvider extends ChangeNotifier {
   String _region = '';
   String _area = '';
 
-  final List<String> _stateList = ['any', 'lagos', 'abuja'];
+  List<String> _stateList = [];
   List<String> _regionList = ['any'];
   List<String> _areaList = ['any'];
 
@@ -197,16 +197,6 @@ class RussianRouletteProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setRegionList(List<String> list) {
-    _regionList = list;
-    notifyListeners();
-  }
-
-  void setAreaList(List<String> list) {
-    _areaList = list;
-    notifyListeners();
-  }
-
   void setState(String state) {
     _state = state;
     notifyListeners();
@@ -236,6 +226,23 @@ class RussianRouletteProvider extends ChangeNotifier {
     _state = state;
     _region = region;
     _area = area;
+    notifyListeners();
+  }
+
+  void setStateLists(BuildContext context) {
+    _stateList = List.from(stateLists);
+    notifyListeners();
+  }
+
+  void setRegionLists(BuildContext context) async {
+    await setRegionList(context);
+    _regionList = List.from(regionLists);
+    notifyListeners();
+  }
+
+  void setAreaLists(BuildContext context) async {
+    await setAreaList(context);
+    _areaList = List.from(areaLists);
     notifyListeners();
   }
 }

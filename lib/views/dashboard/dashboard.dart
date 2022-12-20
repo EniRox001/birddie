@@ -36,7 +36,6 @@ class _DashboardState extends State<Dashboard> {
   final GlobalKey<ScaffoldState> _key = GlobalKey();
   @override
   Widget build(BuildContext context) {
-    print(context.read<RussianRouletteProvider>().phoneNumber);
     return SafeArea(
       child: Scaffold(
         key: _key,

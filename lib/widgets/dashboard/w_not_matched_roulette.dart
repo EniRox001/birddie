@@ -1,7 +1,9 @@
+import 'package:birddie/providers/russian_roulette_provider.dart';
 import 'package:flutter/material.dart';
 import '../common/w_elevated_button.dart';
 import 'package:birddie/views/dashboard/russian_roulette.dart';
 import 'package:birddie/utils/functions.dart';
+import 'package:provider/provider.dart';
 
 const upcomingFeatureSnackBar = SnackBar(
   content: Text('This feature is coming soon... Stay Tuned!'),
@@ -21,6 +23,7 @@ class NotMatchedRoulette extends StatelessWidget {
           ),
           WElevatedButton(
             onPressed: () {
+              context.read<RussianRouletteProvider>().setStateLists(context);
               navigate(
                 context,
                 const RussianRoullete(),

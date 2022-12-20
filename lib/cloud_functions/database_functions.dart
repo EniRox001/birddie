@@ -19,6 +19,7 @@ late DbCollection userCollection;
 late DbCollection eventsCollection;
 late DbCollection russianRouletteCollection;
 late DbCollection matchedCollection;
+late DbCollection locationCollection;
 
 late dynamic event;
 var russianRoulette = {};
@@ -29,6 +30,10 @@ late dynamic chatMessage;
 List chatCollection = [];
 late dynamic selectedMatchedCollection;
 
+List stateLists = [];
+List regionLists = [];
+List areaLists = [];
+
 connectDB() async {
   var db = await Db.create(
       "mongodb+srv://enirox:Pwafukadi@cluster0.4iczrsa.mongodb.net/?retryWrites=true&w=m.0 k20   ajority");
@@ -38,12 +43,14 @@ connectDB() async {
   DbCollection eventDatabase = db.collection('events');
   DbCollection russianRouletteDatabase = db.collection('russianRoulette');
   DbCollection matchedDatabase = db.collection('matched');
+  DbCollection locationDatabase = db.collection('location');
 
   //Add reference to the intialized database collections
   userCollection = userDatabase;
   eventsCollection = eventDatabase;
   russianRouletteCollection = russianRouletteDatabase;
   matchedCollection = matchedDatabase;
+  locationCollection = locationDatabase;
 }
 
 Future createUser(BuildContext context) async {
@@ -73,7 +80,6 @@ Future<Widget> autoLogin(BuildContext context, String? phoneNumber) async {
       )
       .toList()
       .then((value) {
-    print(value);
     loggedInUser = value;
 
     context.read<UserProvider>().setUser();
@@ -337,4 +343,55 @@ Future getRussianRoulette(BuildContext context) async {
     context.read<RussianRouletteProvider>().setNullRussianRoulette();
     navigate(context, const Dashboard());
   }
+}
+
+Future setStateList() async {
+  await locationCollection
+      .find(
+        where.eq(
+          'name',
+          'state',
+        ),
+      )
+      .toList()
+      .then(
+    (value) {
+      if (value.isNotEmpty) {
+        stateLists = value[0]['states'];
+      } else {}
+    },
+  );
+}
+
+Future setRegionList(BuildContext context) async {
+  await locationCollection
+      .find(
+        where.eq(
+          'name',
+          context.read<RussianRouletteProvider>().state,
+        ),
+      )
+      .toList()
+      .then((value) {
+    if (value.isNotEmpty) {
+      regionLists = value[0]['region'];
+    } else {}
+  });
+}
+
+Future setAreaList(BuildContext context) async {
+  await locationCollection
+      .find(
+        where.eq(
+          'name',
+          context.read<RussianRouletteProvider>().region,
+        ),
+      )
+      .toList()
+      .then((value) {
+    if (value.isNotEmpty) {
+      areaLists = value[0]['areas'];
+      print(areaLists);
+    } else {}
+  });
 }

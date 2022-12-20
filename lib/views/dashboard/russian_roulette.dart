@@ -177,31 +177,22 @@ class _RussianRoulleteState extends State<RussianRoullete> {
                                           .stateEnabled,
                                       labelText: 'State',
                                       selectedValue: context
-                                          .read<RussianRouletteProvider>()
+                                          .watch<RussianRouletteProvider>()
                                           .stateList[0],
                                       items: context
-                                          .read<RussianRouletteProvider>()
+                                          .watch<RussianRouletteProvider>()
                                           .stateList,
                                       onChanged: (String? value) {
-                                        if (value == 'lagos') {
-                                          context
-                                              .read<RussianRouletteProvider>()
-                                              .setState(value!);
-                                          context
-                                              .read<RussianRouletteProvider>()
-                                              .setRegionList(lagosRegion);
-                                          // print(selectedRegionList);
-                                        } else if (value == 'abuja') {
-                                          context
-                                              .read<RussianRouletteProvider>()
-                                              .setState(value!);
-                                          context
-                                              .read<RussianRouletteProvider>()
-                                              .setRegionList(abujaRegion);
-                                        }
+                                        context
+                                            .read<RussianRouletteProvider>()
+                                            .setState(value!);
+
                                         context
                                             .read<RussianRouletteProvider>()
                                             .toggleStateDropDown(true);
+                                        context
+                                            .read<RussianRouletteProvider>()
+                                            .setRegionLists(context);
                                       },
                                     ),
                                     const SizedBox(
@@ -213,30 +204,21 @@ class _RussianRoulleteState extends State<RussianRoullete> {
                                           .regionEnabled,
                                       labelText: 'Region',
                                       selectedValue: context
-                                          .watch<RussianRouletteProvider>()
+                                          .read<RussianRouletteProvider>()
                                           .regionList[0],
                                       items: context
                                           .watch<RussianRouletteProvider>()
                                           .regionList,
                                       onChanged: (String? value) {
-                                        if (value == 'mainland') {
-                                          context
-                                              .read<RussianRouletteProvider>()
-                                              .setRegion(value!);
-                                          context
-                                              .read<RussianRouletteProvider>()
-                                              .setAreaList(mainlandAreas);
-                                        } else if (value == 'island') {
-                                          context
-                                              .read<RussianRouletteProvider>()
-                                              .setRegion(value!);
-                                          context
-                                              .read<RussianRouletteProvider>()
-                                              .setAreaList(islandAreas);
-                                        }
+                                        context
+                                            .read<RussianRouletteProvider>()
+                                            .setRegion(value!);
                                         context
                                             .read<RussianRouletteProvider>()
                                             .toggleRegionDropdown(true);
+                                        context
+                                            .read<RussianRouletteProvider>()
+                                            .setAreaLists(context);
                                       },
                                     ),
                                     const SizedBox(
