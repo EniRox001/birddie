@@ -24,16 +24,19 @@ class RussianRouletteProvider extends ChangeNotifier {
   List<types.Message> _chat = [];
   List _chatList = [];
 
+  //Associated properties for location
   bool _stateEnabled = false;
   bool _regionEnabled = false;
-
   String _state = '';
   String _region = '';
   String _area = '';
-
   List<String> _stateList = [];
   List<String> _regionList = ['any'];
   List<String> _areaList = ['any'];
+
+  //Associated properties for dateTime
+  List<String> _dateList = ['any'];
+  List<String> _timeList = ['any'];
 
   ObjectId get id => _id;
   String get phoneNumber => _phoneNumber;
@@ -58,6 +61,8 @@ class RussianRouletteProvider extends ChangeNotifier {
   List<String> get areasList => _areaList;
   bool get stateEnabled => _stateEnabled;
   bool get regionEnabled => _regionEnabled;
+  List<String> get dateList => _dateList;
+  List<String> get timeList => _timeList;
 
   void setLoggedRussianRoulette() {
     _id = russianRoulette['id'];
@@ -243,6 +248,18 @@ class RussianRouletteProvider extends ChangeNotifier {
   void setAreaLists(BuildContext context) async {
     await setAreaList(context);
     _areaList = List.from(areaLists);
+    notifyListeners();
+  }
+
+  void setDateLists(BuildContext context) async {
+    await setDateList();
+    _dateList = List.from(dates);
+    notifyListeners();
+  }
+
+  void setTimeLists(BuildContext context) async {
+    await setTimeList();
+    _timeList = List.from(times);
     notifyListeners();
   }
 }

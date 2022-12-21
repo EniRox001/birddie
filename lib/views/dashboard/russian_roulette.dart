@@ -37,17 +37,10 @@ class _RussianRoulleteState extends State<RussianRoullete> {
     int selectedMaxAge = 50;
     String selectedPay = 'Me';
 
-    List<String> lagosRegion = ['any', 'mainland', 'island'];
-    List<String> abujaRegion = ['any', 'one', 'two'];
-    List<String> mainlandAreas = ['any', 'ikorodu', 'ojota', 'badagry'];
-    List<String> islandAreas = [
-      'any',
-      'banana island',
-      'victoria island',
-      'eko hotels'
-    ];
     List<String> ageList = [for (var i = 18; i <= 50; i += 1) i.toString()];
     List<String> whoPaysList = ['Me', 'Them', 'Split the bill'];
+    List<String> dateList = ['FRI, 15th, APR', 'SAT, 16th APR', 'SUN, 17 APR'];
+    List<String> timeList = ['00:00', '01:00', '02:00', '03:00'];
 
     return SafeArea(
       child: Scaffold(
@@ -293,42 +286,35 @@ class _RussianRoulleteState extends State<RussianRoullete> {
                       widget: Row(
                         children: [
                           Expanded(
-                            child: GestureDetector(
-                              onTap: () async {
-                                await selectRussianRoulleteDate(context);
+                            child: WDropDownWidget(
+                              labelText: 'Date',
+                              selectedValue: context
+                                  .watch<RussianRouletteProvider>()
+                                  .dateList[0],
+                              items: context
+                                  .watch<RussianRouletteProvider>()
+                                  .dateList,
+                              onChanged: (String? value) {
                                 context
                                     .read<RussianRouletteProvider>()
-                                    .setDate(russianRouletteDate);
+                                    .setDate(value!);
                               },
-                              child: Container(
-                                height: 40.0,
-                                decoration: BoxDecoration(
-                                    color: Colors.transparent,
-                                    border: Border.all(
-                                        color: Colors.black, width: 1.0),
-                                    borderRadius: BorderRadius.circular(5.0)),
-                                child: Center(
-                                  child: context
-                                              .watch<RussianRouletteProvider>()
-                                              .date ==
-                                          ""
-                                      ? const Text(
-                                          "Date",
-                                        )
-                                      : Text(
-                                          context
-                                              .watch<RussianRouletteProvider>()
-                                              .date,
-                                        ),
-                                ),
-                              ),
                             ),
                           ),
-                          Flexible(
-                            child: WTextField(
-                              controller: timeController,
-                              hintText: 'Time',
-                              inputType: TextInputType.datetime,
+                          Expanded(
+                            child: WDropDownWidget(
+                              labelText: 'Time',
+                              selectedValue: context
+                                  .watch<RussianRouletteProvider>()
+                                  .timeList[0],
+                              items: context
+                                  .watch<RussianRouletteProvider>()
+                                  .timeList,
+                              onChanged: (String? value) {
+                                context
+                                    .read<RussianRouletteProvider>()
+                                    .setTime(value!);
+                              },
                             ),
                           ),
                         ],
@@ -363,22 +349,11 @@ class _RussianRoulleteState extends State<RussianRoullete> {
                       onPressed: () {
                         context
                             .read<RussianRouletteProvider>()
-                            .setMinAge(int.parse(minAgeController.text));
+                            .setMinAge(selectedMinAge);
 
                         context
                             .read<RussianRouletteProvider>()
-                            .setMaxAge(int.parse(maxAgeController.text));
-
-                        context
-                            .read<RussianRouletteProvider>()
-                            .setDateSetup(dateSetupController.text);
-
-                        context.read<RussianRouletteProvider>().setDate(
-                            context.read<RussianRouletteProvider>().date);
-
-                        context
-                            .read<RussianRouletteProvider>()
-                            .setTime(timeController.text);
+                            .setMaxAge(selectedMaxAge);
 
                         context
                             .read<RussianRouletteProvider>()
@@ -387,7 +362,7 @@ class _RussianRoulleteState extends State<RussianRoullete> {
 
                         context
                             .read<RussianRouletteProvider>()
-                            .setWhoPays(payBillController.text);
+                            .setWhoPays(selectedPay);
 
                         context
                             .read<RussianRouletteProvider>()
@@ -405,6 +380,9 @@ class _RussianRoulleteState extends State<RussianRoullete> {
                     ),
                   ],
                 ),
+              ),
+              const SizedBox(
+                height: 100.0,
               ),
             ],
           ),

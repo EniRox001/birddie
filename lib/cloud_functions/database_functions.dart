@@ -20,6 +20,7 @@ late DbCollection eventsCollection;
 late DbCollection russianRouletteCollection;
 late DbCollection matchedCollection;
 late DbCollection locationCollection;
+late DbCollection dateTimeCOllection;
 
 late dynamic event;
 var russianRoulette = {};
@@ -30,9 +31,14 @@ late dynamic chatMessage;
 List chatCollection = [];
 late dynamic selectedMatchedCollection;
 
+//Lists for location dropdowns
 List stateLists = [];
 List regionLists = [];
 List areaLists = [];
+
+//Lists for dateTime dropdowns
+List dates = [];
+List times = [];
 
 connectDB() async {
   var db = await Db.create(
@@ -44,6 +50,7 @@ connectDB() async {
   DbCollection russianRouletteDatabase = db.collection('russianRoulette');
   DbCollection matchedDatabase = db.collection('matched');
   DbCollection locationDatabase = db.collection('location');
+  DbCollection dateTimeDatabase = db.collection('dateTime');
 
   //Add reference to the intialized database collections
   userCollection = userDatabase;
@@ -51,6 +58,7 @@ connectDB() async {
   russianRouletteCollection = russianRouletteDatabase;
   matchedCollection = matchedDatabase;
   locationCollection = locationDatabase;
+  dateTimeCOllection = dateTimeDatabase;
 }
 
 Future createUser(BuildContext context) async {
@@ -211,6 +219,8 @@ russianRoulleteAutoMatch(BuildContext context) async {
               setRussianRouletteMatchState(context, true);
             }
           }
+        } else {
+          print('no body in the db wants to date you');
         }
       });
 }
@@ -394,4 +404,41 @@ Future setAreaList(BuildContext context) async {
       print(areaLists);
     } else {}
   });
+}
+
+Future setDateList() async {
+  await dateTimeCOllection
+      .find(
+        where.eq(
+          'name',
+          'date',
+        ),
+      )
+      .toList()
+      .then(
+    (value) {
+      if (value.isNotEmpty) {
+        dates = value[0]['dates'];
+        // stateLists = value[0]['states'];
+      } else {}
+    },
+  );
+}
+
+Future setTimeList() async {
+  await dateTimeCOllection
+      .find(
+        where.eq(
+          'name',
+          'time',
+        ),
+      )
+      .toList()
+      .then(
+    (value) {
+      if (value.isNotEmpty) {
+        times = value[0]['times'];
+      } else {}
+    },
+  );
 }

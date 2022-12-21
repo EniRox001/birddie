@@ -24,6 +24,8 @@ class NotMatchedRoulette extends StatelessWidget {
           WElevatedButton(
             onPressed: () {
               context.read<RussianRouletteProvider>().setStateLists(context);
+              context.read<RussianRouletteProvider>().setDateLists(context);
+              context.read<RussianRouletteProvider>().setTimeLists(context);
               navigate(
                 context,
                 const RussianRoullete(),
@@ -34,8 +36,9 @@ class NotMatchedRoulette extends StatelessWidget {
           ),
           WElevatedButton(
             onPressed: () {
-              ScaffoldMessenger.of(context)
-                  .showSnackBar(upcomingFeatureSnackBar);
+              // ScaffoldMessenger.of(context)
+              //     .showSnackBar(upcomingFeatureSnackBar);
+              context.read<RussianRouletteProvider>().setDateLists(context);
             },
             text: 'Sponsored Roulette',
             outlined: true,
