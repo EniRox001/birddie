@@ -1,16 +1,34 @@
 # birddie
 
-A new Flutter project.
+Dating Social Media App
 
-## Getting Started
+## About
 
-This project is a starting point for a Flutter application.
+This is a dating social media application made with:
 
-A few resources to get you started if this is your first Flutter project:
+* Flutter
+* Provider State Management
+* Mongo DB
+* Firebase
+* Figma
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Users have the ability to sign in/login with their phone numbers, create an account with the information required and then proceed to the dashboard where they will be able to upload other needed information and proceed to the dashboard, where they will be able to create a "RUSSIAN ROULETTE". This will enable them to be matched with other users whose roulette matches theirs. A lit of the features are:
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+* User Login/Signup
+* Dashboard Navigation
+* Create Russian Roulette
+* View and reserve slots for events in the application
+* Chat with the matched user
+* View matched user location on date day
+
+## App Pictures
+
+These are some screenshots from the mobile application:
+
+Onboarding Screen          |  Login Screen
+:-------------------------:|:-------------------------:
+![Screenshot](./assets/appImages/bONe.png)  |  ![Screenshot](./assets/appImages/bTwo.png)
+
+Review Russian Roulette          |  Accepted Russian Roulette
+:-------------------------:|:-------------------------:
+![Screenshot](./assets/appImages/bThree.png)  |  ![Screenshot](./assets/appImages/bFour.png)
