@@ -51,52 +51,59 @@ class _DashboardState extends State<Dashboard> {
           ),
         ),
         drawer: const WDrawer(),
-        body: Column(
+        body: ListView(
           children: [
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Text(
-                    'Upcoming Events',
-                    style: Theme.of(context).textTheme.titleLarge,
-                  ),
-                  SizedBox(
-                    height: 220,
-                    child: Swiper(
-                      itemCount: event.length,
-                      itemBuilder: (context, index) {
-                        return GestureDetector(
-                          onTap: () {
-                            // selectedEvent = event[index];
-                            // Provider.of<EventProviders>(context, listen: false)
-                            //     .setSelected();
+            const SizedBox(
+              height: 40.0,
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Text(
+                  'Upcoming Events',
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+                const SizedBox(
+                  height: 40.0,
+                ),
+                SizedBox(
+                  height: 220,
+                  child: Swiper(
+                    itemCount: event.length,
+                    itemBuilder: (context, index) {
+                      return GestureDetector(
+                        onTap: () {
+                          // selectedEvent = event[index];
+                          // Provider.of<EventProviders>(context, listen: false)
+                          //     .setSelected();
 
-                            // navigate(context, const EventDetails());
-                            context
-                                .read<RussianRouletteProvider>()
-                                .autoMatchRoulette(context);
-                          },
-                          child: WEventCard(
-                            backgroundColor: Colors.red,
-                            onAttendeePressed: () {},
-                            location: event[index]['location'],
-                            price: event[index]['price'],
-                            title: event[index]['title'],
-                            description: event[index]['description'],
-                            slotsLeft: event[index]['slot_left'],
-                            date: event[index]['date'],
-                            time: event[index]['time'],
-                          ),
-                        );
-                      },
-                      viewportFraction: 0.8,
-                      scale: 0.9,
-                      autoplay: false,
-                    ),
-                  )
-                ],
-              ),
+                          // navigate(context, const EventDetails());
+                          context
+                              .read<RussianRouletteProvider>()
+                              .autoMatchRoulette(context);
+                        },
+                        child: WEventCard(
+                          backgroundColor: Colors.red,
+                          onAttendeePressed: () {},
+                          location: event[index]['location'],
+                          price: event[index]['price'],
+                          title: event[index]['title'],
+                          description: event[index]['description'],
+                          slotsLeft: event[index]['slot_left'],
+                          date: event[index]['date'],
+                          time: event[index]['time'],
+                        ),
+                      );
+                    },
+                    viewportFraction: 0.8,
+                    scale: 0.9,
+                    autoplay: false,
+                  ),
+                )
+              ],
+            ),
+            const SizedBox(
+              height: 40.0,
             ),
             context.read<RussianRouletteProvider>().id == uninitializedId &&
                     (context.watch<RussianRouletteProvider>().inMatchedOne ==
