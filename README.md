@@ -1,6 +1,6 @@
 # birddie
 
-Dating Social Media App
+Dating Social Media Application 
 
 ## About
 
